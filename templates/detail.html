@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>My Docs</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css"
+    />
+  </head>
+  <style>
+      :root {
+        --bg: #ffffff;
+        --text: #0f0f10;
+        --muted: #6c6c73;
+        --blue: #60c7f7;
+        --blue-strong: #2aa9ec;
+        --pink: #f7a8c1;
+        --card: #f6f7fb;
+        --ink: #111318;
+        --radius: 16px;
+        --shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+        --border: #e7e7ef;
+        --dark: #0e0f14;
+        --dark-card: #11131a;
+        --dark-text: #e9e9f3;
+        --dark-muted: #a8adbd;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        margin: 0;
+        padding: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+          Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+      }
+      .container {
+        width: min(1120px, 92vw);
+        margin-inline: auto;
+      } /* Header*/
+      header {
+        position: sticky;
+        top: 0;
+        background: rgba(255, 255, 255, 0.8);
+        backdrop-filter: blur(10px);
+        border-bottom: 1px solid var(--border);
+        z-index: 10;
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 0;
+      }
+      .brand {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-weight: 600;
+      }
+      .brand span {
+        font-size: 20px;
+      }
+      .menu {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        color: #333;
+      }
+      .menu a {
+        font-weight: 500;
+        font-size: 14px;
+      }
+      .cta {
+        padding: 10px 16px;
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+      }
+  </style>
+<body>
+  <header>
+    <div class="container nav">
+      <a class="brand" href="#">
+        <img
+          src="{% static 'asserts/images/logo.png' %}"
+          alt="logo"
+          style="max-width: 15%"
+        />
+      <span>TransHistory</span>
+      </a>
+      <nav class="menu" aria-label="Primary">
+        <a href="#">About us</a>
+        <a href="#">History</a>
+        <a href="#">Person</a>
+        <a href="#">Theory</a>
+        <a href="#">Blog</a>
+        <a class="cta" href="#">Contact Us</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <div id="app">加载中...</div>
+  </main>
+
+  <script>
+    window.$docsify = {
+      name: "Library",
+      repo: "",
+      homepage: "{{ homepage }}",
+      basePath: "/static/mkdocs/",
+      loadSidebar: false,
+      loadNavbar: false
+    };
+  </script>
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+</body>
+
+</html>
