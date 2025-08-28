@@ -25,7 +25,11 @@ SECRET_KEY = 'django-insecure-tx_d*$^98*xxb7=g&=0t)@7+y8k$-d_k7^9x(_xc(m@+a2r87b
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '127.0.0.1',
+    'transhistory-staging.gro-w.org',
+    'transhistory.gro-w.org',
+]
 
 
 # Application definition
