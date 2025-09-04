@@ -16,3 +16,13 @@ class HistoryNode(models.Model):
 
     def __str__(self):
         return self.title
+
+class Contributor(models.Model):
+    name = models.CharField(max_length=100)
+    email = models.EmailField()
+    node = models.ForeignKey(HistoryNode, on_delete=models.CASCADE)
+    title = models.CharField(max_length=255)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name

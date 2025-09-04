@@ -4,7 +4,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
-from .models import HistoryNode
+from .models import HistoryNode, Contributor
 # Create your views here.
 
 
@@ -36,7 +36,7 @@ def post(request):
         uploaded_file = request.FILES.get('doc')  # 对应 <input name="doc">
 
         # 3. 保存到数据库
-        entry = HistoryNode.objects.create(
+        node = HistoryNode.objects.create(
             title=data.get('title', ''),
             con=data.get('con', ''),
             ref=data.get('ref', []),
@@ -48,6 +48,13 @@ def post(request):
             oridoc=uploaded_file
         )
 
-        return JsonResponse({'status': 'ok', 'data': data, 'id': entry.id})
+        Contributor.objects.create(
+            name = data.get('user', {}).get('name', ''),
+            email = data.get('user', {}).get('email', ''),
+            node_id = node.id,
+            title = node.title
+        )
+
+        return JsonResponse({'status': 'ok', 'data': data, 'id': node.id})
 
     return JsonResponse({'error': 'POST required'}, status=405)

@@ -255,7 +255,12 @@
     <header>
       <div class="bar">
         <h1>TransHistoria 资料提交</h1>
-        <h3>欢迎登陆！{{ user.username }}</h3>
+        <div style="display: flex;">
+          <h3>欢迎登陆！</h3>
+          <h3 id="username">{{ user.username }}</h3>
+          <h3>，</h3>
+          <h3 id="useremail">{{ user.email }}</h3>
+        </div>
       </div>
     </header>
 
@@ -588,7 +593,10 @@
         const docFile = docInput.files && docInput.files[0];
         const doc = docFile ? docFile.name : "";
 
-        return { title, con, ref, attr, doc };
+        const username = document.getElementById("username")?.textContent.trim();
+        const useremail = document.getElementById("useremail")?.textContent.trim();
+        const user = { name: username, email: useremail };
+        return { title, con, ref, attr, doc , user };
       }
     </script>
   </body>
