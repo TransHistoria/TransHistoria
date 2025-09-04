@@ -12,11 +12,39 @@ def index_A(request):
     return render(request, 'test_index_A.html')
 
 def index(request):
-    return render(request, 'Index.html')
+    return render(request, 'index.html')
+
+def history(request):
+    return render(request, 'history.html')
+
+def timeline(request):
+    return render(request, 'timeline.html')
 
 def timepoint(request, year):
     markdown_file = f'{year}.md'
     return render(request, 'detail.html', {'homepage': markdown_file})
+
+def people(request):
+    return render(request, 'people.html')
+
+def theory(request):
+    return render(request, 'theory.html')
+
+def gallery(request):
+    return render(request, 'gallery.html')
+
+def archives(request):
+    return render(request, 'archives.html')
+
+def about_us(request):
+    return render(request, 'about_us.html')
+
+def about_submission(request):
+    return render(request, 'about_submission.html')
+
+def dlog(request):
+    return render(request, 'dlog.html')
+
 
 @login_required
 def submit(request):

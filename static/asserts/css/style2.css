@@ -1,41 +1,50 @@
-*{
+* {
     margin: 0;
     padding: 0;
-    font-family: 'Roboto',sans-serif;
+    font-family: "Roboto", sans-serif;
 }
 
 /* 页眉导航 */
-.header{
+.header {
     min-height: 100vh;
     width: 100%;
     /* background-color: rgb(255, 201, 40); */
-    background-color: rgb(46,45,40);
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.25),rgba(0,0,0,0.25),rgba(0,0,0,0.7)),url(./images/Judith_Butler03.jpg);
+    background-color: rgb(46, 45, 40);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.7)),
+        url(../images/Judith_Butler03.jpg);
     background-position: center;
     background-size: center;
     position: relative;
     background-repeat: no-repeat;
 }
-nav{
+
+nav {
     display: flex;
     padding: 2% 6%;
     justify-content: space-between;
     align-items: center;
 }
-.logo-icon{
+
+.logo-icon {
     width: 300px;
     cursor: pointer;
     margin-left: 38px;
 }
+
 .menu-icon {
     width: 30px;
     cursor: pointer;
-    margin-right:38px;
+    margin-right: 38px;
 }
-.nav-links{
+
+.nav-links {
     flex: 1;
     text-align: right;
 }
+
 .nav-links ul li {
     list-style: none;
     display: inline-block;
@@ -43,13 +52,15 @@ nav{
     margin-right: 20px;
     /* position: relative; */
 }
+
 .nav-links ul li a {
     color: #fff;
     text-decoration: none;
     font-size: 25px;
 }
+
 .nav-links ul li::after {
-    content: '';
+    content: "";
     width: 0%;
     height: 2px;
     background: #eeeeee2e;
@@ -57,11 +68,10 @@ nav{
     margin: auto;
     transition: 0.1s;
 }
+
 .nav-links ul li:hover::after {
     width: 100%;
 }
-
-
 
 /* About Us 页header设置 */
 .sub-header {
@@ -69,19 +79,22 @@ nav{
     height: 35vh;
     width: 100%;
     /* background-color: rgb(97, 91, 83); */
-    background-color: rgb(46,45,40);
-    background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.25),rgba(0,0,0,0.25),rgba(0,0,0,0.7)),url(./images/Judith_Butler03.jpg);
+    background-color: rgb(46, 45, 40);
+    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.25),
+            rgba(0, 0, 0, 0.7)),
+        url(../images/Judith_Butler03.jpg);
     background-position: center;
     background-size: center;
     background-repeat: no-repeat;
     text-align: center;
     color: #fff;
 }
+
 .sub-header h1 {
     margin-top: 50px;
 }
-
-
 
 .about-us {
     width: 80%;
@@ -89,47 +102,51 @@ nav{
     padding-top: 80px;
     padding-bottom: 50px;
 }
+
 .row1 {
     width: 100%;
     display: flex;
     justify-content: space-between;
 
     /* 如果空间不够，允许换行 */
-    flex-wrap: wrap; 
+    flex-wrap: wrap;
     /* align-items: flex-start; */
 }
+
 .row1 ul li {
     height: 70px;
 }
+
 .about-col {
     flex-basis: 48%;
     padding: 30px 2px;
 }
+
 .about-col img {
     width: 300px;
     /* display: block; */
     margin-left: auto;
-
 }
+
 .about-col h3 {
     padding: 15px 0 25px;
     line-height: 35px;
     text-indent: 2em;
     color: rgba(46, 45, 40, 0.7);
 }
+
 .about-col h4 {
     padding: 15px 0 25px;
     line-height: 25px;
     color: rgba(46, 45, 40, 0.7);
 }
+
 .about-col p {
     padding: 15px 0 25px;
     line-height: 35px;
     text-indent: 2em;
     color: rgba(46, 45, 40, 0.7);
 }
-
-
 
 /* .about-col h1 {
     padding-top: 0;
@@ -142,28 +159,34 @@ nav{
     /* 调纵向间距的 */
     padding: 50px 10%;
     /* background: rgb(49, 0, 68);*/
-    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),rgb(255, 201, 40);
+    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
+        rgb(255, 201, 40);
     color: #efefef;
     /* 控制页脚排版布局的，改变形状靠这个 */
     display: flex;
 }
+
 .footer div {
     text-align: center;
 }
+
 .col-2 {
     flex-grow: 2;
 }
+
 .footer div h3 {
     font-weight: 300;
     margin-bottom: 30px;
     letter-spacing: 1px;
 }
-.col-1 a{
+
+.col-1 a {
     display: block;
     text-decoration: none;
     color: #efefef;
     margin-bottom: 10px;
 }
+
 form input {
     width: 400px;
     height: 45px;
@@ -174,6 +197,7 @@ form input {
     outline: none;
     border: none;
 }
+
 form button {
     width: 100px;
     background: transparent;
@@ -186,53 +210,22 @@ form button {
     font-size: 16px;
     cursor: pointer;
 }
+
 .col-2 button:hover {
     border: 2px solid #eeeeee2e;
     background: #eeeeee2e;
-    transition: 0.0s;
+    transition: 0s;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 /* 自适应（先不搞可以忽略） */
-@media(max-width: 700px) {
+@media (max-width: 700px) {
     .nav-links ul li {
         display: block;
     }
+
     .nav-links {
         position: absolute;
-        background: rgba(4,9,30,0.7);
+        background: rgba(4, 9, 30, 0.7);
         height: 100vh;
         width: 200px;
         top: 0;

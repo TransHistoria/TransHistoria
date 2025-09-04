@@ -1,78 +1,71 @@
 <!DOCTYPE html>
 {% load static %}
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>光谱历史-档案馆-历史事件</title>
 
-    <link rel="stylesheet" href="../../资料库/事件/history.css">
+<head>
+  <meta charset="utf-8" />
+  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+  <title>光谱历史-档案馆-历史事件</title>
+  <link href="{% static 'asserts/css/history.css' %}" rel="stylesheet" />
 </head>
 
 <body>
-    <!-- 一整个页面的布局 -->
-    <div class="Box-Background">
-
-        <!-- 导航栏设置 -->
-        <div class="navbar">
-            <a href="../../index.html" target="_self"><img src="../../images/logo-trans4tm1.png" class="logo-icon"></a>
-            <nav>
-                <ul>
-                    <li><a href="../../index.html" target="_blank">主页</a></li>
-                    <li><a href="../../timeline.html" target="_blank">跨性别编年史</a></li>
-                    <li><a href="../../archives.html" target="_self">资料库</a></li>
-                    <li><a href="../../about_us.html"target="_blank">关于我们</a></li>
-                </ul>
-            </nav>
-            <img src="../../images/分类.png" class="menu-icon">
-        </div>
-        
-        <div class="row">
-            <div class="col01">
-                <div class="card card1" onclick="window.open('../../资料库/事件/1966-事件-科普顿自助餐厅抗争-档案-.html')">
-                    <h5><br><br><br>科普顿自助餐厅抗争</h5>
-                    <h6>奠定了跨性别社区争取权利的早期基础</h6>
-                    
-                </div>
-                <div class="card card2" onclick="window.open('../../资料库/事件/1999-事件-跨性别者追悼日设立-档案.html')">
-                    <h5><br><br><br>跨性别者追悼日设立</h5>
-                    <h6>以纪念因跨性别恐惧症或暴力而逝去的人们</h6>
-                </div>
-                <div class="card card3" onclick="window.open('../../资料库/事件/2019-事件-世卫组织ICD-11去病理化-档案.html')">
-                    <h5><br><br><br>ICD-11去病理化</h5>
-                    <h6>将“性别不一致”从精神障碍分类中移出</h6>
-                </div>
-
-            </div>
-        </div>
+  <!-- 一整个页面的布局 -->
+  <div class="Box-Background">
+    <!-- 导航栏设置 -->
+    <div class="navbar">
+      <a href="/" target="_self"><img class="logo-icon" src="{% static 'asserts/images/logo-trans4tm1.png' %}" /></a>
+      <nav>
+        <ul>
+          <li><a href="/" target="_blank">主页</a></li>
+          <li><a href="/history/timeline" target="_blank">跨性别编年史</a></li>
+          <li><a href="/archives" target="_self">资料库</a></li>
+          <li><a href="/about_us" target="_blank">关于我们</a></li>
+        </ul>
+      </nav>
+      <img class="menu-icon" src="{% static 'asserts/images/分类.png' %}" />
     </div>
-    
-</div>
-
-    
-    <!-- 一整个页脚的布局 -->
-    <div class="footer">
-        <div class="col-1">
-            <h3>快速链接</h3>
-            <a href="../../about_submission.html" target="_blank">关于投稿</a>
-            <a href="../../about_us.html" target="_blank">关于我们</a>
-            <a href="../..//dlog.html" target="_blank">开发日志</a>
+    <div class="row">
+      <div class="col01">
+        <div class="card card1" onclick="window.open('../../资料库/事件/1966-事件-科普顿自助餐厅抗争-档案-.html')">
+          <h5><br /><br /><br />科普顿自助餐厅抗争</h5>
+          <h6>奠定了跨性别社区争取权利的早期基础</h6>
         </div>
-
-        <div class="col-2">
-            <h3>搜索栏</h3>
-            <form>
-                <input type="type" placeholder="档案搜索" required>
-                <br>
-                <button type="submit">搜索</button》>
-            </form>
+        <div class="card card2" onclick="window.open('../../资料库/事件/1999-事件-跨性别者追悼日设立-档案.html')">
+          <h5><br /><br /><br />跨性别者追悼日设立</h5>
+          <h6>以纪念因跨性别恐惧症或暴力而逝去的人们</h6>
         </div>
-        <div class="col-3">
-            <h3>联系我们</h3>
-            <p2>Email:xxxxx@xx.xx</p2>
-            <br><br>
-            <p2>关注我们的微信公众号：XXXX</p2>
+        <div class="card card3" onclick="window.open('../../资料库/事件/2019-事件-世卫组织ICD-11去病理化-档案.html')">
+          <h5><br /><br /><br />ICD-11去病理化</h5>
+          <h6>将“性别不一致”从精神障碍分类中移出</h6>
         </div>
+      </div>
     </div>
+  </div>
+
+  <!-- 一整个页脚的布局 -->
+  <div class="footer">
+    <div class="col-1">
+      <h3>快速链接</h3>
+      <a href="about_submission" target="_blank">关于投稿</a>
+      <a href="/about_us" target="_blank">关于我们</a>
+      <a href="dlog" target="_blank">开发日志</a>
+    </div>
+    <div class="col-2">
+      <h3>搜索栏</h3>
+      <form>
+        <input placeholder="档案搜索" required="" type="type" />
+        <br />
+        <button type="submit">搜索</button>
+      </form>
+    </div>
+    <div class="col-3">
+      <h3>联系我们</h3>
+      <p2>Email:xxxxx@xx.xx</p2>
+      <br /><br />
+      <p2>关注我们的微信公众号：XXXX</p2>
+    </div>
+  </div>
 </body>
+
 </html>

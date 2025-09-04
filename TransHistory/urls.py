@@ -3,8 +3,18 @@ from . import views
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
+    path("test_index_A/", views.index_A),
     path("", views.index),
-    path('History/timepoint/<int:year>/', views.timepoint, name='timepoint'),
+    path("history/", views.history),
+    path("history/timeline", views.timeline),
+    path('history/timepoint/<int:year>/', views.timepoint, name='timepoint'),
+    path("people/", views.people),
+    path("theory/", views.theory),
+    path("gallery/", views.gallery),
+    path("archives/", views.archives),
+    path("about_us/", views.about_us),
+    path("about_submission/", views.about_submission),
+    path("dlog/", views.dlog),
     path("submit/", views.submit, name="submit"),
     path("api/", views.post, name="post"),
     path("login/", auth_views.LoginView.as_view(), name="login"),

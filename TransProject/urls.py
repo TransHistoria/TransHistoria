@@ -19,7 +19,6 @@ from django.urls import path
 from django.urls import include, path
 
 urlpatterns = [
-    path("test_index_A/", include("TransHistory.urls")),
-    path("index/", include("TransHistory.urls")),
+    path("", include("TransHistory.urls")),
     path('admin/', admin.site.urls),
 ]
