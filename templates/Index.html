@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>光谱历史-主页</title>
+
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <div class="Box-Background">
+        <div class="navbar">
+            <a href="./Index.html" target="_self"><img src="./images/logo-trans4tm1.png" class="logo-icon"></a>
+            <nav>
+                <ul>
+                    <li><a href="./Index.html" target="_self">主页</a></li>
+                    <li><a href="./Time Line.html" target="_blank">跨性别编年史</a></li>
+                    <li><a href="./Archives.html" target="_blank">资料库</a></li>
+                    <li><a href="./About us.html" target="_blank">关于我们</a></li>
+                </ul>
+            </nav>
+            <img src="./images/分类.png" class="menu-icon">
+        </div>
+        
+        <div class="row">
+            <div class="col">
+                <h2>Transgender's History</h2>
+                <h1>跨性别历史</h1>
+                <h2>我们的历史，我们的声音</h2>
+                <button type="button" onclick="window.open('./Time Line.html')"><h4>进入时间线</h4></buttontype>
+            </div>
+            <div class="col">
+
+                <div class="card card1" onclick="window.open('./Archives.html')">
+                    <h5><br><br><br><br>资料库</h5>
+                    <h6>收集跨性别群体的历史</h6>
+                    <br>
+                    
+                </div>
+                <div class="card card2" onclick="window.open('./资料库/理论/Hall of Theory.html')">
+                    <h5><br><br><br><br>理论研究</h5>
+                    <h6>收集了各种资料</h6>
+                    <br>
+                </div>
+                <div class="card card3" onclick="window.open('./资料库/艺术/Gallery.html')">
+                    <h5><br><br><br><br>艺术馆</h5>
+                    <h6>我本是女娇娥
+                    <br>又不是男儿郎</h6>
+                </div>
+                <div class="card card4" onclick="window.open('./资料库/人物/Hall of Fame.html')">
+                    <h5><br><br><br><br>名人堂</h5>
+                    <h6>改变世界的跨性别者们</h6>
+                    <br>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+
+    
+    <!-- 一整个页脚的布局 -->
+    <div class="footer">
+        <div class="col-1">
+            <h3>快速链接</h3>
+            <a href="./About submission.html" target="_blank">关于投稿</a>
+            <a href="./About us.html" target="_blank">关于我们</a>
+            <a href="./Dlog.html" target="_blank">开发日志</a>
+        </div>
+        <div class="col-2">
+            <h3>搜索栏</h3>
+            <form>
+                <input type="type" placeholder="档案搜索" required>
+                <br>
+                <button type="submit">搜索</button>
+            </form>
+        </div>
+        <div class="col-3">
+            <h3>联系我们</h3>
+            <p2>Email:xxxxx@xx.xx</p2>
+            <br><br>
+            <p2>关注我们的微信公众号：XXXX</p2>
+        </div>
+    </div>
+</body>
+</html>

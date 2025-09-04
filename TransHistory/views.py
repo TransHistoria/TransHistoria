@@ -11,6 +11,9 @@ from .models import HistoryNode
 def index_A(request):
     return render(request, 'test_index_A.html')
 
+def index(request):
+    return render(request, 'Index.html')
+
 def timepoint(request, year):
     markdown_file = f'{year}.md'
     return render(request, 'detail.html', {'homepage': markdown_file})
