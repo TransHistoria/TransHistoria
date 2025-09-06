@@ -107,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 # user manage
-LOGIN_REDIRECT_URL = "/test_index_A/submit"
+LOGIN_REDIRECT_URL = "/submit"
 LOGOUT_REDIRECT_URL = "/"
 
 # Internationalization
