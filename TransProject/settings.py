@@ -27,7 +27,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     '127.0.0.1',
-    'staging.transhistoria.org'
+    'staging.transhistoria.org',
     'transhistoria.org',
     'www.transhistoria.org',
 ]
