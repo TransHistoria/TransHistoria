@@ -15,6 +15,6 @@ export default {
     request: Request,
     env: { WEBAPP: DurableObjectNamespace<WebappContainer> },
   ): Promise<Response> {
-	return await getContainer(env.WEBAPP).fetch(request);
+  return await getContainer(env.WEBAPP).fetch(request);
   },
 };
