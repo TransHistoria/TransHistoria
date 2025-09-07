@@ -4,3 +4,6 @@
 # python cache
 __pycache__
 *.pyc
+
+# nodejs things
+node_modules
