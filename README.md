@@ -1,5 +1,6 @@
 # TransHistory
 一个记录跨性别历史的网站，包括事件史、人物史、理论文化史。
+https://transhistoria.org/
 
 ## 运行方法
 1. 从源码运行
