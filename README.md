@@ -14,7 +14,7 @@ https://transhistoria.org/
     - 打开 http://127.0.0.1:8000/
 2. 用docker运行
     - ```sh
-      docker run -ditp 8000:8000 --rm --name transhistoria ghcr.io/transhistoria/transhistoria:latest
+      docker run -dp 8000:8000 --rm --name transhistoria ghcr.io/transhistoria/transhistoria:latest
       ```
     - 打开 http://127.0.0.1:8000/
 3. 部署到cloudflare workers
