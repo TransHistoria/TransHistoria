@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "deploy": "wrangler deploy"
+    "deploy": "sh container.sh && wrangler deploy && rm -r container"
   },
   "dependencies": {
     "@cloudflare/containers": "^0.0.13"
