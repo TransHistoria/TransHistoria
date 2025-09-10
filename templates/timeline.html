@@ -1,100 +1,61 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="en">
 
-<head>
-  <meta charset="utf-8" />
-  <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-  <title>光谱历史-时间线</title>
-  <link href="{% static 'asserts/css/timeline.css' %}" rel="stylesheet" />
-</head>
+{% block title %}光谱历史-时间线{% endblock %}
 
-<body>
-  <nav>
-    <a href="/" target="_self"><img class="logo-icon" src="{% static 'asserts/images/logo-trans4tm1.png' %}" /></a>
-    <div class="nav-links">
-      <ul>
-        <li><a href="/" target="_self">主页</a></li>
-        <li><a href="/history/timeline" target="_self">跨性别编年史</a></li>
-        <li><a href="/archives" target="_blank">资料库</a></li>
-        <li><a href="/about_us" target="_blank">关于我们</a></li>
-      </ul>
-    </div>
-    <img class="menu-icon" src="{% static 'asserts/images/分类.png' %}" />
-  </nav>
-  <div class="/history/timeline">
-    <div class="container left-container">
-      <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" style="position: cover" />
-      <div class="text-box" onclick="window.open('../../资料库/人物/1930-人物-莉莉·艾尔伯-档案.html')">
-        <h2>Lili Elbe（莉莉·艾尔伯）</h2>
-        <big>1882年12月28日—1931年09月13日</big>
-        <p>世界上有纪录的最早接受性别重置手术者之一</p>
-        <span class="left-container-arrow"></span>
-      </div>
-    </div>
-    <div class="container right-container">
-      <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
-      <div class="text-box" onclick="window.open('../../资料库/人物/1952-人物-克里斯汀·约根森-档案.html')">
-        <h2>Christine Jorgensen（克里斯汀·约根森）</h2>
-        <big>1926年05月30日——1989年05月03日</big>
-        <p>美国第一个因接受变性手术而广为人知的跨性别女性</p>
-        <span class="right-container-arrow"></span>
-      </div>
-    </div>
-    <div class="container left-container">
-      <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
-      <div class="text-box" onclick="window.open('../../资料库/事件/1966-事件-科普顿自助餐厅抗争-档案-.html')">
-        <h2>科普顿自助餐厅抗争</h2>
-        <big>1966年</big>
-        <p>奠定了跨性别社区争取权利的早期基础</p>
-        <span class="left-container-arrow"></span>
-      </div>
-    </div>
-    <div class="container right-container">
-      <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
-      <div class="text-box" onclick="window.open('../../资料库/事件/1999-事件-跨性别者追悼日设立-档案.html')">
-        <h2>跨性别者追悼日设立（TDoR）</h2>
-        <big>1999年12月20日</big>
-        <p>Transgender Day of Remembrance, TDOR（跨性别者追悼日设立）</p>
-        <span class="right-container-arrow"></span>
-      </div>
-    </div>
-    <div class="container left-container">
-      <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
-      <div class="text-box" onclick="window.open('../../资料库/事件/2019-事件-世卫组织ICD-11去病理化-档案.html')">
-        <h2>世卫组织ICD-11去病理化</h2>
-        <big>2019年</big>
-        <p>
-          将“性别不一致”（Gender
-          Incongruence）从精神障碍分类中移出，归入“性健康相关状况”。
-        </p>
-        <span class="left-container-arrow"></span>
-      </div>
+{% block extra_head %}
+<link href="{% static 'asserts/css/timeline.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block content %}
+<div class="/history/timeline">
+  <div class="container left-container">
+    <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" style="position: cover" />
+    <div class="text-box" onclick="window.open('../../资料库/人物/1930-人物-莉莉·艾尔伯-档案.html')">
+      <h2>Lili Elbe（莉莉·艾尔伯）</h2>
+      <big>1882年12月28日—1931年09月13日</big>
+      <p>世界上有纪录的最早接受性别重置手术者之一</p>
+      <span class="left-container-arrow"></span>
     </div>
   </div>
-  <!-- 页脚 -->
-  <section class="footer">
-    <div class="col-1">
-      <h3>快速链接</h3>
-      <a href="about_submission" target="_blank">关于投稿</a>
-      <a href="/about_us" target="_blank">关于我们</a>
-      <a href="dlog" target="_blank">开发日志</a>
+  <div class="container right-container">
+    <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
+    <div class="text-box" onclick="window.open('../../资料库/人物/1952-人物-克里斯汀·约根森-档案.html')">
+      <h2>Christine Jorgensen（克里斯汀·约根森）</h2>
+      <big>1926年05月30日——1989年05月03日</big>
+      <p>美国第一个因接受变性手术而广为人知的跨性别女性</p>
+      <span class="right-container-arrow"></span>
     </div>
-    <div class="col-2">
-      <h3>搜索栏</h3>
-      <form>
-        <input placeholder="档案搜索" required="" type="type" />
-        <br />
-        <button type="submit">搜索</button>
-      </form>
+  </div>
+  <div class="container left-container">
+    <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
+    <div class="text-box" onclick="window.open('../../资料库/事件/1966-事件-科普顿自助餐厅抗争-档案-.html')">
+      <h2>科普顿自助餐厅抗争</h2>
+      <big>1966年</big>
+      <p>奠定了跨性别社区争取权利的早期基础</p>
+      <span class="left-container-arrow"></span>
     </div>
-    <div class="col-3">
-      <h3>联系我们</h3>
-      <p2>Email:xxxxx@xx.xx</p2>
-      <br /><br />
-      <p2>微信公众号：XXXX</p2>
+  </div>
+  <div class="container right-container">
+    <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
+    <div class="text-box" onclick="window.open('../../资料库/事件/1999-事件-跨性别者追悼日设立-档案.html')">
+      <h2>跨性别者追悼日设立（TDoR）</h2>
+      <big>1999年12月20日</big>
+      <p>Transgender Day of Remembrance, TDOR（跨性别者追悼日设立）</p>
+      <span class="right-container-arrow"></span>
     </div>
-  </section>
-</body>
-
-</html>
+  </div>
+  <div class="container left-container">
+    <img src="{% static 'asserts/images/实心圆圈-copy.png' %}" />
+    <div class="text-box" onclick="window.open('../../资料库/事件/2019-事件-世卫组织ICD-11去病理化-档案.html')">
+      <h2>世卫组织ICD-11去病理化</h2>
+      <big>2019年</big>
+      <p>
+        将“性别不一致”（Gender
+        Incongruence）从精神障碍分类中移出，归入“性健康相关状况”。
+      </p>
+      <span class="left-container-arrow"></span>
+    </div>
+  </div>
+</div>
+{% endblock %}
