@@ -9,7 +9,7 @@ from .models import HistoryNode, Contributor
 
 
 def index_A(request):
-    return render(request, 'test_index_A.html')
+    return render(request, 'index_A.html')
 
 def index(request):
     return render(request, 'index.html')

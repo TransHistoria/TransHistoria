@@ -1,0 +1,124 @@
+:root {
+    --bg: #ffffff;
+    --text: #0f0f10;
+    --muted: #6c6c73;
+    --blue: #60c7f7;
+    --blue-strong: #2aa9ec;
+    --pink: #f7a8c1;
+    --card: #f6f7fb;
+    --ink: #111318;
+    --radius: 16px;
+    --shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+    --border: #e7e7ef;
+    --dark: #0e0f14;
+    --dark-card: #11131a;
+    --dark-text: #e9e9f3;
+    --dark-muted: #a8adbd;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+        Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    width: min(1120px, 92vw);
+    margin-inline: auto;
+}
+
+/* Header*/
+header {
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    z-index: 10;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+}
+
+.brand span {
+    font-size: 20px;
+}
+
+.menu {
+    display: flex;
+    align-items: center;
+    gap: 26px;
+    color: #333;
+}
+
+.menu a {
+    font-weight: 500;
+    font-size: 14px;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.cta {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 640px) {
+    .menu-toggle {
+        display: block;
+    }
+
+    .menu {
+        display: none;
+        /* 默认隐藏菜单 */
+        flex-direction: column;
+        width: 100%;
+        background: rgba(255, 255, 255, 0.95);
+        position: absolute;
+        top: 100%;
+        left: 0;
+    }
+
+    .menu.open {
+        display: flex;
+        /* 打开状态显示 */
+    }
+}

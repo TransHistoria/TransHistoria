@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TransHistory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>{% block title %}Title{% endblock %}</title>
+    <link href="{% static 'asserts/css/base_A.css' %}" rel="stylesheet" />
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <a class="brand" href="#">
+                <img src="{% static 'asserts/images/logo.png' %}" alt="logo" style="max-width: 15%" />
+                <span>TransHistory</span>
+            </a>
+            <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+            <nav class="menu" aria-label="Primary">
+                <a href="#">About us</a>
+                <a href="#history">History</a>
+                <a href="#person">Person</a>
+                <a href="#theory">Theory</a>
+                <a href="#">Blog</a>
+                <a class="cta" href="#">Contact Us</a>
+            </nav>
+        </div>
+    </header>
+    <main class="container">{% block main %}{% endblock %}</main>
+    <footer class="container"></footer>
+    <script>
+        const toggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('open');
+        });
+    </script>
+    {% block extra_body %}{% endblock %}
+</body>
