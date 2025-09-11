@@ -401,6 +401,7 @@
           <button type="button" class="btn secondary" id="previewBtn">
             预览 JSON
           </button>
+          <button type="button" class="btn secondary" onclick="location.reload();">清空</button>
           <button type="submit" class="btn">提交</button>
           <input type="hidden" name="json_data" id="json_data">
           <span class="muted">提交后将以 JSON 结构传送到后端。</span>
@@ -515,7 +516,7 @@
         document.getElementById('json_data').value = JSON.stringify(data);
         const formData = new FormData(form);
         try {
-          const res = await fetch('/test_index_A/api/', {
+          const res = await fetch('/api/', {
             method: 'POST',
             body: formData
           });

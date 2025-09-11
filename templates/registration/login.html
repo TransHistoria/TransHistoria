@@ -1,208 +1,31 @@
-<!DOCTYPE html>
+{% extends "base_A.html" %}
 {% load static %}
-<html lang="zh">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>用户登录</title>
-  <style>
-    :root {
-      --bg: #ffffff;
-      --text: #0f0f10;
-      --muted: #6c6c73;
-      --blue: #60c7f7;
-      --blue-strong: #2aa9ec;
-      --pink: #f7a8c1;
-      --card: #f6f7fb;
-      --ink: #111318;
-      --radius: 16px;
-      --shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
-      --border: #e7e7ef;
-      --dark: #0e0f14;
-      --dark-card: #11131a;
-      --dark-text: #e9e9f3;
-      --dark-muted: #a8adbd;
-    }
-    * {
-      box-sizing: border-box;
-    }
-    html,
-    body {
-      margin: 0;
-      padding: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
-        Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
-    }
-    a {
-      color: inherit;
-      text-decoration: none;
-    }
-    img {
-      max-width: 100%;
-      display: block;
-    }
-    .container {
-      width: min(1120px, 92vw);
-      margin-inline: auto;
-    } /* Header*/
-    header {
-      position: sticky;
-      top: 0;
-      background: rgba(255, 255, 255, 0.8);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      z-index: 10;
-    }
-    .nav {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 14px 0;
-    }
-    .brand {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-weight: 600;
-    }
-    .brand span {
-      font-size: 20px;
-    }
-    .menu {
-      display: flex;
-      align-items: center;
-      gap: 26px;
-      color: #333;
-    }
-    .menu a {
-      font-weight: 500;
-      font-size: 14px;
-    }
-    .cta {
-      padding: 10px 16px;
-      border: 1px solid var(--border);
-      border-radius: 12px;
-      background: #fff;
-      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-    }
-    main {
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      background: #f7f9fb;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-    }
-    .card {
-      background: #fff;
-      border-radius: 16px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;
-      max-width: 380px;
-      padding: 2rem;
-    }
-    h2 {
-      margin: 0 0 1.5rem;
-      font-size: 1.5rem;
-      text-align: center;
-      color: #333;
-    }
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
-    input[type="text"], input[type="password"] {
-      width: 100%;
-      padding: 0.75rem 1rem;
-      border: 1px solid #ddd;
-      border-radius: 10px;
-      font-size: 1rem;
-      outline: none;
-      transition: border-color 0.2s;
-    }
-    input[type="text"]:focus, input[type="password"]:focus {
-      border-color: #007bff;
-    }
-    button {
-      background: #007bff;
-      color: white;
-      border: none;
-      padding: 0.75rem;
-      border-radius: 10px;
-      font-size: 1rem;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
-    button:hover {
-      background: #0056b3;
-    }
-    .links {
-      margin-top: 1rem;
-      text-align: center;
-      font-size: 0.9rem;
-    }
-    .links a {
-      color: #007bff;
-      text-decoration: none;
-    }
-    .links a:hover {
-      text-decoration: underline;
-    }
-    .hide {
-      display: none;
-    }
-    .forget:hover + .hide {
-      display: block;
-    }
-  </style>
-</head>
-<body>
-  <header>
-    <div class="container nav">
-      <a class="brand" href="#">
-        <img
-          src="{% static 'asserts/images/logo.png' %}"
-          alt="logo"
-          style="max-width: 15%"
-        />
-      <span>TransHistory</span>
-      </a>
-      <nav class="menu" aria-label="Primary">
-        <a href="#">About us</a>
-        <a href="#">History</a>
-        <a href="#">Person</a>
-        <a href="#">Theory</a>
-        <a href="#">Blog</a>
-        <a class="cta" href="#">Contact Us</a>
-      </nav>
+
+{% block title %}TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/login.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<div class="card">
+  <h2>用户登录</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div>
+      {{ form.username.errors }}
+      <input type="text" name="username" placeholder="用户名" value="{{ form.username.value|default_if_none:'' }}">
     </div>
-  </header>
-  <main>
-    <div class="card">
-      <h2>用户登录</h2>
-      <form method="post">
-        {% csrf_token %}
-        {{ form.non_field_errors }}
-        <div>
-          {{ form.username.errors }}
-          <input type="text" name="username" placeholder="用户名" value="{{ form.username.value|default_if_none:'' }}">
-        </div>
-        <div>
-          {{ form.password.errors }}
-          <input type="password" name="password" placeholder="密码">
-        </div>
-        <button type="submit">登录</button>
-        <div style="display:flex">
-          <span class="forget">忘记密码？</span>
-          <span class="hide">再想想？（或者联系开发者）</span>
-        </div>
-      </form>
+    <div>
+      {{ form.password.errors }}
+      <input type="password" name="password" placeholder="密码">
     </div>
-  </main>
-</body>
-</html>
+    <button type="submit">登录</button>
+    <div style="display:flex">
+      <span class="forget">忘记密码？</span>
+      <span class="hide">再想想？（或者联系开发者）</span>
+    </div>
+  </form>
+</div>
+{% endblock %}

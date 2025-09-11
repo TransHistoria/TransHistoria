@@ -82,6 +82,7 @@
 }
 
 .t-year {
+    min-width: 40px;
     width: 80px;
     font-weight: 700;
     letter-spacing: 0.4px;
@@ -98,20 +99,31 @@
 .t-bar {
     min-width: 260px;
     min-height: 160px;
-    padding: 0px 20px 0px 20px;
+    padding: 10px 20px 10px 20px;
     border-radius: 12px;
     flex: 1;
     box-shadow: var(--shadow);
     display: flex;
-    align-items: center;
+    flex-direction: column;
+}
+
+.t-bar p {
+    margin: 5px;
+}
+
+.t-bar a {
+    display: none;
+    text-align: end;
 }
 
 .t-title {
     font-size: 18px;
+    font-weight: 700;
 }
 
 .t-content {
     font-size: 15px;
+    font-weight: 500;
 }
 
 .discover {
@@ -297,4 +309,38 @@
     .theory .dark-row {
         grid-template-columns: 1fr;
     }
+}
+
+.ref-tooltip {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px dotted #555;
+}
+
+/* 悬浮显示 */
+.ref-tooltip .tooltip-box {
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: -250px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    z-index: 100;
+    min-width: 300px;
+    max-width: 500px;
+    /* max-height: 100px; */
+    white-space: pre-wrap;
+}
+
+/* hover 显示 */
+.ref-tooltip:hover .tooltip-box {
+    display: block;
+}
+
+/* 点击固定显示 */
+.ref-tooltip .tooltip-box.fixed {
+    display: block !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
 }

@@ -5,6 +5,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
 from .models import HistoryNode, Contributor
+from django.shortcuts import get_object_or_404
 # Create your views here.
 
 
@@ -89,3 +90,14 @@ def post(request):
         return JsonResponse({'status': 'ok', 'data': data, 'id': node.id})
 
     return JsonResponse({'error': 'POST required'}, status=405)
+
+def historynode_api(request, pk):
+    node = get_object_or_404(HistoryNode, pk=pk)
+    data = {
+        "title": node.title,
+        "con": node.con,
+        "time": node.time,
+        "mkdoc": node.mkdoc,
+        "ref": node.ref,
+    }
+    return JsonResponse(data)

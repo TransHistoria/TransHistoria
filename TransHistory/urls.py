@@ -17,6 +17,7 @@ urlpatterns = [
     path("dlog/", views.dlog),
     path("submit/", views.submit, name="submit"),
     path("api/", views.post, name="post"),
+    path('api/historynode/<int:pk>/', views.historynode_api, name='historynode_api'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ]
