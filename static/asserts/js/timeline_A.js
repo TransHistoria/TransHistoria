@@ -1,3 +1,9 @@
+const the_item = document.querySelector('.t-item');
+const timeline = document.querySelector('.timeline');
+for(let i = 0; i < 50; i++){
+  timeline.appendChild(the_item.cloneNode(true));
+}
+
 const items = document.querySelectorAll('.t-item');
 const style = document.createElement('style');
 let active_set = new Set();

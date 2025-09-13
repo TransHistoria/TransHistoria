@@ -17,7 +17,7 @@
 }
 
 * {
-    box-sizing: border-box;
+    box-sizing: content-box;
 }
 
 html,
@@ -47,7 +47,7 @@ img {
 
 /* Header*/
 header {
-    position: sticky;
+    /* position: sticky; */
     top: 0;
     background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
@@ -60,6 +60,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 14px 0;
+    height: 50px;
 }
 
 .brand {
