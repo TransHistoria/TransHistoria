@@ -21,11 +21,12 @@
     </div>
 </div>
 <script>
+    const track = document.querySelector('.timeline-progress');
     const rainbows = document.querySelectorAll('.rainbow');
-    const nyan_cat = document.querySelector('#nyan-cat');
+    const cat = document.querySelector('#nyan-cat');
     const root = document.documentElement;
-    const nyancat_scale = getComputedStyle(root).getPropertyValue('--nyancat-scale');
-    // progress
+    const scale = getComputedStyle(root).getPropertyValue('--nyancat-scale');
+    // progress to cat
     window.addEventListener('scroll', () => {
         // 页面可滚动的总高度
         const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
@@ -33,12 +34,33 @@
         const scrollPercent = (window.scrollY / scrollHeight) * 100;
         // 设置彩虹进度
         rainbows.forEach(rainbow => {
-            const wp = (1 / nyancat_scale) * scrollPercent;
+            const wp = (1 / scale) * scrollPercent;
             rainbow.style.width = `${wp}%`;
-            rainbow.style.left = `-${((1 - nyancat_scale) / 2) * wp}%`;
+            rainbow.style.left = `-${((1 - scale) / 2) * wp}%`;
         })
         // 设置猫的位置
-        nyan_cat.style.left = `${scrollPercent}%`;
+        cat.style.left = `${scrollPercent}%`;
+    });
+
+    // scroll page
+    function scrollPage(present, smooth = false) {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollY = present * scrollHeight;
+        if (smooth) {
+            window.scrollTo({
+                top: scrollY,
+                behavior: 'smooth'
+            });
+        } else {
+            window.scrollTo(0, scrollY);
+        }
+    }
+    // locate the cat to scroll page
+    track.addEventListener('click', e => {
+        const rect = track.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let p = x / rect.width;
+        scrollPage(p, true);
     });
 
     // nyan cat

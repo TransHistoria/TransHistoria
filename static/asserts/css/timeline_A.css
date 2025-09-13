@@ -15,6 +15,20 @@
     --spark-time: 2800ms;
 }
 
+/* 对整个页面 body 隐藏滚动条，但仍可滚动 */
+body {
+  scrollbar-width: none;  /* Firefox */
+  -ms-overflow-style: none; /* IE 10+ */
+  overflow-y: scroll;     /* 保证滚动功能 */
+}
+
+/* Chrome, Edge, Safari */
+body::-webkit-scrollbar {
+  width: 0px;
+  background: transparent; /* 可选：完全透明 */
+}
+
+
 html,
 body {
     background:

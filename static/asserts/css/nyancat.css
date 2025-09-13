@@ -17,6 +17,7 @@
     z-index: 1000;
     background: #036;
     opacity: 0.8;
+    cursor: grab;
 }
 
 /* nyan cat background*/
