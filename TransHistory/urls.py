@@ -4,6 +4,7 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path("index_A/", views.index_A),
+    path("history/timeline_A/", views.timeline_A),
     path("", views.index),
     path("history/", views.history),
     path("history/timeline", views.timeline),

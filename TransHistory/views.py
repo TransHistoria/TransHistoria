@@ -12,6 +12,9 @@ from django.shortcuts import get_object_or_404
 def index_A(request):
     return render(request, 'index_A.html')
 
+def timeline_A(request):
+    return render(request, 'timeline_A.html')
+
 def index(request):
     return render(request, 'index.html')
 
