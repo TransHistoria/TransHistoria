@@ -6,6 +6,7 @@ from django.http import JsonResponse
 from django.core.files.storage import default_storage
 from .models import HistoryNode, Contributor
 from django.shortcuts import get_object_or_404
+from .Tools.file import handle_upload_file
 # Create your views here.
 
 
@@ -24,9 +25,8 @@ def history(request):
 def timeline(request):
     return render(request, 'timeline.html')
 
-def timepoint(request, year):
-    markdown_file = f'{year}.md'
-    return render(request, 'detail.html', {'homepage': markdown_file})
+def timepoint(request, uuid, mkdoc_path):
+    return render(request, 'detail.html', {'basePath': f"/static/mkdocs/{uuid}/", 'homepage': mkdoc_path})
 
 def people(request):
     return render(request, 'people.html')
@@ -69,6 +69,9 @@ def post(request):
         
         # 2. 获取文件
         uploaded_file = request.FILES.get('doc')  # 对应 <input name="doc">
+        mkdoc_path = None
+        if uploaded_file:
+            mkdoc_path = handle_upload_file(uploaded_file)
 
         # 3. 保存到数据库
         node = HistoryNode.objects.create(
@@ -80,7 +83,8 @@ def post(request):
             theme=data.get('attr', {}).get('theme', ''),
             region=data.get('attr', {}).get('region', ''),
             tag=data.get('attr', {}).get('tag', ''),
-            oridoc=uploaded_file
+            oridoc=uploaded_file,
+            mkdoc=mkdoc_path
         )
 
         Contributor.objects.create(

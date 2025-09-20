@@ -8,7 +8,7 @@ urlpatterns = [
     path("", views.index),
     path("history/", views.history),
     path("history/timeline", views.timeline),
-    path('history/timepoint/<int:year>/', views.timepoint, name='timepoint'),
+    path('history/timepoint/<str:uuid>/<str:mkdoc_path>/', views.timepoint, name='timepoint'),
     path("people/", views.people),
     path("theory/", views.theory),
     path("gallery/", views.gallery),
