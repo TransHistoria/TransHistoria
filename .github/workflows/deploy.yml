@@ -4,12 +4,12 @@ on:
   push:
     branches:
       - deploy
-permissions:
-  contents: read
-  packages: admin
 jobs:
   buildAndPushAndDeploy:
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
     steps:
       - name: checkout code
         uses: actions/checkout@v5
@@ -18,7 +18,7 @@ jobs:
         with:
           registry: ghcr.io
           username: ${{ github.actor }}
-          password: ${{ secrets.GITHUB_TOKEN }}
+          password: ${{ github.token }}
       - name: get tags
         id: getTags
         run: echo "tags<<EOF">>$GITHUB_OUTPUT;echo $(git rev-parse --short HEAD)>>$GITHUB_OUTPUT;echo latest>>$GITHUB_OUTPUT;echo EOF>>$GITHUB_OUTPUT
