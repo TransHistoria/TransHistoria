@@ -1,6 +1,8 @@
 from django.urls import path
 from . import views
 from django.contrib.auth import views as auth_views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path("index_A/", views.index_A),
@@ -8,7 +10,7 @@ urlpatterns = [
     path("", views.index),
     path("history/", views.history),
     path("history/timeline", views.timeline),
-    path('history/timepoint/<str:uuid>/<str:mkdoc_path>/', views.timepoint, name='timepoint'),
+    path('detail/<str:uuid>/<str:mkdoc_path>/', views.timepoint, name='timepoint'),
     path("people/", views.people),
     path("theory/", views.theory),
     path("gallery/", views.gallery),
@@ -21,4 +23,4 @@ urlpatterns = [
     path('api/historynode/<int:pk>/', views.historynode_api, name='historynode_api'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
-]
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

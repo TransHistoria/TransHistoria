@@ -23,7 +23,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (yearElem) yearElem.textContent = data.time || "";
                 if (data.mkdoc) {
                     aElem.style.display = "block";
-                    aElem.href = `/history/timepoint/${data.mkdoc}`;
+                    aElem.href = `/detail/${data.mkdoc}`;
                 }
                 if (titleElem) titleElem.textContent = data.title || "";
                 // 处理 t-content，添加引用 tooltip
