@@ -1,0 +1,29 @@
+# virtualenv
+/.run
+
+# python cache
+__pycache__
+*.pyc                                                                                                                                                                                                                                                                          
+# nodejs things
+node_modules
+.pnp.cjs
+.pnp.loader.mjs
+.yarn/
+yarn.lock
+package.json
+worker.ts
+.wrangler
+wrangler.jsonc
+.yarnrc.yml
+
+# container
+/container
+/container.sh
+
+# git
+.git
+.gitignore
+
+# dockerfile itself
+.dockerignore
+Dockerfile

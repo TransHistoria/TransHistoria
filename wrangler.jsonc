@@ -12,7 +12,7 @@
   ],
   "containers": [
     {
-      "image": "./container/Dockerfile",
+      "image": "./Dockerfile",
       "class_name": "WebappContainer",
       "max_instances": 1,
       "instance_type": "standard"
