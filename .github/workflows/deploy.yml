@@ -21,7 +21,7 @@ jobs:
           password: ${{ secrets.GITHUB_TOKEN }}
       - name: get tags
         id: getTags
-        run: echo "tags<<EOF\n$(git rev-parse --short HEAD)\nlatest\nEOF" >> $GITHUB_OUTPUT
+        run: echo "tags<<EOF">>$GITHUB_OUTPUT;echo $(git rev-parse --short HEAD)>>$GITHUB_OUTPUT;echo latest>>$GITHUB_OUTPUT;echo EOF>>$GITHUB_OUTPUT
       - name: Docker metadata
         id: meta
         uses: docker/metadata-action@v5
