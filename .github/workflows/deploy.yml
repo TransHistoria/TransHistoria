@@ -5,8 +5,8 @@ on:
     branches:
       - deploy
 permissions:
-  contents: write
-  packages: write
+  contents: read
+  packages: admin
 jobs:
   buildAndPushAndDeploy:
     runs-on: ubuntu-latest
