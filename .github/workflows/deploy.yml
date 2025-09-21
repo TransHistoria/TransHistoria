@@ -5,6 +5,7 @@ on:
     branches:
       - deploy
 permissions:
+  contents: write
   packages: write
 jobs:
   buildAndPushAndDeploy:
