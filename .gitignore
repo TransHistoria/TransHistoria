@@ -5,12 +5,5 @@
 __pycache__
 *.pyc
 
-# nodejs things
-node_modules
-.pnp.cjs
-.pnp.loader.mjs
-.yarn/
-yarn.lock
-
 # container
-/container
+/container/data
