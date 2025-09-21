@@ -5,7 +5,6 @@ import zipfile
 import tarfile
 from pathlib import Path
 from django.conf import settings
-from django.http import HttpResponseBadRequest, JsonResponse
 
 def handle_upload_file(file):
     """
@@ -17,7 +16,7 @@ def handle_upload_file(file):
     """
 
     # === 1. 保存临时文件 ===
-    tmp_dir = Path(settings.BASE_DIR) / 'tmp_uploads'
+    tmp_dir = Path(settings.MEDIA_ROOT) / 'tmp_uploads'
     tmp_dir.mkdir(exist_ok=True)
     tmp_file = tmp_dir / file.name
     with open(tmp_file, 'wb+') as f:
@@ -64,7 +63,7 @@ def handle_upload_file(file):
 
     # === 4. 复制到 static/mkdoc/<uuid> ===
     target_uuid = uuid.uuid4().hex
-    mkdoc_root = Path(settings.BASE_DIR) / 'static' / 'mkdocs' / target_uuid
+    mkdoc_root = Path(settings.MEDIA_ROOT) / 'mkdocs' / target_uuid
     mkdoc_root.mkdir(parents=True, exist_ok=True)
 
     # 将整个解压内容复制过去（保留目录结构）

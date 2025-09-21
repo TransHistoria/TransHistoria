@@ -26,7 +26,7 @@ def timeline(request):
     return render(request, 'timeline.html')
 
 def timepoint(request, uuid, mkdoc_path):
-    return render(request, 'detail.html', {'basePath': f"/static/mkdocs/{uuid}/", 'homepage': mkdoc_path})
+    return render(request, 'detail.html', {'basePath': f"/media/mkdocs/{uuid}/", 'homepage': mkdoc_path})
 
 def people(request):
     return render(request, 'people.html')
