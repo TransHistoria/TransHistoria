@@ -1,0 +1,30 @@
+{% load static %}
+
+<!-- 导航 -->
+<div class="header">
+    <nav>
+        <a href="/" target="_self"><img class="logo-icon" src="{% static 'asserts/images/logo-trans4tm1.png' %}">
+        </a>
+        <div class="nav-links" id="navLinks">
+            <img src="{% static 'asserts/images/关闭.png' %}" class="close-icon" onclick="hideMenu()">
+            <ul>
+                <li><a href="/" target="_self">主页</a></li>
+                <li><a href="/history/timeline" target="_blank">跨性别编年史</a></li>
+                <li><a href="/archives" target="_blank">资料库</a></li>
+                <li><a href="/about_us" target="_blank">关于我们</a></li>
+            </ul>
+        </div>
+        <img src="{% static 'asserts/images/分类.png' %}" class="menu-icon" onclick="showMenu()">
+    </nav>
+    {% block content %}{% endblock %}
+</div>
+<!-- 侧边栏的javascript -->
+<script>
+    var navLinks = document.getElementById("navLinks");
+    function showMenu() {
+        navLinks.style.right = "0";
+    }
+    function hideMenu() {
+        navLinks.style.right = "-200px";
+    }
+</script>

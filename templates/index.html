@@ -1,41 +1,44 @@
 {% extends "base.html" %}
 {% load static %}
-
 {% block title %}光谱历史-主页{% endblock %}
 
 {% block extra_head %}
+<link href="{% static 'asserts/css/header.css' %}" rel="stylesheet" />
 <link href="{% static 'asserts/css/index.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block content %}
-<div class="row">
-  <div class="col">
-    <h2>Transgender's History</h2>
-    <h1>跨性别历史</h1>
-    <h2>我们的历史，我们的声音</h2>
-    <button onclick="window.open('history/timeline')" type="button">
-      <h4>进入时间线</h4>
-    </button>
-  </div>
-  <div class="col">
-    <div class="card card1" onclick="window.open('history')">
-      <h5><br /><br /><br /><br />资料库</h5>
-      <h6>收集跨性别群体的历史</h6>
-      <br />
+<div class="Box-Background">
+  {% include "header.html" %}
+  <div class="row">
+    <div class="col">
+      <h2>Transgender's History</h2>
+      <h1>跨性别历史</h1>
+      <h2>我们的历史，我们的声音</h2>
+      <button onclick="window.open('history/timeline')" type="button">
+        <h4>进入时间线</h4>
+      </button>
     </div>
-    <div class="card card2" onclick="window.open('theory')">
-      <h5><br /><br /><br /><br />理论研究</h5>
-      <h6>收集了各种资料</h6>
-      <br />
-    </div>
-    <div class="card card3" onclick="window.open('gallery')">
-      <h5><br /><br /><br /><br />艺术馆</h5>
-      <h6>我本是女娇娥 <br />又不是男儿郎</h6>
-    </div>
-    <div class="card card4" onclick="window.open('people')">
-      <h5><br /><br /><br /><br />名人堂</h5>
-      <h6>改变世界的跨性别者们</h6>
-      <br />
+    <div class="col">
+      <div class="card card1" onclick="window.open('history')">
+        <h5>资料库</h5>
+        <h6>收集跨性别群体的历史</h6>
+        <br />
+      </div>
+      <div class="card card2" onclick="window.open('theory')">
+        <h5>理论研究</h5>
+        <h6>收集了各种资料</h6>
+        <br />
+      </div>
+      <div class="card card3" onclick="window.open('gallery')">
+        <h5>艺术馆</h5>
+        <h6>我本是女娇娥 <br />又不是男儿郎</h6>
+      </div>
+      <div class="card card4" onclick="window.open('people')">
+        <h5>名人堂</h5>
+        <h6>改变世界的跨性别者们</h6>
+        <br />
+      </div>
     </div>
   </div>
 </div>

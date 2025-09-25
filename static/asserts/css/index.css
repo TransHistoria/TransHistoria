@@ -1,264 +1,208 @@
-/* 总体设置 */
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Roboto", sans-serif;
-    /* 写完记得试试注释掉下面这行效果如何 */
-    box-sizing: border-box;
-}
+ /* 主界面设置 */
+ .Box-Background {
+     width: 100%;
+     height: 100vh;
+     /* background-color: rgb(255, 201, 40); */
+     background-color: rgb(46, 45, 40);
+     background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.7)), url('../images/Judith_Butler03.jpg');
+     background-position: center;
+     background-size: center;
+     padding-left: 8%;
+     padding-right: 8%;
+     box-sizing: border-box;
+     background-repeat: no-repeat;
+ }
 
-/* 主界面设置 */
-.Box-Background {
-    width: 100%;
-    height: 100vh;
-    /* background-color: rgb(255, 201, 40); */
-    background-color: rgb(46, 45, 40);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.7)),
-        url("../images/Judith_Butler03.jpg");
-    background-position: center;
-    background-size: center;
-    padding-left: 8%;
-    padding-right: 8%;
-    box-sizing: border-box;
-    background-repeat: no-repeat;
-}
 
-/* 导航栏设置 */
-.navbar {
-    height: 12%;
-    display: flex;
-    align-items: center;
-}
+ /* 主界面资料卡设置 */
+ .row {
+     display: flex;
+     flex-wrap: wrap;
+     /* 允许换行 */
+     justify-content: space-between;
+     /* 空间 between */
+     align-items: center;
+     gap: 40px;
+     /* 增加间隙 */
+     padding: 40px 0;
+     flex-wrap: wrap;
+     /* 允许换行 */
+     justify-content: center;
+     /* 居中内容 */
+ }
 
-.logo-icon {
-    width: 300px;
-    cursor: pointer;
-}
+ .col {
+     flex: 1;
+     min-width: 300px;
+     /* 设置最小宽度，防止过度挤压 */
+     min-width: 300px;
+     /* 设置最小宽度 */
+     flex-shrink: 0;
+     /* 防止Flex项目缩小 */
+ }
 
-.menu-icon {
-    width: 30px;
-    cursor: pointer;
-    margin-left: 40px;
-}
+ .col:first-child {
+     text-align: left;
+     /* 保持左对齐 */
+ }
 
-nav {
-    flex: 1;
-    text-align: right;
-}
+ .col:last-child {
+     display: flex;
+     flex-wrap: wrap;
+     justify-content: center;
+     /* 居中卡片 */
+     gap: 20px;
+     /* 卡片间隙 */
+ }
 
-nav ul li {
-    list-style: none;
-    display: inline-block;
-    margin-left: 60px;
-}
+ .col button {
+     width: 180px;
+     background: transparent;
+     border: 4px solid #fff;
+     color: #fff;
+     border-radius: 30px;
+     font-size: clamp(14px, 2vw, 20px);
+     padding: 12px 0;
+ }
 
-nav ul li a {
-    text-decoration: none;
-    color: #fff;
-    font-size: 25px;
-}
+ .col button:hover {
+     border: 4px solid #eeeeee2e;
+     background: #eeeeee2e;
+     transition: 0.05s;
+ }
 
-.navbar ul li::after {
-    content: "";
-    width: 0%;
-    height: 2px;
-    background: #eeeeee2e;
-    display: block;
-    margin: auto;
-    transition: 0.1s;
-}
+ h1 {
+     color: #fff;
+     font-size: clamp(2.5rem, 8vw, 100px);
+     /* 使用clamp函数实现响应式字体大小 */
+ }
 
-.navbar ul li:hover::after {
-    width: 100%;
-}
+ h2 {
+     color: #fff;
+     font-size: clamp(1.2rem, 4vw, 30px);
+ }
 
-/* 主界面资料卡设置 */
-.row {
-    display: flex;
-    height: 88%;
-    align-items: center;
-}
+ h5 {
+     color: #fff;
+     text-shadow: 0 0 5px #999;
+     font-size: 30px;
+ }
 
-.col {
-    flex-basis: 50%;
-}
+ h6 {
+     color: #fff;
+     font-size: 20px;
+ }
 
-.col button {
-    width: 140px;
-    background: transparent;
-    border: 4px solid #fff;
-    color: #fff;
-    border-radius: 30px;
-    font-size: 20px;
-}
+ p {
+     color: #fff;
+     font-size: 20px;
+     line-height: 20px;
+ }
 
-.col button:hover {
-    border: 4px solid #eeeeee2e;
-    background: #eeeeee2e;
-    transition: 0.05s;
-}
+ button {
+     width: 180px;
+     color: #000;
+     font-size: 12px;
+     padding: 12px 0;
+     background: #fff;
+     border: 0;
+     border-radius: 20px;
+     outline: none;
+     margin-top: 30px;
+ }
 
-h1 {
-    color: #fff;
-    font-size: 100px;
-}
+ .card {
+     width: 200px;
+     height: 230px;
+     display: inline-block;
+     border-radius: 10px;
+     padding: 15px 25px;
+     box-sizing: content-box;
+     cursor: pointer;
+     margin: 10px 15px;
+     /* background-image: url(./images/Judith_Butler02.jpg); */
+     background-position: center;
+     background-size: cover;
+     transition: 0.28s;
+ }
 
-h2 {
-    color: #fff;
-    font-size: 30px;
-}
+ .card:hover {
+     transform: translateY(-10px);
+ }
 
-h6 {
-    color: #fff;
-    font-size: 20px;
-}
+ .card1 {
+     background-image: url(../images/李银河1.jpg);
+ }
 
-p {
-    color: #fff;
-    font-size: 20px;
-    line-height: 20px;
-}
+ .card2 {
+     background-image: url(../images/资料库/事件/ICD-11_Logo.jpg);
+ }
 
-button {
-    width: 180px;
-    color: #000;
-    font-size: 12px;
-    padding: 12px 0;
-    background: #fff;
-    border: 0;
-    border-radius: 20px;
-    outline: none;
-    margin-top: 30px;
-}
+ .card3 {
+     background-image: url(../images/艺术馆.png);
+ }
 
-.card {
-    width: 200px;
-    height: 230px;
-    display: inline-block;
-    border-radius: 10px;
-    padding: 15px 25px;
-    box-sizing: content-box;
-    cursor: pointer;
-    margin: 10px 15px;
-    /* background-image: url(../images/Judith_Butler02.jpg); */
-    background-position: center;
-    background-size: cover;
-    transition: 0.28s;
-}
+ .card4 {
+     background-image: url(../images/Lynn_Conway.jpg);
+ }
 
-.card:hover {
-    transform: translateY(-10px);
-}
+ .card p {
+     text-shadow: 0 0 15px #000;
+     font-size: 15px;
+ }
 
-.card1 {
-    background-image: url(../images/李银河1.jpg);
-}
+ /* 卡片移动设备适配 - 媒体查询 */
+ @media screen and (max-width: 1024px) {
+     h1 {
+         font-size: 3.5rem;
+     }
+ }
 
-.card2 {
-    background-image: url(../images/资料库/事件/ICD-11_Logo.jpg);
-}
+ @media screen and (max-width: 900px) {
+     .col:first-child {
+         text-align: center;
+         /* 移动端居中 */
+     }
 
-.card3 {
-    background-image: url(../images//艺术馆.png);
-}
+     .col:last-child {
+         justify-content: center;
+         /* 确保卡片居中 */
+     }
 
-.card4 {
-    background-image: url(../images/Lynn_Conway.jpg);
-}
+     .card {
+         width: 180px;
+         /* 稍微调整卡片大小 */
+         width: calc(50% - 20px);
+         /* 两列布局 */
+         max-width: 200px;
+         height: 210px;
+     }
+ }
 
-.card5 {
-    background-image: url(../images/考古.jpg);
-}
+ @media screen and (max-width: 768px) {
+     h1 {
+         font-size: 2.5rem;
+     }
 
-.card6 {
-    background-image: url(../images/working.jpg);
-}
+     .col button {
+         width: 160px;
+         font-size: 16px;
+     }
+ }
 
-.card7 {
-    background-image: url(../images/working.jpg);
-}
+ @media screen and (max-width: 600px) {
+     .card {
+         width: 160px;
+         height: 190px;
+         width: calc(100% - 20px);
+         /* 单列布局 */
+         max-width: 250px;
+     }
+ }
 
-.card8 {
-    background-image: url(../images/working.jpg);
-}
-
-h5 {
-    color: #fff;
-    text-shadow: 0 0 5px #999;
-    font-size: 30px;
-}
-
-.card p {
-    text-shadow: 0 0 15px #000;
-    font-size: 15px;
-}
-
-/* 这一部分是页脚的设置 */
-.footer {
-    /* margin-top: 150px; 这条没事就别动*/
-    width: 100%;
-    /* 调纵向间距的 */
-    padding: 50px 10%;
-    /* background: rgb(49, 0, 68);*/
-    /* background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),rgb(255, 201, 40); */
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        rgb(46, 45, 40);
-    /* background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),rgb(85,81,69); */
-    color: #efefef;
-    /* 控制页脚排版布局的，改变形状靠这个 */
-    display: flex;
-}
-
-.footer div {
-    text-align: center;
-}
-
-.col-2 {
-    flex-grow: 2;
-}
-
-.footer div h3 {
-    font-weight: 300;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-.col-1 a {
-    display: block;
-    text-decoration: none;
-    color: #efefef;
-    margin-bottom: 10px;
-}
-
-form input {
-    width: 400px;
-    height: 45px;
-    border-radius: 4px;
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    outline: none;
-    border: none;
-}
-
-form button {
-    width: 100px;
-    background: transparent;
-    border: 2px solid #eeeeee2e;
-    color: #fff;
-    border-radius: 30px;
-    padding: 10px 30px;
-    margin-top: 0%;
-    /* 调节页脚按钮大小 */
-    font-size: 16px;
-    cursor: pointer;
-}
-
-.col-2 button:hover {
-    border: 2px solid #eeeeee2e;
-    background: #eeeeee2e;
-    transition: 0s;
-}
+ @media screen and (max-width: 480px) {
+     .card {
+         width: 140px;
+         height: 170px;
+     }
+ }
