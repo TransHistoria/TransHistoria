@@ -1,0 +1,52 @@
+/* About Us 页header设置 */
+.about-us {
+    width: 80%;
+    margin-left: auto;
+    padding-top: 80px;
+    padding-bottom: 50px;
+}
+
+.row1 {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+
+    /* 如果空间不够，允许换行 */
+    flex-wrap: wrap;
+    /* align-items: flex-start; */
+}
+
+.row1 ul li {
+    height: 70px;
+}
+
+.about-col {
+    flex-basis: 48%;
+    padding: 30px 2px;
+}
+
+.about-col img {
+    width: 300px;
+    /* display: block; */
+    margin-left: auto;
+}
+
+.about-col h3 {
+    padding: 15px 0 25px;
+    line-height: 35px;
+    text-indent: 2em;
+    color: rgba(46, 45, 40, 0.7);
+}
+
+.about-col h4 {
+    padding: 15px 0 25px;
+    line-height: 25px;
+    color: rgba(46, 45, 40, 0.7);
+}
+
+.about-col p {
+    padding: 15px 0 25px;
+    line-height: 35px;
+    text-indent: 2em;
+    color: rgba(46, 45, 40, 0.7);
+}

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Title{% endblock %}</title>
+    <link href="{% static 'asserts/css/index.css' %}" rel="stylesheet" />
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <!-- 导航 -->
+    <div class="Box-Background">
+        <div class="navbar">
+            <a href="/" target="_self"><img class="logo-icon"
+                src="{% static 'asserts/images/logo-trans4tm1.png' %}" >
+            </a>
+            <nav>
+                <!-- <img src="{% static 'asserts/images/关闭.png' %}" class="close-icon" onclick="hideMenu()"> -->
+                <ul>
+                    <li><a href="/" target="_self">主页</a></li>
+                    <li><a href="/history/timeline" target="_blank">跨性别编年史</a></li>
+                    <li><a href="/archives" target="_blank">资料库</a></li>
+                    <li><a href="/about_us" target="_blank">关于我们</a></li>
+                </ul>
+                
+            </nav>
+            <img src="{% static 'asserts/images/分类.png' %}" class="menu-icon" onclick="showMenu()">
+        </div>
+        {% block content %}{% endblock %}
+    </div>
+
+    <!-- 页脚 -->
+    <section class="footer">
+            <div class="col-1">
+                <h3>快速链接</h3>
+                <a href="./About submission.html" target="_blank">关于投稿</a>
+                <a href="./About us.html" target="_blank">关于我们</a>
+                <a href="./Dlog.html" target="_blank">开发日志</a>
+            </div>
+
+            <div class="col-2">
+                <h3>搜索栏</h3>
+                <form>
+                    <input type="type" placeholder="档案搜索" required>
+                    <br>
+                    <button type="submit">搜索</button>
+                </form>
+            </div>
+
+            <div class="col-3">
+                <h3>联系我们</h3>
+                <p2>Email:xxxxx@xx.xx</p2>
+                <br><br>
+                <p2>微信公众号：XXXX</p2>
+            </div>
+    </section>
+</body>
+
+</html>

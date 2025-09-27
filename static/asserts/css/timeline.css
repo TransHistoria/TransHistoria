@@ -1,362 +1,196 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: "Poppins", sans-serif;
-    box-sizing: border-box;
+header {
+    position: fixed;
 }
 
-body {
-    background-color: rgb(46, 45, 40);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.7)),
-        url(../images/考古.jpg);
-    /* background-image: linear-gradient(rgba(0,0,0,0.5),rgba(0,0,0,0.25),rgba(0,0,0,0.25),rgba(0,0,0,0.7)); */
-    background-position: center;
-    background-size: center;
-    position: relative;
-    background-repeat: no-repeat;
-}
 
-/* 页眉导航 */
-.header {
-    min-height: 100vh;
-    width: 100%;
-    /* background-color: rgb(255, 201, 40); */
-    background-color: rgb(46, 45, 40);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.7)),
-        url(../images/Judith_Butler03.jpg);
-    background-position: center;
-    background-size: center;
-    position: relative;
-    background-repeat: no-repeat;
-}
+@import url("https://fonts.googleapis.com/css?family=Cardo|Pathway+Gothic+One");
 
-nav {
-    display: flex;
-    padding: 2% 6%;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.logo-icon {
-    width: 300px;
-    cursor: pointer;
-    margin-left: 38px;
-}
-
-.menu-icon {
-    width: 30px;
-    cursor: pointer;
-    margin-right: 38px;
-}
-
-.nav-links {
-    flex: 1;
-    text-align: right;
-}
-
-.nav-links ul li {
-    list-style: none;
-    display: inline-block;
-    padding: 20px;
-    margin-right: 20px;
-    /* position: relative; */
-}
-
-.nav-links ul li a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 25px;
-}
-
-.nav-links ul li::after {
-    content: "";
-    width: 0%;
-    height: 2px;
-    background: #eeeeee2e;
-    display: block;
-    margin: auto;
-    transition: 0.1s;
-}
-
-.nav-links ul li:hover::after {
-    width: 100%;
-}
-
-/* About Us 页header设置 */
-.sub-header {
-    /* height: 14.7vh; */
-    height: 35vh;
-    width: 100%;
-    /* background-color: rgb(97, 91, 83); */
-    background-color: rgb(46, 45, 40);
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.25),
-            rgba(0, 0, 0, 0.7)),
-        url(../images/Judith_Butler03.jpg);
-    background-position: center;
-    background-size: center;
-    background-repeat: no-repeat;
-    text-align: center;
-    color: #fff;
-}
-
-.sub-header h1 {
-    margin-top: 50px;
-}
-
-.about-us {
-    width: 80%;
-    margin-left: auto;
-    padding-top: 80px;
-    padding-bottom: 50px;
-}
-
-.row1 {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-
-    /* 如果空间不够，允许换行 */
-    flex-wrap: wrap;
-    /* align-items: flex-start; */
-}
-
-.row1 ul li {
-    height: 70px;
-}
-
-.about-col {
-    flex-basis: 48%;
-    padding: 30px 2px;
-}
-
-.about-col img {
-    width: 300px;
-    /* display: block; */
-    margin-left: auto;
-}
-
-.about-col h3 {
-    padding: 15px 0 25px;
-    line-height: 35px;
-    text-indent: 2em;
-    color: rgba(46, 45, 40, 0.7);
-}
-
-.about-col h4 {
-    padding: 15px 0 25px;
-    line-height: 25px;
-    color: rgba(46, 45, 40, 0.7);
-}
-
-.about-col p {
-    padding: 15px 0 25px;
-    line-height: 35px;
-    text-indent: 2em;
-    color: rgba(46, 45, 40, 0.7);
-}
-
-/* 时间线设计 */
 .timeline {
-    position: relative;
-    max-width: 1200px;
-    margin: 100px auto;
-    height: 100vh;
-}
-
-.container {
-    padding: 10px 50px;
-    position: relative;
-    width: 50%;
-    animation: movedown 0.3s linear forwards;
-    opacity: 0;
-}
-
-@keyframes movedown {
-    0% {
-        opacity: 1;
-        transform: translateY(-30px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0px);
-    }
-}
-
-.container:nth-child(1) {
-    animation-delay: 0s;
-}
-
-.container:nth-child(2) {
-    animation-delay: 0.4s;
-}
-
-.container:nth-child(3) {
-    animation-delay: 0.8s;
-}
-
-.container:nth-child(4) {
-    animation-delay: 1.2s;
-}
-
-.container:nth-child(5) {
-    animation-delay: 1.6s;
-}
-
-.text-box {
-    padding: 20px 30px;
-    background: #eeeeee2e;
-    position: relative;
-    border-radius: 6px;
-    font-size: 15px;
-}
-
-.left-container {
-    left: 0;
-}
-
-.right-container {
-    left: 50%;
-}
-
-.container img {
-    position: absolute;
-    width: 40px;
-    border-radius: 50%;
-    right: -20px;
-    top: 32px;
-    z-index: 10;
-}
-
-.right-container img {
-    left: -20px;
-}
-
-.timeline::after {
-    content: "";
-    position: absolute;
-    width: 4px;
-    height: 100;
-    background: #eeeeee2e;
-    top: 0;
-    left: 50%;
-    margin-left: -2px;
-    z-index: -1;
-    animation: moveline 2s linear forwards;
-}
-
-@keyframes moveline {
-    0% {
-        height: 0;
-    }
-
-    100% {
-        height: 100%;
-    }
-}
-
-.text-box h2 {
-    font-weight: 600;
-}
-
-.text-box small {
-    display: inline-block;
-    margin-bottom: 15px;
-}
-
-.left-container-arrow {
-    height: 0;
-    width: 0;
-    position: absolute;
-    top: 28px;
-    z-index: 1;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-left: 15px solid #eeeeee2e;
-    right: -15px;
-}
-
-.right-container-arrow {
-    height: 0;
-    width: 0;
-    position: absolute;
-    top: 28px;
-    z-index: 1;
-    border-top: 15px solid transparent;
-    border-bottom: 15px solid transparent;
-    border-right: 15px solid #eeeeee2e;
-    left: -15px;
-}
-
-/* 页脚 */
-.footer {
-    /* margin-top: 150px; 这条没事就别动*/
-    width: 100%auto;
-    /* 调纵向间距的 */
-    padding: 50px 10%;
-    /* background: rgb(49, 0, 68);*/
-    background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)),
-        rgb(46, 45, 40);
-    color: #efefef;
-    /* 控制页脚排版布局的，改变形状靠这个 */
     display: flex;
+    margin: 0 auto;
+    flex-wrap: wrap;
+    flex-direction: column;
+    max-width: 700px;
+    position: relative;
 }
 
-.footer div {
-    text-align: center;
-}
-
-.col-2 {
-    flex-grow: 2;
-}
-
-.footer div h3 {
-    font-weight: 300;
-    margin-bottom: 30px;
-    letter-spacing: 1px;
-}
-
-.col-1 a {
-    display: block;
-    text-decoration: none;
-    color: #efefef;
-    margin-bottom: 10px;
-}
-
-form input {
-    width: 400px;
-    height: 45px;
-    border-radius: 4px;
-    text-align: center;
-    margin-top: -10px;
-    margin-bottom: 20px;
-    outline: none;
-    border: none;
-}
-
-form button {
-    width: 100px;
-    background: transparent;
-    border: 2px solid #eeeeee2e;
+.timeline__content-title {
+    font-weight: normal;
+    font-size: 66px;
+    margin: -10px 0 0 0;
+    transition: 0.4s;
+    padding: 0 10px;
+    box-sizing: border-box;
+    font-family: "Pathway Gothic One", sans-serif;
     color: #fff;
-    border-radius: 30px;
-    padding: 10px 30px;
-    margin-top: 0%;
-    /* 调节页脚按钮大小 */
-    font-size: 16px;
-    cursor: pointer;
 }
 
-.col-2 button:hover {
-    border: 2px solid #eeeeee2e;
-    background: #eeeeee2e;
-    transition: 0s;
+.timeline__content-desc {
+    margin: 0;
+    font-size: 15px;
+    box-sizing: border-box;
+    color: rgba(255, 255, 255, 0.7);
+    font-family: Cardo;
+    font-weight: normal;
+    line-height: 25px;
+}
+
+.timeline__details {
+    display: none;
+    text-align: end;
+    color: #fff;
+}
+
+.timeline:before {
+    position: absolute;
+    left: 50%;
+    width: 2px;
+    height: 100%;
+    margin-left: -1px;
+    content: "";
+    background: rgba(255, 255, 255, 0.07);
+}
+
+@media only screen and (max-width: 767px) {
+    .timeline:before {
+        left: 40px;
+    }
+}
+
+.timeline-item {
+    padding: 40px 0;
+    opacity: 0.3;
+    filter: blur(2px);
+    transition: 0.5s;
+    box-sizing: border-box;
+    width: calc(50% - 40px);
+    display: flex;
+    position: relative;
+    transform: translateY(-80px);
+}
+
+.timeline-item:before {
+    content: attr(data-text);
+    letter-spacing: 3px;
+    width: 100%;
+    position: absolute;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 13px;
+    font-family: "Pathway Gothic One", sans-serif;
+    border-left: 2px solid rgba(255, 255, 255, 0.5);
+    top: 70%;
+    margin-top: -5px;
+    padding-left: 15px;
+    opacity: 0;
+    right: calc(-100% - 56px);
+}
+
+.timeline-item:nth-child(even) {
+    align-self: flex-end;
+}
+
+.timeline-item:nth-child(even):before {
+    right: auto;
+    text-align: right;
+    left: calc(-100% - 56px);
+    padding-left: 0;
+    border-left: none;
+    border-right: 2px solid rgba(255, 255, 255, 0.5);
+    padding-right: 15px;
+}
+
+.timeline-item--active {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0px);
+}
+
+.timeline-item--active:before {
+    top: 50%;
+    transition: 0.3s all 0.2s;
+    opacity: 1;
+}
+
+.timeline-item--active .timeline__content-title {
+    margin: -50px 0 20px 0;
+}
+
+@media only screen and (max-width: 767px) {
+    .timeline-item {
+        align-self: baseline !important;
+        width: 100%;
+        padding: 0 30px 150px 80px;
+    }
+
+    .timeline-item:before {
+        left: 10px !important;
+        padding: 0 !important;
+        top: 50px;
+        text-align: center !important;
+        width: 60px;
+        border: none !important;
+    }
+
+    .timeline-item:last-child {
+        padding-bottom: 40px;
+    }
+}
+
+.timeline__img {
+    max-width: 100%;
+    box-shadow: 0 10px 15px rgba(0, 0, 0, 0.4);
+}
+
+.timeline-container {
+    width: 100%;
+    position: relative;
+    padding: 80px 0;
+    transition: 0.3s ease 0s;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.timeline-container:before {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(99, 99, 99, 0.8);
+    content: "";
+}
+
+.timeline-header {
+    width: 100%;
+    text-align: center;
+    margin-bottom: 80px;
+    position: relative;
+}
+
+.timeline-header__title {
+    color: #fff;
+    font-size: 46px;
+    font-family: Cardo;
+    font-weight: normal;
+    margin: 0;
+}
+
+.timeline-header__subtitle {
+    color: rgba(255, 255, 255, 0.5);
+    font-family: "Pathway Gothic One", sans-serif;
+    font-size: 16px;
+    letter-spacing: 5px;
+    margin: 10px 0 0 0;
+    font-weight: normal;
+}
+
+.demo-footer {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.demo-footer a {
+    color: #999;
+    display: inline-block;
+    font-family: Cardo;
 }
