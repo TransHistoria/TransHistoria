@@ -41,17 +41,15 @@ img {
 }
 
 .container {
-    width: min(1120px, 92vw);
     margin-inline: auto;
 }
 
 /* Header*/
 header {
-    /* position: sticky; */
+    position: absolute;
+    width: 100%;
     top: 0;
-    background: rgba(255, 255, 255, 0.8);
     backdrop-filter: blur(10px);
-    border-bottom: 1px solid var(--border);
     z-index: 10;
 }
 
@@ -60,7 +58,7 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 14px 0;
-    height: 50px;
+    height: 40px;
 }
 
 .brand {
@@ -68,6 +66,7 @@ header {
     align-items: center;
     gap: 10px;
     font-weight: 600;
+    padding-left: 20px;
 }
 
 .brand span {
@@ -75,15 +74,19 @@ header {
 }
 
 .menu {
+    max-height: 100%;
     display: flex;
     align-items: center;
-    gap: 26px;
-    color: #333;
+    gap: 12px;
+    color: #ffffff;
+    padding-right: 20px;
 }
 
 .menu a {
+    min-width: 56px;
     font-weight: 500;
     font-size: 14px;
+    text-align: center;
 }
 
 .menu-toggle {
@@ -98,24 +101,28 @@ header {
     padding: 10px 16px;
     border: 1px solid var(--border);
     border-radius: 12px;
-    background: #fff;
+    background: #000000;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
 }
 
 @media (max-width: 640px) {
     .menu-toggle {
         display: block;
+        color: #ffffff;
+        padding-right: 20px;
     }
 
     .menu {
         display: none;
         /* 默认隐藏菜单 */
+        max-height:fit-content;
         flex-direction: column;
         width: 100%;
-        background: rgba(255, 255, 255, 0.95);
+        background: rgb(50, 50, 50);
         position: absolute;
         top: 100%;
         left: 0;
+        padding-bottom: 20px;
     }
 
     .menu.open {

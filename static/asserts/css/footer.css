@@ -1,22 +1,7 @@
-* {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    box-sizing: border-box;
-}
-
-body {
-    display: flex;
-    flex-direction: column;
-    overflow-x: hidden;
-    /* 防止水平滚动 */
-}
-
-
 /* 页脚 */
 .footer {
     /* margin-top: 150px; 这条没事就别动*/
-    width: 100%;
+    max-width: 100%;
     padding: 50px 10%;
     /* 调纵向间距的 */
     /* background: rgb(49, 0, 68);*/
