@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}光谱历史-开发日志{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/about_submission.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<!-- About Us Content -->
+<div class="about-us">
+  <div class="row1">
+    <div class="about-col">
+      <h1>
+        如果您要投稿，请与我们联系！
+        <br />发送邮件或关注公众号加入社群联系开发团队。
+      </h1>
+      <h3>
+        我们由衷感谢您与我们共同完成编年史计划，收到资料后我们将进行严谨核对，确认后将加入数据库。
+      </h3>
+      <h4>
+        我们的邮箱：1234567890@xxxx.com<br />
+        <br />微信公众号：XXXXX<br />
+      </h4>
+    </div>
+    <div class="about-col">
+      <img src="{% static 'asserts/images/新青年卷一第一号.jpg' %}" />
+    </div>
+  </div>
+</div>
+{% endblock %}

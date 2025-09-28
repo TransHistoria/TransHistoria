@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>TransHistory</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <title>{% block title %}Title{% endblock %}</title>
+    <link href="{% static 'asserts/css/base.css' %}" rel="stylesheet" />
+    {% block extra_head %}{% endblock %}
+</head>
+
+<body>
+    <header>
+        <div class="container nav">
+            <a class="brand" href="/">
+                <img src="{% static 'asserts/images/logo-trans4tm1.png' %}" alt="logo" style="max-height: 30px" />
+                <!-- <span>TransHistory</span> -->
+            </a>
+            <button class="menu-toggle" aria-label="Toggle Menu">☰</button>
+            <div class="menu" aria-label="Primary">
+                <a href="/">主页</a>
+                <a href="/history">历史事件</a>
+                <a href="/people">人物史</a>
+                <a href="/gallery">艺术史</a>
+                <a href="/theory">理论史</a>
+                <a class="cta" href="/about_us">关于我们</a>
+            </div>
+        </div>
+    </header>
+    <main class="container">
+        {% block main %}{% endblock %}
+    </main>
+    <footer class="container">
+        <div class="footer">
+            <div class="col-1">
+                <h3>快速链接</h3>
+                <a href="/about_submission">关于投稿</a>
+                <a href="/about_us">关于我们</a>
+                <a href="/dlog">开发日志</a>
+            </div>
+            <div class="col-2">
+                <h3>搜索栏</h3>
+                <form>
+                    <input id="footer_searchInput"  placeholder="档案搜索" type="text" />
+                    <br />
+                    <button id="footer_searchButton">搜索</button>
+                </form>
+            </div>
+            <div class="col-3">
+                <h3>联系我们</h3>
+                <p>Email:xxxxx@xx.xx</p>
+                <p>微信公众号：XXXX</p>
+                <p>微博账号：XXXX</p>
+            </div>
+        </div>
+    </footer>
+    <script>
+        const header = document.querySelector('header');
+        const toggle = document.querySelector('.menu-toggle');
+        const menu = document.querySelector('.menu');
+        toggle.addEventListener('click', () => {
+            menu.classList.toggle('open');
+            header.classList.toggle('open');
+        });
+        document.addEventListener("click", (e) => {
+            const h = e.target.closest("header");
+            if (h == null && menu.classList.contains("open")) {
+                header.classList.remove("open");
+                menu.classList.remove("open");
+            }
+        });
+
+        const footer_searchButton = document.getElementById("footer_searchButton");
+        const footer_searchInput = document.getElementById("footer_searchInput");
+        footer_searchButton.addEventListener("click", () => {
+            const url = "/archives/?input=" + footer_searchInput.value
+            window.open(url);
+        });
+    </script>
+</body>

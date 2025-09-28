@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}光谱历史-主页{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/index.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<div class="top">
+  <div class="title">
+    <p class="title-2">Transgender's History</p>
+    <p class="title-1">跨性别历史</p>
+    <p class="title-2">我们的历史，我们的声音</p>
+    <a href="/history/timeline">进入时间线</a>
+  </div>
+</div>
+{% endblock %}

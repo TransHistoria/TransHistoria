@@ -1,0 +1,346 @@
+.hero {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 36px;
+    align-items: center;
+    padding: 42px 0 28px;
+}
+
+.hero h1 {
+    font-size: 44px;
+    line-height: 1.12;
+    margin: 0 0 12px;
+}
+
+.hero p {
+    color: var(--muted);
+    max-width: 480px;
+}
+
+.hero .shot {
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: var(--shadow);
+}
+
+.shot img {
+    aspect-ratio: 1/1;
+    border-radius: 20px;
+    object-fit: cover;
+}
+
+/* Section title*/
+.section-head {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 20px 0 10px;
+}
+
+.tag {
+    background: var(--blue);
+    color: #05131a;
+    font-weight: 700;
+    padding: 8px 14px;
+    border-radius: 10px;
+    display: inline-block;
+    letter-spacing: 0.2px;
+}
+
+.section-head p {
+    color: var(--muted);
+}
+
+/* Timeline*/
+.timeline-wrap {
+    margin: 12px 0 42px;
+}
+
+.timeline {
+    position: relative;
+    padding-left: 130px;
+    margin-top: 18px;
+}
+
+.timeline:before {
+    content: "";
+    position: absolute;
+    left: 42px;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: linear-gradient(var(--blue), var(--blue));
+    border-radius: 6px;
+}
+
+.t-item {
+    display: flex;
+    align-items: center;
+    gap: 22px;
+    margin: 24px 0;
+    transform: translateX(-54px);
+}
+
+.t-year {
+    min-width: 40px;
+    width: 80px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+}
+
+.t-dot {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    flex: 0 0 18px;
+    box-shadow: 0 0 0 4px #fff, 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.t-bar {
+    min-width: 260px;
+    min-height: 160px;
+    padding: 10px 20px 10px 20px;
+    border-radius: 12px;
+    flex: 1;
+    box-shadow: var(--shadow);
+    display: flex;
+    flex-direction: column;
+}
+
+.t-bar p {
+    margin: 5px;
+}
+
+.t-bar a {
+    display: none;
+    text-align: end;
+}
+
+.t-title {
+    font-size: 18px;
+    font-weight: 700;
+}
+
+.t-content {
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.discover {
+    background: #f2f4f8;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 18px;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 18px;
+    align-items: center;
+    margin: 34px 0 56px;
+}
+
+.discover h4 {
+    margin: 0 0 8px;
+}
+
+.discover p {
+    margin: 0 0 14px;
+    color: var(--muted);
+}
+
+.search {
+    display: flex;
+    gap: 10px;
+}
+
+.search input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    outline: none;
+    font: inherit;
+}
+
+.search button {
+    padding: 12px 16px;
+    border: none;
+    background: #111318;
+    color: #fff;
+    border-radius: 10px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.discover .pic {
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+/* Person cards*/
+.person {
+    margin: 18px 0;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 22px;
+}
+
+.card {
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 16px;
+    box-shadow: 0 1px 6px rgba(16, 24, 40, 0.04);
+}
+
+.card .thumb {
+    border-radius: 12px;
+    overflow: hidden;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+.card h5 {
+    margin: 0 0 6px;
+    font-size: 14px;
+}
+
+.card .meta {
+    font-size: 12px;
+    color: var(--muted);
+    line-height: 1.45;
+}
+
+.card .desc {
+    margin-top: 10px;
+    color: #3a3a44;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.seeall {
+    display: flex;
+    justify-content: center;
+    margin: 20px 0 60px;
+}
+
+.seeall a {
+    background: #111318;
+    color: #fff;
+    padding: 12px 18px;
+    border-radius: 12px;
+    font-weight: 600;
+}
+
+.theory .dark-row {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 18px;
+    margin: 14px 0 26px;
+}
+
+.tcard {
+    background: var(--dark-card);
+    color: var(--dark-text);
+    border-radius: 18px;
+    padding: 18px;
+    border: 1px solid #1b1f2a;
+}
+
+.tcard h6 {
+    margin: 0 0 10px;
+    font-size: 16px;
+}
+
+.tcard p {
+    margin: 0;
+    color: var(--dark-muted);
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.learn {
+    display: inline-block;
+    margin-top: 10px;
+    color: #b7f0ff;
+    font-weight: 600;
+}
+
+
+@media (max-width: 960px) {
+    .hero {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .timeline {
+        padding-left: 100px;
+    }
+
+    .discover {
+        grid-template-columns: 1fr;
+        gap: 12px;
+    }
+
+    .grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .theory .dark-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 640px) {
+    .hero h1 {
+        font-size: 34px;
+    }
+
+    .timeline {
+        padding-left: 88px;
+    }
+
+    .grid {
+        grid-template-columns: 1fr;
+    }
+
+    .theory .dark-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.ref-tooltip {
+    position: relative;
+    cursor: pointer;
+    border-bottom: 1px dotted #555;
+}
+
+/* 悬浮显示 */
+.ref-tooltip .tooltip-box {
+    display: none;
+    position: absolute;
+    bottom: 120%;
+    left: -250px;
+    background: rgba(0, 0, 0, 0.8);
+    color: #fff;
+    padding: 6px 10px;
+    border-radius: 4px;
+    z-index: 100;
+    min-width: 300px;
+    max-width: 500px;
+    /* max-height: 100px; */
+    white-space: pre-wrap;
+}
+
+/* hover 显示 */
+.ref-tooltip:hover .tooltip-box {
+    display: block;
+}
+
+/* 点击固定显示 */
+.ref-tooltip .tooltip-box.fixed {
+    display: block !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4);
+}

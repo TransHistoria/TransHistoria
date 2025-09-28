@@ -1,0 +1,83 @@
+<div class="timeline-progress">
+    <div class="sparks-combo">
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+        <div class="spark"></div>
+    </div>
+    <div id="wave-a" class="up rainbow"></div>
+    <div id="wave-a" class="down rainbow"></div>
+    <div id="wave-b" class="up rainbow"></div>
+    <div id="wave-b" class="down rainbow"></div>
+    <div id="nyan-cat" class="frame4">
+        <div id="tail"></div>
+        <div id="paws"></div>
+        <div id="pop-tarts-body">
+            <div id="pop-tarts-body-cream"></div>
+        </div>
+        <div id="head">
+            <div id="face"></div>
+        </div>
+    </div>
+</div>
+<script>
+    const track = document.querySelector('.timeline-progress');
+    const rainbows = document.querySelectorAll('.rainbow');
+    const cat = document.querySelector('#nyan-cat');
+    const root = document.documentElement;
+    const scale = getComputedStyle(root).getPropertyValue('--nyancat-scale');
+    // progress to cat
+    window.addEventListener('scroll', () => {
+        // 页面可滚动的总高度
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        // 当前滚动位置百分比
+        const scrollPercent = (window.scrollY / scrollHeight) * 100;
+        // 设置彩虹进度
+        rainbows.forEach(rainbow => {
+            const wp = (1 / scale) * scrollPercent;
+            rainbow.style.width = `${wp}%`;
+            rainbow.style.left = `-${((1 - scale) / 2) * wp}%`;
+        })
+        // 设置猫的位置
+        cat.style.left = `${scrollPercent}%`;
+    });
+
+    // scroll page
+    function scrollPage(present, smooth = false) {
+        const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollY = present * scrollHeight;
+        if (smooth) {
+            window.scrollTo({
+                top: scrollY,
+                behavior: 'smooth'
+            });
+        } else {
+            window.scrollTo(0, scrollY);
+        }
+    }
+    // locate the cat to scroll page
+    track.addEventListener('click', e => {
+        const rect = track.getBoundingClientRect();
+        let x = e.clientX - rect.left;
+        let p = x / rect.width;
+        scrollPage(p, true);
+    });
+
+    // nyan cat
+    function cycleFrames(_nyanCat, _currentFrame) {
+        _nyanCat.classList = []
+        _nyanCat.classList.add(`frame${_currentFrame}`)
+    }
+
+    (function () {
+        let nyanCat = document.getElementById('nyan-cat')
+        let currentFrame = 1
+
+        // replicateSparks(document.getElementsByClassName('sparks-combo')[0])
+
+        setInterval(function () {
+            currentFrame = (currentFrame % 6) + 1
+            cycleFrames(nyanCat, currentFrame)
+        }, 70)
+    })()
+</script>

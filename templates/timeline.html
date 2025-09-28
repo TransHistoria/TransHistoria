@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}光谱历史-时间线{% endblock %}
+
+{% block extra_head %}
+<!-- <link href="{% static 'asserts/css/header.css' %}" rel="stylesheet" /> -->
+<link href="{% static 'asserts/css/timeline.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/timeline.js' %}" defer></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="timeline-container" id="timeline-1">
+  <div class="timeline-header">
+    <h2 class="timeline-header__title">Transgender History Timeline</h2>
+    <h3 class="timeline-header__subtitle">
+      <a href="/history/timeline_A">跨性别历史时间线</a>
+    </h3>
+  </div>
+  <div class="timeline">
+    <div class="timeline-item" data-text="FATHER OF THE TURKSssss">
+      <div class="timeline__content">
+        <img class="timeline__img" src="" />
+        <h2 class="timeline__content-title">1908</h2>
+        <p class="timeline__content-desc">In 1908 he helped the group of officers who toppled the Sultan. Mustafa
+          Kemal'scareer flourished as he won his heroism in the far corners of the Ottoman Empire,including Albania and
+          Tripoli. He also briefly served as a staff officer in Salonica andIstanbul and as a military attache in Sofia.
+        </p>
+        <a class="timeline__details">了解更多➝</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+{% endblock %}

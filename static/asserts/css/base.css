@@ -1,0 +1,312 @@
+:root {
+    --bg: #ffffff;
+    --text: #0f0f10;
+    --muted: #6c6c73;
+    --blue: #5bcffa;
+    --blue-strong: #2aa9ec;
+    --pink: #f5abb9;
+    --card: #f6f7fb;
+    --ink: #111318;
+    --radius: 16px;
+    --shadow: 0 8px 24px rgba(16, 24, 40, 0.08);
+    --border: #e7e7ef;
+    --dark: #0e0f14;
+    --dark-card: #11131a;
+    --dark-text: #e9e9f3;
+    --dark-muted: #a8adbd;
+}
+
+* {
+    box-sizing: content-box;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    background: var(--bg);
+    color: var(--text);
+    font-family: "Poppins", system-ui, -apple-system, Segoe UI, Roboto,
+        Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+.container {
+    margin-inline: auto;
+}
+
+/* Header*/
+header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    background: #000000;
+    backdrop-filter: blur(10px);
+    z-index: 10;
+}
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    height: 40px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-weight: 600;
+    padding-left: 20px;
+}
+
+.brand span {
+    font-size: 20px;
+}
+
+.menu {
+    max-height: 100%;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: #ffffff;
+    padding-right: 20px;
+}
+
+.menu a {
+    min-width: 56px;
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.cta {
+    padding: 10px 16px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: #000000;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+@media (max-width: 640px) {
+
+    .menu-toggle {
+        display: block;
+        color: #ffffff;
+        padding-right: 20px;
+    }
+
+    .menu {
+        display: none;
+        /* 默认隐藏菜单 */
+        max-height:fit-content;
+        flex-direction: column;
+        width: 100%;
+        background: rgb(50, 50, 50);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        padding-bottom: 18px;
+        gap: 0px;
+    }
+
+    .menu a {
+        font-size: 24px;
+    }
+
+    .menu a:not(.cta) {
+        padding: 5px 0px;
+        width: 100%;
+    }
+
+    .open {
+        background: rgb(50, 50, 50);
+    }
+
+    .menu.open {
+        display: flex;
+        /* 打开状态显示 */
+    }
+}
+
+main {
+    min-height: 100vh;
+    padding: 100px 2%;
+}
+
+/* 页脚 */
+.footer {
+    /* margin-top: 150px; 这条没事就别动*/
+    max-width: 100%;
+    padding: 50px 10%;
+    /* 调纵向间距的 */
+    /* background: rgb(49, 0, 68);*/
+    background: linear-gradient(rgba(0,0,0,0.7),rgba(0,0,0,0.7)),rgb(46,45,40);
+    color: #efefef;
+    display: flex;
+    /* 控制页脚排版布局的，改变形状靠这个 */
+    flex-wrap: wrap;
+    /* 允许元素换行 */
+}
+
+.footer div {
+    text-align: center;
+}
+
+.col-2 {
+    flex-grow: 2;
+}
+
+.col-3 p {
+    margin: 5px 0px;
+}
+
+.footer div h3 {
+    font-weight: 300;
+    margin-bottom: 30px;
+    letter-spacing: 1px;
+}
+
+.col-1 a {
+    display: block;
+    text-decoration: none;
+    color: #efefef;
+    margin: 5px 0px;
+}
+
+form input {
+    /* width: 400px; */
+    height: 45px;
+    border-radius: 4px;
+    text-align: center;
+    margin-top: -10px;
+    margin-bottom: 20px;
+    outline: none;
+    border: none;
+    /* 修改宽度属性 */
+    width: 100%;
+    /*改为百分比宽度*/
+    max-width: 400px;
+    /*添加最大宽度限制*/
+}
+
+form button {
+    width: 100px;
+    background: transparent;
+    border: 2px solid #eeeeee2e;
+    color: #fff;
+    border-radius: 30px;
+    padding: 10px 30px;
+    margin-top: 0%;
+    /* 调节页脚按钮大小 */
+    font-size: 16px;
+    cursor: pointer;
+}
+
+.col-2 button:hover {
+    border: 2px solid #eeeeee2e;
+    background: #eeeeee2e;
+    transition: 0.0s;
+}
+
+/* 页脚移动设备适配 - 媒体查询 */
+@media screen and (max-width: 768px) {
+    .footer {
+        padding: 40px 5%;
+        /* 减少左右内边距 */
+        flex-direction: column;
+        /* 改为垂直布局 */
+    }
+
+    .footer div {
+        width: 100%;
+        /* 每个列占满宽度 */
+        margin-bottom: 40px;
+        /* 增加底部间距 */
+        padding: 0;
+        /* 移除内边距 */
+    }
+
+    .footer div h3 {
+        margin-bottom: 15px;
+    }
+
+    /* 分配网格区域 */
+    .col-2 {
+        grid-area: search;
+        grid-column: 1 / span 2;
+        margin-bottom: 20px;
+    }
+
+    .col-1 {
+        grid-area: links;
+        text-align: left;
+        padding-left: 10%;
+    }
+
+    .col-3 {
+        grid-area: contact;
+        text-align: left;
+    }
+
+    .col-2 {
+        flex-grow: 1;
+        /* 取消在移动设备上的额外增长 */
+    }
+
+    form input {
+        max-width: 100%;
+        /* 输入框宽度适应容器 */
+        width: 100%;
+        /* 确保输入框占满宽度 */
+    }
+
+    .footer div:last-child {
+        margin-bottom: 0;
+        /* 最后一个元素不需要底部间距 */
+    }
+
+    .footer div h3 {
+        margin-bottom: 20px;
+        /* 调整标题底部间距 */
+    }
+}
+
+/* 小屏幕手机适配 */
+@media screen and (max-width: 480px) {
+    .footer {
+        padding: 30px 5%;
+        /* 进一步减少内边距 */
+    }
+
+    form button {
+        width: 100%;
+        /* 按钮宽度适应容器 */
+        max-width: 200px;
+        /* 设置最大宽度 */
+    }
+
+    .col-1,
+    .col-3 {
+        text-align: center;
+        padding: 0 5%;
+    }
+}

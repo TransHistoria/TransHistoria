@@ -1,0 +1,338 @@
+{% extends "base_A.html" %}
+{% load static %}
+
+{% block title %}TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/index_A.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/index_A.js' %}" defer></script>
+{% endblock %}
+
+{% block main %}
+<main class="container">
+  <!-- Hero -->
+  <section class="hero" aria-label="Hero">
+    <div>
+      <h1>Remember The History!</h1>
+      <p>This is a site for the history of transgender.</p>
+    </div>
+    <div class="shot">
+      <img src="{% static 'asserts/images/sky.jpg' %}" alt="Blue sky with clouds and a kite" />
+    </div>
+  </section>
+  <!-- History -->
+  <section id="history" class="timeline-wrap">
+    <div class="section-head">
+      <span class="tag">History</span>
+      <p>
+        A brief introduction to the history of transgender in the timeline.
+      </p>
+    </div>
+    <div class="timeline">
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--pink)"></div>
+        <div class="t-id" style="display: none;">12</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--pink)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--blue)"></div>
+        <div class="t-id" style="display: none;">13</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--blue)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--pink)"></div>
+        <div class="t-id" style="display: none;">14</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--pink)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--blue)"></div>
+        <div class="t-id" style="display: none;">16</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--blue)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--pink)"></div>
+        <div class="t-id" style="display: none;">18</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--pink)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--blue)"></div>
+        <div class="t-id" style="display: none;">19</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--blue)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+      <div class="t-item">
+        <div class="t-dot" style="background: var(--pink)"></div>
+        <div class="t-id" style="display: none;">20</div>
+        <div class="t-year">AD 1930</div>
+        <div class="t-bar" style="background: var(--pink)">
+          <p class="t-title">莉莉·艾尔伯开始性别确认手术</p>
+          <p class="t-content">
+            她成为最早因手术而为世人所知的跨性别女性之一，推动医学与公众讨论。
+          </p>
+          <a>了解更多➝</a>
+        </div>
+      </div>
+    </div>
+    <!-- Discover card -->
+    <div class="discover">
+      <div>
+        <h4>Let’s discover the history</h4>
+        <p>Input something and dive into the history!</p>
+        <form class="search" onsubmit="event.preventDefault()">
+          <input type="text" placeholder="Search..." aria-label="Search" />
+          <button type="submit">Search</button>
+        </form>
+      </div>
+      <div class="pic">
+        <img src="{% static 'asserts/images/cherry.jpg' %}" alt="Portrait" style="max-height: 100%" />
+      </div>
+    </div>
+  </section>
+  <!-- Person -->
+  <section id="person" class="person">
+    <div class="section-head">
+      <span class="tag" style="background: var(--blue)">Person</span>
+      <p>
+        Some transgender people and those who support or participate in
+        related history.
+      </p>
+    </div>
+    <div class="grid">
+      <!-- Card x6 (you can duplicate more if needed) -->
+      <article class="card">
+        <div class="thumb">
+          <img src="{% static 'asserts/images/Simone de Beauvoir.jpg' %}" alt="Portrait" style="max-height: 100%" />
+        </div>
+        <h5>Simone de Beauvoir</h5>
+        <div class="meta">
+          French existentialist philosopher, writer, social theorist, and
+          feminist activist
+        </div>
+        <div class="desc">
+          She was best known for her trailblazing work in feminist
+          philosophy. The Second Sex (1949), a detailed analysis of women’s
+          oppression and a foundational tract of contemporary feminism.
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <img src="{% static 'asserts/images/Simone de Beauvoir.jpg' %}" alt="Portrait" style="max-height: 100%" />
+        </div>
+        <h5>Simone de Beauvoir</h5>
+        <div class="meta">
+          French existentialist philosopher, writer, social theorist, and
+          feminist activist
+        </div>
+        <div class="desc">
+          She was best known for her trailblazing work in feminist
+          philosophy. The Second Sex (1949), a detailed analysis of women’s
+          oppression and a foundational tract of contemporary feminism.
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <img src="{% static 'asserts/images/Simone de Beauvoir.jpg' %}" alt="Portrait" style="max-height: 100%" />
+        </div>
+        <h5>Simone de Beauvoir</h5>
+        <div class="meta">
+          French existentialist philosopher, writer, social theorist, and
+          feminist activist
+        </div>
+        <div class="desc">
+          She was best known for her trailblazing work in feminist
+          philosophy. The Second Sex (1949), a detailed analysis of women’s
+          oppression and a foundational tract of contemporary feminism.
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <img src="{% static 'asserts/images/Simone de Beauvoir.jpg' %}" alt="Portrait" style="max-height: 100%" />
+        </div>
+        <h5>Simone de Beauvoir</h5>
+        <div class="meta">
+          French existentialist philosopher, writer, social theorist, and
+          feminist activist
+        </div>
+        <div class="desc">
+          She was best known for her trailblazing work in feminist
+          philosophy. The Second Sex (1949), a detailed analysis of women’s
+          oppression and a foundational tract of contemporary feminism.
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <img src="{% static 'asserts/images/Simone de Beauvoir.jpg' %}" alt="Portrait" style="max-height: 100%" />
+        </div>
+        <h5>Simone de Beauvoir</h5>
+        <div class="meta">
+          French existentialist philosopher, writer, social theorist, and
+          feminist activist
+        </div>
+        <div class="desc">
+          She was best known for her trailblazing work in feminist
+          philosophy. The Second Sex (1949), a detailed analysis of women’s
+          oppression and a foundational tract of contemporary feminism.
+        </div>
+      </article>
+      <article class="card">
+        <div class="thumb">
+          <img src="{% static 'asserts/images/Simone de Beauvoir.jpg' %}" alt="Portrait" style="max-height: 100%" />
+        </div>
+        <h5>Simone de Beauvoir</h5>
+        <div class="meta">
+          French existentialist philosopher, writer, social theorist, and
+          feminist activist
+        </div>
+        <div class="desc">
+          She was best known for her trailblazing work in feminist
+          philosophy. The Second Sex (1949), a detailed analysis of women’s
+          oppression and a foundational tract of contemporary feminism.
+        </div>
+      </article>
+    </div>
+    <div class="seeall">
+      <a href="#">See all Person</a>
+    </div>
+  </section>
+  <!-- Theory -->
+  <section id="theory" class="theory">
+    <div class="section-head">
+      <span class="tag" style="background: var(--blue)">Theory</span>
+      <p>Those profound thoughts that see the truth.</p>
+    </div>
+    <div class="dark-row">
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+    </div>
+    <div class="dark-row">
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+      <article class="tcard">
+        <h6 style="font-size: large; margin-bottom: 0.5em">Gender</h6>
+        <p>
+          Gender refers to the socially constructed roles, behaviors,
+          identities, and expectations of being a man, woman, or third
+          gender, which vary across cultures and time; it differs from
+          biological sex, which relates to physical attributes like
+          chromosomes and anatomy.
+        </p>
+        <a class="learn" href="#">Learn more ↗</a>
+      </article>
+    </div>
+  </section>
+</main>
+{% endblock %}

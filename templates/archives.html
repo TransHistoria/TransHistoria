@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}光谱历史-艺术馆{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/archives.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/archives.js' %}" defer></script>
+{% endblock %}
+
+{% block main %}
+
+<div class="search-container">
+  <div class="search">
+    <!-- Tag多选框 -->
+    <div class="tags" id="tagContainer">
+      <label class="tag-item">
+        <input type="checkbox" value="事件" >
+        <span>事件</span>
+      </label>
+      <label class="tag-item">
+        <input type="checkbox" value="人物" >
+        <span>人物</span>
+      </label>
+      <label class="tag-item">
+        <input type="checkbox" value="艺术" >
+        <span>艺术</span>
+      </label>
+      <label class="tag-item">
+        <input type="checkbox" value="理论" >
+        <span>理论</span>
+      </label>
+    </div>
+    <!-- 搜索框 -->
+    <div class="search-bar">
+      <input type="text" id="searchInput" placeholder="输入关键词搜索…">
+      <script>searchInput.value = "{{ search_keyword }}" || "";</script>
+      <button id="searchButton">搜索</button>
+    </div>
+  </div>
+</div>
+
+<!-- 记录展示 -->
+<div class="nodes" id="nodesContainer">
+
+</div>
+{% endblock %}

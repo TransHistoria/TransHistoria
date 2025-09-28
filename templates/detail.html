@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/docsify_vue.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/docsify@4.js' %}" defer></script>
+<style>
+  * {
+    box-sizing: content-box;
+  }
+  header {
+    position: sticky;
+  }
+  .content {
+    padding: 0px;
+    position: static;
+  }
+  body.close .content {
+    transform: translateX(0px);
+  }
+  main {
+    padding: 0px;
+    height: auto;
+    min-height: 100vh;
+  }
+  .sidebar {
+    width: 100px;
+  }
+  .sidebar-toggle {
+    width: 80px;
+  }
+  body.close .sidebar-toggle {
+    width: auto;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+<div id="app">加载中...</div>
+<script>
+  window.$docsify = {
+    name: "Library",
+    repo: "",
+    homepage: "{{ homepage }}",
+    basePath: "{{ basePath }}",
+    loadSidebar: false,
+    loadNavbar: false,
+    plugins: [
+      function (hook, vm) {
+        // hook.doneEach(function () {
+        //   document.body.classList.toggle('close');
+        // });
+      }
+    ]
+  };
+</script>
+{% endblock %}

@@ -1,0 +1,31 @@
+{% extends "base_A.html" %}
+{% load static %}
+
+{% block title %}TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/login.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<div class="card">
+  <h2>用户登录</h2>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    <div>
+      {{ form.username.errors }}
+      <input type="text" name="username" placeholder="用户名" value="{{ form.username.value|default_if_none:'' }}">
+    </div>
+    <div>
+      {{ form.password.errors }}
+      <input type="password" name="password" placeholder="密码">
+    </div>
+    <button type="submit">登录</button>
+    <div style="display:flex">
+      <span class="forget">忘记密码？</span>
+      <span class="hide">再想想？（或者联系开发者）</span>
+    </div>
+  </form>
+</div>
+{% endblock %}
