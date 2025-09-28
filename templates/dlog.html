@@ -3,16 +3,11 @@
 {% block title %}光谱历史-开发日志{% endblock %}
 
 {% block extra_head %}
-<link href="{% static 'asserts/css/header.css' %}" rel="stylesheet" />
-<link href="{% static 'asserts/css/base_page.css' %}" rel="stylesheet" />
-<link href="{% static 'asserts/css/style.css' %}" rel="stylesheet" />
+<link href="{% static 'asserts/css/about_submission.css' %}" rel="stylesheet" />
 {% endblock %}
 
-{% block content %}
-{% include "header.html" %}
-<!-- About Us Content -->
+{% block main %}
 <div class="about-us">
-  <hr style="width: 56.6vw" />
   <div class="row1">
     <div class="about-col">
       <h3>
@@ -82,24 +77,23 @@
       <img src="{% static 'asserts/images/lebond始末04.jpg' %}" />
     </div>
     <hr style="width: 56.6vw" />
+    <div class="about-col">
+      <h1>2025.08.25</h1>
+      <h4><strong>开发团队的第一次会议</strong></h4>
+      <p>
+        我们确立了网站的发展方向，并决定立即实行该计划。
+        目前已做好开发团队的人员分工，网站开发成员正
+        在狂肝网页demo，在下次会议前将提交demo。
+      </p>
+    </div>
+    <hr style="width: 56.6vw" />
+    <div class="about-col">
+      <h1>2025.08.30</h1>
+      <h4><strong>开发团队的第二次会议</strong></h4>
+      <p>
+        确认了后续的开发计划，接下来将继续完善网站功能，加入搜索、投稿等功能、并加入手机自适应。
+      </p>
+    </div>
   </div>
-  <div class="about-col">
-    <h1>2025.08.25</h1>
-    <h4><strong>开发团队的第一次会议</strong></h4>
-    <p>
-      我们确立了网站的发展方向，并决定立即实行该计划。
-      目前已做好开发团队的人员分工，网站开发成员正
-      在狂肝网页demo，在下次会议前将提交demo。
-    </p>
-  </div>
-  <hr style="width: 56.6vw" />
-  <div class="about-col">
-    <h1>2025.08.30</h1>
-    <h4><strong>开发团队的第二次会议</strong></h4>
-    <p>
-      确认了后续的开发计划，接下来将继续完善网站功能，加入搜索、投稿等功能、并加入手机自适应。
-    </p>
-  </div>
-  <hr style="width: 56.6vw" />
 </div>
 {% endblock %}

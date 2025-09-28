@@ -1,0 +1,24 @@
+{% extends "archives.html" %}
+{% load static %}
+{% block title %}光谱历史-历史馆{% endblock %}
+
+{% block extra_head %}
+{{ block.super }}
+<style>
+  .tags {
+    display: none;
+  }
+</style>
+{% endblock %}
+
+{% block main %}
+{{ block.super }}
+<script>
+  const tag = "{{ tag }}"
+  document.addEventListener('DOMContentLoaded', () => {
+    const tagsLabels = tagContainer.querySelector(`input[value="${tag}"]`);
+    tagsLabels.checked = true;
+    fetchRecords();
+  });
+</script>
+{% endblock %}

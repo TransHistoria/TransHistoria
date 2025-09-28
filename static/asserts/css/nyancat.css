@@ -1,4 +1,6 @@
 :root {
+    --blue: #5bcffa;
+    --pink: #f5abb9;
     --transform-time: 2s;
     --nyancat-scale: 0.3;
     --progress-height: 50;
@@ -275,11 +277,11 @@
 }
 
 .up:after {
-    background-image: linear-gradient(to right, var(--left-color) 49px, transparent 49px, transparent 92px);
+    background-image: linear-gradient(to right, var(--blue) 49px, transparent 49px, transparent 92px);
 }
 
 .up:before {
-    background-image: linear-gradient(to right, var(--right-color) 49px, transparent 49px, transparent 92px);
+    background-image: linear-gradient(to right, var(--pink) 49px, transparent 49px, transparent 92px);
 }
 
 .down:after {
@@ -288,11 +290,11 @@
 }
 
 .down:before {
-    background-image: linear-gradient(to right, var(--right-color) 49px, transparent 49px, transparent 92px);
+    background-image: linear-gradient(to right, var(--pink) 49px, transparent 49px, transparent 92px);
 }
 
 .down {
-    background-image: linear-gradient(to right, var(--left-color) 49px, transparent 49px, transparent 92px);
+    background-image: linear-gradient(to right, var(--blue) 49px, transparent 49px, transparent 92px);
 }
 
 .rainbow,

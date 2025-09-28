@@ -1,6 +1,6 @@
 const the_item = document.querySelector('.t-item');
 const timeline = document.querySelector('.timeline');
-for(let i = 0; i < 50; i++){
+for(let i = 0; i < 100; i++){
   timeline.appendChild(the_item.cloneNode(true));
 }
 
