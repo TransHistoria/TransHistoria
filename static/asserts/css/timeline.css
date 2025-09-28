@@ -1,5 +1,11 @@
+main {
+    padding: 0px;
+    width: 100%;
+}
+
 header {
     position: fixed;
+    background: none;
 }
 
 

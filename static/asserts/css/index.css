@@ -12,6 +12,7 @@ main {
 
 
 header {
+    background: none;
     backdrop-filter: blur(0px);
 }
 
@@ -74,60 +75,4 @@ header {
     }
 
     
-}
-
-/* 卡片移动设备适配 - 媒体查询 */
-@media screen and (max-width: 1024px) {
-    h1 {
-        font-size: 3.5rem;
-    }
-}
-
-@media screen and (max-width: 900px) {
-    .col:first-child {
-        text-align: center;
-        /* 移动端居中 */
-    }
-
-    .col:last-child {
-        justify-content: center;
-        /* 确保卡片居中 */
-    }
-
-    .card {
-        width: 180px;
-        /* 稍微调整卡片大小 */
-        width: calc(50% - 20px);
-        /* 两列布局 */
-        max-width: 200px;
-        height: 210px;
-    }
-}
-
-@media screen and (max-width: 768px) {
-    h1 {
-        font-size: 2.5rem;
-    }
-
-    .col button {
-        width: 160px;
-        font-size: 16px;
-    }
-}
-
-@media screen and (max-width: 600px) {
-    .card {
-        width: 160px;
-        height: 190px;
-        width: calc(100% - 20px);
-        /* 单列布局 */
-        max-width: 250px;
-    }
-}
-
-@media screen and (max-width: 480px) {
-    .card {
-        width: 140px;
-        height: 170px;
-    }
 }

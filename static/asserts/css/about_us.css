@@ -1,19 +1,24 @@
 /* About Us 页header设置 */
+header {
+    position: fixed;
+    background-color: #000000;
+}
+
 .about-us {
-    width: 80%;
-    margin-left: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    /* margin-left: auto; */
     padding-top: 80px;
     padding-bottom: 50px;
 }
 
 .row1 {
-    width: 100%;
+    width: 80%;
     display: flex;
-    justify-content: space-between;
-
-    /* 如果空间不够，允许换行 */
-    flex-wrap: wrap;
-    /* align-items: flex-start; */
+    flex-direction: column;
+    align-items: center;
 }
 
 .row1 ul li {

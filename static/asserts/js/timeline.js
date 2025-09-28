@@ -1,20 +1,20 @@
 const the_item = document.querySelector('.timeline-item');
 const timeline = document.querySelector('.timeline');
-for (let i = 0; i < 50; i++) {
+for (let i = 0; i < 7; i++) {
     timeline.appendChild(the_item.cloneNode(true));
 }
-
+timeline.removeChild(the_item);
 const ids = [12,13,14,16,18,19,20]
 
 
 document.addEventListener("DOMContentLoaded", () => {
     // 找到所有 t-item
     const items = document.querySelectorAll(".timeline .timeline-item");
-
+    let i = 0;
     items.forEach(item => {
 
         const randomIndex = Math.floor(Math.random() * ids.length);
-        const id = ids[randomIndex]; // 随机获取 t-id
+        const id = ids[i]; // 随机获取 t-id
 
         // 请求后端数据
         fetch(`/api/historynode/${id}/`)  // 假设你的 Django URL 是 /api/historynode/<id>/
@@ -29,7 +29,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
                 if (titleElem) titleElem.dataset.text = data.title || "";
                 const randomIndex = Math.floor(Math.random() * 7) + 1;
-                if (imageElem) imageElem.src =`/static/asserts/images/index/${randomIndex}.jpg` || "";
+                if (imageElem) imageElem.src = `/static/asserts/images/index/${randomIndex}.jpg` || "";
                 if (yearElem) yearElem.textContent = data.time || "";
                 if (data.mkdoc) {
                     aElem.style.display = "block";
@@ -74,6 +74,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 });
             })
             .catch(err => console.error("Error fetching history node:", err));
+        i = i + 1;
     });
 });
 

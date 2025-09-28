@@ -3,16 +3,12 @@
 {% block title %}光谱历史-开发日志{% endblock %}
 
 {% block extra_head %}
-<link href="{% static 'asserts/css/header.css' %}" rel="stylesheet" />
-<link href="{% static 'asserts/css/base_page.css' %}" rel="stylesheet" />
-<link href="{% static 'asserts/css/style.css' %}" rel="stylesheet" />
+<link href="{% static 'asserts/css/about_submission.css' %}" rel="stylesheet" />
 {% endblock %}
 
-{% block content %}
-{% include "header.html" %}
+{% block main %}
 <!-- About Us Content -->
 <div class="about-us">
-  <hr style="width: 56.6vw" />
   <div class="row1">
     <div class="about-col">
       <h1>
@@ -31,10 +27,5 @@
       <img src="{% static 'asserts/images/新青年卷一第一号.jpg' %}" />
     </div>
   </div>
-  <hr style="width: 56.6vw" />
-  <h2>资料贡献者名单（按字母顺序排序）</h2>
-  <hr style="width: 56.6vw" />
-  <h2 style="color: rgb(102, 92, 6)">!!!///表单项目进行中///!!!</h2>
-  <hr style="width: 56.6vw" />
 </div>
 {% endblock %}

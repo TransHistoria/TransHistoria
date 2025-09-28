@@ -17,15 +17,19 @@
 
 /* 对整个页面 body 隐藏滚动条，但仍可滚动 */
 body {
-  scrollbar-width: none;  /* Firefox */
-  -ms-overflow-style: none; /* IE 10+ */
-  overflow-y: scroll;     /* 保证滚动功能 */
+    scrollbar-width: none;
+    /* Firefox */
+    -ms-overflow-style: none;
+    /* IE 10+ */
+    overflow-y: scroll;
+    /* 保证滚动功能 */
 }
 
 /* Chrome, Edge, Safari */
 body::-webkit-scrollbar {
-  width: 0px;
-  background: transparent; /* 可选：完全透明 */
+    width: 0px;
+    background: transparent;
+    /* 可选：完全透明 */
 }
 
 
@@ -35,6 +39,10 @@ body {
         radial-gradient(farthest-side at top right, #ffffff 98%, #0000) calc(50% - 10px) 0/20px 20px no-repeat,
         radial-gradient(farthest-side at bottom right, #ffffff 98%, #0000) calc(50% - 10px) 100%/20px 20px no-repeat,
         linear-gradient(90deg, var(--left-color) 50%, var(--right-color) 0);
+}
+
+main {
+    padding: 0px;
 }
 
 .t-item {
@@ -83,7 +91,7 @@ body {
 /* 卡片背景 */
 
 .t-item.active .t-background {
-    display: flex;
+    display: flex ;
     justify-content: center;
     align-items: center;
     position: relative;
@@ -92,8 +100,8 @@ body {
     /* max-width: 100%; */
     border-radius: var(--card-radius);
     /* transform: scale(0.8); */
-    background:
-        linear-gradient(var(--card-color) 0 0) content-box;
+    /* background:
+        linear-gradient(var(--card-color) 0 0) content-box; */
 }
 
 

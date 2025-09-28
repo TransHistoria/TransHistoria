@@ -7,6 +7,7 @@ from django.core.files.storage import default_storage
 from .models import HistoryNode, Contributor
 from django.shortcuts import get_object_or_404
 from .Tools.file import handle_upload_file
+from django.db.models import Q
 # Create your views here.
 
 
@@ -20,7 +21,7 @@ def index(request):
     return render(request, 'index.html')
 
 def history(request):
-    return render(request, 'history.html')
+    return render(request, 'archives_field.html', {'tag': '事件'})
 
 def timeline(request):
     return render(request, 'timeline.html')
@@ -29,16 +30,17 @@ def timepoint(request, uuid, mkdoc_path):
     return render(request, 'detail.html', {'basePath': f"/media/mkdocs/{uuid}/", 'homepage': mkdoc_path})
 
 def people(request):
-    return render(request, 'people.html')
+    return render(request, 'archives_field.html', {'tag': '人物'})
 
 def theory(request):
-    return render(request, 'theory.html')
+    return render(request, 'archives_field.html', {'tag': '理论'})
 
 def gallery(request):
-    return render(request, 'gallery.html')
+    return render(request, 'archives_field.html', {'tag': '艺术'})
 
 def archives(request):
-    return render(request, 'archives.html')
+    input = request.GET.get('input')
+    return render(request, 'archives.html', {'search_keyword': input})
 
 def about_us(request):
     return render(request, 'about_us.html')
@@ -108,3 +110,25 @@ def historynode_api(request, pk):
         "ref": node.ref,
     }
     return JsonResponse(data)
+
+def get_historynodes(request):
+    tags = request.GET.get('tag', '')        # tag参数
+    keyword = request.GET.get('q', '')      # 搜索关键词
+
+    # 先查询全部
+    records = HistoryNode.objects.all()
+
+    # 如果传了tag，就按tag过滤
+    if tags:
+        tag_list = [t.strip() for t in tags.split(',') if t.strip()]
+        records = records.filter(tag__in=tag_list)
+
+    # 如果传了搜索关键词，就按title包含过滤
+    if keyword:
+        records = records.filter(title__icontains=keyword)
+    
+    # 按创建时间倒序排序（最新的在前）
+    records = records.order_by('-created_at')
+
+    data = list(records.values())  # 转为dict列表返回
+    return JsonResponse(data, safe=False)
