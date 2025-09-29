@@ -71,7 +71,7 @@ def post(request):
         
         # 2. 获取文件
         uploaded_file = request.FILES.get('doc')  # 对应 <input name="doc">
-        mkdoc_path = None
+        mkdoc_path = ""
         if uploaded_file:
             mkdoc_path = handle_upload_file(uploaded_file)
 
