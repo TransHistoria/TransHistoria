@@ -32,6 +32,11 @@ ALLOWED_HOSTS = [
     'www.transhistoria.org',
 ]
 
+CSRF_TRUSTED_ORIGINS = [
+    'http://www.transhistoria.org',
+    'https://www.transhistoria.org',
+]
+
 
 # Application definition
 

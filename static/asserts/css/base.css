@@ -192,7 +192,7 @@ main {
     margin: 5px 0px;
 }
 
-form input {
+.footer input {
     /* width: 400px; */
     height: 45px;
     border-radius: 4px;
@@ -208,7 +208,7 @@ form input {
     /*添加最大宽度限制*/
 }
 
-form button {
+.footer button {
     width: 100px;
     background: transparent;
     border: 2px solid #eeeeee2e;
@@ -272,7 +272,7 @@ form button {
         /* 取消在移动设备上的额外增长 */
     }
 
-    form input {
+    .footer input {
         max-width: 100%;
         /* 输入框宽度适应容器 */
         width: 100%;
@@ -297,7 +297,7 @@ form button {
         /* 进一步减少内边距 */
     }
 
-    form button {
+    .footer button {
         width: 100%;
         /* 按钮宽度适应容器 */
         max-width: 200px;
