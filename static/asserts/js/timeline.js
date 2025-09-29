@@ -4,7 +4,7 @@ for (let i = 0; i < 7; i++) {
     timeline.appendChild(the_item.cloneNode(true));
 }
 timeline.removeChild(the_item);
-const ids = [12,13,14,16,18,19,20]
+const ids = [12,13,16,18,14,19,20]
 
 
 document.addEventListener("DOMContentLoaded", () => {
