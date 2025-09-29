@@ -1,7 +1,7 @@
 import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
 from django.core.files.storage import default_storage
 from .models import HistoryNode, Contributor
@@ -57,7 +57,7 @@ def submit(request):
     user = request.user   # 当前登录用户对象
     return render(request, "submit.html", {"user": user})
 
-@csrf_exempt
+@csrf_protect
 def post(request):
     if request.method == "POST":
         # 1. 获取 JSON
