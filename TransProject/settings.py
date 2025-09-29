@@ -35,6 +35,8 @@ ALLOWED_HOSTS = [
 CSRF_TRUSTED_ORIGINS = [
     'http://www.transhistoria.org',
     'https://www.transhistoria.org',
+    'http://transhistoria.org',
+    'https://transhistoria.org',
 ]
 
 
