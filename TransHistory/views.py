@@ -6,7 +6,6 @@ from django.http import JsonResponse
 from django.core.files.storage import default_storage
 from .models import HistoryNode, Contributor
 from django.shortcuts import get_object_or_404
-from .Tools.file import handle_upload_file
 from django.db.models import Q
 from django import forms
 from martor.fields import MartorFormField
@@ -54,10 +53,14 @@ def dlog(request):
     return render(request, 'dlog.html')
 
 
+class TestForm(forms.Form):
+    details = MartorFormField()
+
 @login_required
 def submit(request):
     user = request.user   # 当前登录用户对象
-    return render(request, "submit.html", {"user": user})
+    form = TestForm()
+    return render(request, "submit.html", {"user": user, 'form': form})
 
 @csrf_protect
 def post(request):
@@ -71,12 +74,6 @@ def post(request):
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         
-        # 2. 获取文件
-        uploaded_file = request.FILES.get('doc')  # 对应 <input name="doc">
-        mkdoc_path = ""
-        if uploaded_file:
-            mkdoc_path = handle_upload_file(uploaded_file)
-
         # 3. 保存到数据库
         node = HistoryNode.objects.create(
             title=data.get('title', ''),
@@ -87,8 +84,6 @@ def post(request):
             theme=data.get('attr', {}).get('theme', ''),
             region=data.get('attr', {}).get('region', ''),
             tag=data.get('attr', {}).get('tag', ''),
-            oridoc=uploaded_file,
-            mkdoc=mkdoc_path
         )
 
         Contributor.objects.create(
