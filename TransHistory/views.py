@@ -73,7 +73,9 @@ def post(request):
             data = json.loads(json_str)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
+        form = TestForm(request.POST)
         
+
         # 3. 保存到数据库
         node = HistoryNode.objects.create(
             title=data.get('title', ''),
@@ -84,6 +86,7 @@ def post(request):
             theme=data.get('attr', {}).get('theme', ''),
             region=data.get('attr', {}).get('region', ''),
             tag=data.get('attr', {}).get('tag', ''),
+            details=form.data['details']
         )
 
         Contributor.objects.create(
