@@ -6,7 +6,6 @@ const refItemTpl = document.getElementById("refItemTpl");
 const attrItemTpl = document.getElementById("attrItemTpl");
 const form = document.getElementById("entryForm");
 const preview = document.getElementById("jsonPreview");
-const docInput = document.getElementById("doc");
 
 // 初始化
 addRef();
@@ -166,11 +165,8 @@ function collectData() {
     const tag = (new FormData(form).get("tag") || "").toString();
     attr.tag = tag;
 
-    const docFile = docInput.files && docInput.files[0];
-    const doc = docFile ? docFile.name : "";
-
     const username = document.getElementById("username")?.textContent.trim();
     const useremail = document.getElementById("useremail")?.textContent.trim();
     const user = { name: username, email: useremail };
-    return { title, con, ref, attr, doc, user };
+    return { title, con, ref, attr, user };
 }
