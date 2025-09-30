@@ -49,8 +49,15 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'TransHistory'
+    'TransHistory',
+    'martor',
 ]
+
+# Choose your preferred theme: "bootstrap" or "semantic"
+MARTOR_THEME = 'bootstrap'  # Default
+
+# CSRF token configuration (required for AJAX uploads)
+CSRF_COOKIE_HTTPONLY = False 
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -136,6 +143,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / "static",
 ]
+STATIC_ROOT = BASE_DIR / "staticfiles"
 
 # Media files
 

@@ -21,4 +21,5 @@ from django.urls import include, path
 urlpatterns = [
     path("", include("TransHistory.urls")),
     path('admin/', admin.site.urls),
+    path('martor/', include('martor.urls')),
 ]
