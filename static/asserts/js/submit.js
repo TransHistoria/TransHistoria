@@ -6,6 +6,7 @@ const refItemTpl = document.getElementById("refItemTpl");
 const attrItemTpl = document.getElementById("attrItemTpl");
 const form = document.getElementById("entryForm");
 const preview = document.getElementById("jsonPreview");
+const cover = document.getElementById("cover");
 
 // 初始化
 addRef();
@@ -77,6 +78,36 @@ function getCookie(name) {
     return cookieValue;
 }
 csrftoken = getCookie('csrftoken');
+
+cover.addEventListener('change', function () {
+    const file = this.files[0];
+    if (!file) return;
+
+    const formData = new FormData();
+    formData.append("markdown-image-upload", file);
+
+    fetch("/api/images_uploader/", {
+        method: "POST",
+        body: formData,
+        headers: {
+            "X-CSRFToken": csrftoken
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 200) {
+                // 把返回的图片链接存到隐藏字段
+                document.getElementById("cover_image_url").value = data.link;
+                document.getElementById("cover_preview").src = data.link;
+                alert("图片上传成功: " + data.link);
+            } else {
+                alert("上传失败: " + data.error);
+            }
+        })
+        .catch(err => {
+            console.error("上传出错", err);
+        });
+});
 
 // 表单提交
 form.addEventListener("submit", async (e) => {
@@ -168,5 +199,7 @@ function collectData() {
     const username = document.getElementById("username")?.textContent.trim();
     const useremail = document.getElementById("useremail")?.textContent.trim();
     const user = { name: username, email: useremail };
-    return { title, con, ref, attr, user };
+
+    const cover = document.getElementById("cover_image_url").value.trim();
+    return { title, con, ref, attr, user, cover};
 }

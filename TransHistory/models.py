@@ -23,6 +23,7 @@ class HistoryNode(models.Model):
         max_length=3000,
         validators=[validate_markdown_length]
     )
+    cover = models.ImageField(upload_to='images/', blank=True, null=True)
     oridoc = models.FileField(upload_to='uploads/', blank=True, null=True)
     mkdoc = models.CharField(max_length=255, blank=True)
     created_at = models.DateTimeField(auto_now_add=True)

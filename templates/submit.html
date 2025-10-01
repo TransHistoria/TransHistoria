@@ -85,6 +85,18 @@
         <label>详细资料（富文本 Markdown 输入框）</label>
         {{ form.details }}
       </div>
+
+      <div class="row">
+        <div>
+          <label for="doc">封面图片</label>
+          <input id="cover" name="cover_image" type="file" accept="image/*" />
+          <input type="hidden" id="cover_image_url" name="cover_image_url">
+          <img id="cover_preview" src="" alt="">
+          <div class="footnote">
+            添加任意比例的封面，大小不要大于10MB
+          </div>
+        </div>
+      </div>
     </section>
 
     <section class="grid actions">

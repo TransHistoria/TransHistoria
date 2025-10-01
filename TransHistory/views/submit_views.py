@@ -43,7 +43,8 @@ def post(request):
             theme=data.get('attr', {}).get('theme', ''),
             region=data.get('attr', {}).get('region', ''),
             tag=data.get('attr', {}).get('tag', ''),
-            details=form.data['details']
+            details=form.data['details'],
+            cover=data.get('cover', ''),
         )
 
         Contributor.objects.create(
