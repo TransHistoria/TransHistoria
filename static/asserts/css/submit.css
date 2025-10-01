@@ -15,21 +15,7 @@
 }
 
 * {
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-    background: var(--bg);
-    color: var(--fg);
-}
-
-body {
-    margin: 0;
-    font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-        "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
-        "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+    box-sizing: content-box;
 }
 
 .wrap {
@@ -38,24 +24,9 @@ body {
     padding: 20px clamp(16px, 4vw, 28px) 80px;
 }
 
-header {
-    position: sticky;
-    top: 0;
-    backdrop-filter: saturate(1.2) blur(8px);
-    background: rgba(255, 255, 255, 0.7);
-    border-bottom: 1px solid var(--ring);
-    z-index: 30;
-}
-
-header .bar {
-    max-width: 840px;
-    margin: 0 auto;
-    padding: 12px clamp(16px, 4vw, 28px);
-    display: flex;
-    justify-content: space-between;
-    /* 元素横向分散 */
-    align-items: center;
-    gap: 10px;
+a {
+    color: inherit;
+    text-decoration: none;
 }
 
 h1 {
@@ -195,7 +166,7 @@ select:focus {
     flex-wrap: wrap;
 }
 
-.btn {
+.submit-btn {
     appearance: none;
     border: 1px solid var(--ring);
     border-radius: 14px;
@@ -207,7 +178,7 @@ select:focus {
     box-shadow: var(--shadow);
 }
 
-.btn.secondary {
+.submit-btn.secondary {
     background: #fff;
     color: var(--fg);
 }
@@ -270,4 +241,8 @@ select:focus {
     .list-item {
         grid-template-columns: auto 1fr auto;
     }
+}
+
+.btn-group {
+    flex-wrap: wrap;
 }

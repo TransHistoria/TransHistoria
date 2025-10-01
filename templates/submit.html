@@ -1,143 +1,134 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="zh-CN">
-
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-  <title>Hrans Historia 资料提交</title>
-  <link href="{% static 'asserts/css/submit.css' %}" rel="stylesheet" />
-  <script src="{% static 'asserts/js/submit.js' %}" defer></script>
+{% block title %}光谱历史-资料上传{% endblock %}
+{% block extra_head %}
 <link href="{% static 'plugins/css/bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
 <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <link href="{% static 'plugins/css/ace.min.css' %}" rel="stylesheet" />
 <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" rel="stylesheet" />
+<link href="{% static 'asserts/css/submit.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/submit.js' %}" defer></script>
+{% endblock %}
 
-</head>
-
-<body>
-  <header>
-    <div class="bar">
-      <h1>TransHistoria 资料提交</h1>
-      <div style="display: flex;">
-        <h3>欢迎登陆！</h3>
-        <h3 id="username">{{ user.username }}</h3>
-        <h3>，</h3>
-        <h3 id="useremail">{{ user.email }}</h3>
+{% block main%}
+<div class="bar">
+  <h1>TransHistoria 资料提交卡</h1>
+  <div style="display: flex;">
+    <h3>欢迎登陆！</h3>
+    <h3 id="username">{{ user.username }}</h3>
+    <h3>，</h3>
+    <h3 id="useremail">{{ user.email }}</h3>
+  </div>
+</div>
+<main class="wrap">
+  <form id="entryForm" class="grid" autocomplete="off" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- 卡片：标题 / 正文 / 参考文献 -->
+    <section class="card section">
+      <div class="row">
+        <div>
+          <label for="title">标题</label>
+          <input id="title" name="title" type="text" placeholder="卡片标题" required />
+        </div>
       </div>
-    </div>
-  </header>
-
-  <main class="wrap">
-    <form id="entryForm" class="grid" autocomplete="off" method="POST" enctype="multipart/form-data">
-      {% csrf_token %}
-      <!-- 卡片：标题 / 正文 / 参考文献 -->
-      <section class="card section">
-        <div class="row">
-          <div>
-            <label for="title">标题</label>
-            <input id="title" name="title" type="text" placeholder="卡片标题" required />
-          </div>
+      <div class="row">
+        <div>
+          <label for="content">正文</label>
+          <textarea id="content" name="content" placeholder="卡片内容" required></textarea>
         </div>
-        <div class="row">
-          <div>
-            <label for="content">正文</label>
-            <textarea id="content" name="content" placeholder="卡片内容" required></textarea>
-          </div>
-        </div>
+      </div>
 
-        <div class="row">
-          <div class="inline" style="justify-content: space-between; width: 100%">
-            <label style="margin: 0">参考文献</label>
-            <div class="inline">
-              <button type="button" class="icon-btn" id="addRefBtn" title="添加参考文献">
-                <span class="icon">＋</span>
-              </button>
-            </div>
-          </div>
-          <div id="refList" class="list"></div>
-          <div class="footnote">按序编号</div>
-        </div>
-      </section>
-
-      <!-- 属性部分 -->
-      <section class="card section">
+      <div class="row">
         <div class="inline" style="justify-content: space-between; width: 100%">
-          <label style="margin: 0">属性</label>
+          <label style="margin: 0">参考文献</label>
           <div class="inline">
-            <button type="button" class="icon-btn" id="addAttrBtn" title="添加一行属性">
+            <button type="button" class="icon-btn" id="addRefBtn" title="添加参考文献">
               <span class="icon">＋</span>
             </button>
           </div>
         </div>
+        <div id="refList" class="list"></div>
+        <div class="footnote">按序编号</div>
+      </div>
+    </section>
 
-        <div id="attrList" class="list"></div>
+    <!-- 属性部分 -->
+    <section class="card section">
+      <div class="inline" style="justify-content: space-between; width: 100%">
+        <label style="margin: 0">属性</label>
+        <div class="inline">
+          <button type="button" class="icon-btn" id="addAttrBtn" title="添加一行属性">
+            <span class="icon">＋</span>
+          </button>
+        </div>
+      </div>
 
-        <div class="divider"></div>
+      <div id="attrList" class="list"></div>
 
-        <div class="row">
-          <div>
-            <label>分类标签（唯一）</label>
-            <div class="inline" role="radiogroup" aria-label="分类标签">
-              <label class="chip"><input type="radio" name="tag" value="事件" required
-                  style="margin-right: 8px" />事件</label>
-              <label class="chip"><input type="radio" name="tag" value="人物" style="margin-right: 8px" />人物</label>
-              <label class="chip"><input type="radio" name="tag" value="理论" style="margin-right: 8px" />理论</label>
-              <label class="chip"><input type="radio" name="tag" value="作品" style="margin-right: 8px" />作品</label>
-            </div>
+      <div class="divider"></div>
+
+      <div class="row">
+        <div>
+          <label>分类标签（唯一）</label>
+          <div class="inline" role="radiogroup" aria-label="分类标签">
+            <label class="chip"><input type="radio" name="tag" value="事件" required
+                style="margin-right: 8px" />事件</label>
+            <label class="chip"><input type="radio" name="tag" value="人物" style="margin-right: 8px" />人物</label>
+            <label class="chip"><input type="radio" name="tag" value="理论" style="margin-right: 8px" />理论</label>
+            <label class="chip"><input type="radio" name="tag" value="作品" style="margin-right: 8px" />作品</label>
           </div>
         </div>
+      </div>
 
-        <div class="row">
-          <label>详细资料（富文本 Markdown 输入框）</label>
-          {{ form.details }}
-        </div>
-      </section>
+      <div class="row">
+        <label>详细资料（富文本 Markdown 输入框）</label>
+        {{ form.details }}
+      </div>
+    </section>
 
-      <section class="grid actions">
-        <button type="button" class="btn secondary" id="previewBtn">
-          预览 JSON
-        </button>
-        <button type="button" class="btn secondary" onclick="location.reload();">清空</button>
-        <button type="submit" class="btn">提交</button>
-        <input type="hidden" name="json_data" id="json_data">
-        <span class="muted">提交后将以 JSON 结构传送到后端。</span>
-      </section>
-
-      <section class="section">
-        <label>JSON 预览</label>
-        <pre id="jsonPreview" class="preview" aria-live="polite">{ }</pre>
-      </section>
-    </form>
-  </main>
-
-  <template id="refItemTpl">
-    <div class="list-item ref-item">
-      <div class="num"></div>
-      <input type="text" class="ref-input" placeholder="作者. 标题. 出版社/期刊/网址, 年份." />
-      <button type="button" class="icon-btn remove-ref" title="移除此条">
-        <span class="icon">－</span>
+    <section class="grid actions">
+      <button type="button" class="btn secondary" id="previewBtn">
+        预览 JSON
       </button>
-    </div>
-  </template>
+      <button type="button" class="submit-btn secondary" onclick="location.reload();">清空</button>
+      <button type="submit" class="submit-btn">提交</button>
+      <input type="hidden" name="json_data" id="json_data">
+      <span class="muted">提交后将以 JSON 结构传送到后端。</span>
+    </section>
 
-  <template id="attrItemTpl">
-    <div class="list-item attr-item">
-      <select class="attr-key" aria-label="属性类型">
-        <option value="" disabled selected>选择属性</option>
-        <option value="time">时间</option>
-        <option value="field">领域</option>
-        <option value="theme">主题</option>
-        <option value="region">地区</option>
-      </select>
-      <input type="text" class="attr-val" placeholder="填写内容" />
-      <button type="button" class="icon-btn remove-attr" title="移除此行">
-        <span class="icon">－</span>
-      </button>
-    </div>
-  </template>
-</body>
+    <section class="section">
+      <label>JSON 预览</label>
+      <pre id="jsonPreview" class="preview" aria-live="polite">{ }</pre>
+    </section>
+  </form>
+</main>
+
+<template id="refItemTpl">
+  <div class="list-item ref-item">
+    <div class="num"></div>
+    <input type="text" class="ref-input" placeholder="作者. 标题. 出版社/期刊/网址, 年份." />
+    <button type="button" class="icon-btn remove-ref" title="移除此条">
+      <span class="icon">－</span>
+    </button>
+  </div>
+</template>
+
+<template id="attrItemTpl">
+  <div class="list-item attr-item">
+    <select class="attr-key" aria-label="属性类型">
+      <option value="" disabled selected>选择属性</option>
+      <option value="time">时间</option>
+      <option value="field">领域</option>
+      <option value="theme">主题</option>
+      <option value="region">地区</option>
+    </select>
+    <input type="text" class="attr-val" placeholder="填写内容" />
+    <button type="button" class="icon-btn remove-attr" title="移除此行">
+      <span class="icon">－</span>
+    </button>
+  </div>
+</template>
 <script type="text/javascript" src="{% static 'plugins/js/jquery.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'plugins/js/bootstrap.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
@@ -149,5 +140,4 @@
 <script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
 <script type="text/javascript" src="{% static 'martor/js/martor.bootstrap.min.js' %}"></script>
-
-</html>
+{% endblock %}
