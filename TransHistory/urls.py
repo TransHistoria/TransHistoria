@@ -1,5 +1,7 @@
 from django.urls import path
-from . import views
+from .views import views
+from .views import submit_views as submit
+from .views import node_views as node
 from django.contrib.auth import views as auth_views
 from django.conf import settings
 from django.conf.urls.static import static
@@ -18,10 +20,10 @@ urlpatterns = [
     path("about_us/", views.about_us),
     path("about_submission/", views.about_submission),
     path("dlog/", views.dlog),
-    path("submit/", views.submit, name="submit"),
-    path("api/", views.post, name="post"),
-    path('api/historynode/<int:pk>/', views.historynode_api, name='historynode_api'),
-    path('api/get_historynodes/', views.get_historynodes, name='search_historynodes_api'),
+    path("submit/", submit.submit, name="submit"),
+    path("api/", submit.post, name="post"),
+    path('api/historynode/<int:pk>/', node.historynode_api, name='historynode_api'),
+    path('api/get_historynodes/', node.get_historynodes, name='search_historynodes_api'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

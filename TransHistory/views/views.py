@@ -1,0 +1,42 @@
+from django.shortcuts import render
+# Create your views here.
+
+def index_A(request):
+    return render(request, 'index_A.html')
+
+def timeline_A(request):
+    return render(request, 'timeline_A.html')
+
+def index(request):
+    return render(request, 'index.html')
+
+def history(request):
+    return render(request, 'archives_field.html', {'tag': '事件'})
+
+def timeline(request):
+    return render(request, 'timeline.html')
+
+def timepoint(request, uuid, mkdoc_path):
+    return render(request, 'detail.html', {'basePath': f"/media/mkdocs/{uuid}/", 'homepage': mkdoc_path})
+
+def people(request):
+    return render(request, 'archives_field.html', {'tag': '人物'})
+
+def theory(request):
+    return render(request, 'archives_field.html', {'tag': '理论'})
+
+def gallery(request):
+    return render(request, 'archives_field.html', {'tag': '艺术'})
+
+def archives(request):
+    input = request.GET.get('input')
+    return render(request, 'archives.html', {'search_keyword': input})
+
+def about_us(request):
+    return render(request, 'about_us.html')
+
+def about_submission(request):
+    return render(request, 'about_submission.html')
+
+def dlog(request):
+    return render(request, 'dlog.html')
