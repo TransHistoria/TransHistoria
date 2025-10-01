@@ -11,7 +11,12 @@ from django.contrib.auth.decorators import login_required
 
 
 class TestForm(forms.Form):
-    details = MartorFormField()
+    details = MartorFormField(
+        label=_('Details'),
+        help_text=_('请使用Markdown语法书写，点击右上角问号可以查看帮助'),
+        required = False,
+        max_length = 3000,
+    )
 
 @login_required
 def submit(request):
