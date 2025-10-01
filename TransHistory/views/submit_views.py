@@ -1,22 +1,13 @@
-import os
-import json
-import uuid
 import json
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.csrf import csrf_protect
 from django.http import JsonResponse
-from django.core.files.storage import default_storage
 from ..models import HistoryNode, Contributor
 from django import forms
 from martor.fields import MartorFormField
-from django.conf import settings
-from django.http import HttpResponse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.decorators import login_required
-from django.core.files.storage import default_storage
-from django.core.files.base import ContentFile
-from martor.utils import LazyEncoder
 
 
 class TestForm(forms.Form):
