@@ -92,6 +92,41 @@ select:focus {
     box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
 }
 
+input[type="number"] {
+    width: 200px;
+    padding: 8px 12px;
+    font-size: 16px;
+    border: 2px solid #ccc;
+    border-radius: 8px;
+    outline: none;
+    transition: all 0.2s ease-in-out;
+}
+
+/* 聚焦时高亮 */
+input[type="number"]:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+}
+
+/* 禁用状态 */
+input[type="number"]:disabled {
+    background-color: #f5f5f5;
+    color: #999;
+}
+
+/* 去掉上下的小箭头（Chrome、Edge、Safari） */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+/* 去掉 Firefox 的箭头 */
+input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
 .list {
     display: grid;
     gap: 10px;

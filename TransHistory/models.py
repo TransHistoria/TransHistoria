@@ -14,7 +14,7 @@ class HistoryNode(models.Model):
     time = models.IntegerField(
         default=0,
         blank=True,
-        validators=[MinValueValidator(-9999), MaxValueValidator(9999)]
+        validators=[MinValueValidator(-9999), MaxValueValidator(99999999)]
     )
     time_name = models.CharField(max_length=100, blank=True)
     field = models.CharField(max_length=100, blank=True)

@@ -28,14 +28,22 @@
     <section class="card section">
       <div class="row">
         <div>
-          <label for="title">标题</label>
+          <label for="title">标题（必填）</label>
           <input id="title" name="title" type="text" placeholder="卡片标题" required />
         </div>
       </div>
+
       <div class="row">
         <div>
-          <label for="content">正文</label>
+          <label for="content">正文（必填）</label>
           <textarea id="content" name="content" placeholder="卡片内容" required></textarea>
+        </div>
+      </div>
+      
+      <div class="row" >
+        <div>
+          <label for="time">准确时间（数字，公元前用负数，公元后用正数）</label>
+          <input id="time" name="time" type="number" placeholder="时间"  min="-9999" max="99999999" step="1"/>
         </div>
       </div>
 
@@ -55,6 +63,7 @@
 
     <!-- 属性部分 -->
     <section class="card section">
+
       <div class="inline" style="justify-content: space-between; width: 100%">
         <label style="margin: 0">属性</label>
         <div class="inline">
@@ -70,7 +79,7 @@
 
       <div class="row">
         <div>
-          <label>分类标签（唯一）</label>
+          <label>分类标签（必填，唯一）</label>
           <div class="inline" role="radiogroup" aria-label="分类标签">
             <label class="chip"><input type="radio" name="tag" value="事件" required
                 style="margin-right: 8px" />事件</label>
@@ -131,7 +140,7 @@
   <div class="list-item attr-item">
     <select class="attr-key" aria-label="属性类型">
       <option value="" disabled selected>选择属性</option>
-      <option value="time">时间</option>
+      <option value="time_name">时间</option>
       <option value="field">领域</option>
       <option value="theme">主题</option>
       <option value="region">地区</option>

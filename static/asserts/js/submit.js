@@ -182,11 +182,12 @@ function refreshAttrOptions() {
 function collectData() {
     const title = document.getElementById("title").value.trim();
     const con = document.getElementById("content").value.trim();
+    const time = document.getElementById("time").value.trim();
     const ref = [...refList.querySelectorAll(".ref-input")]
         .map((i) => i.value.trim())
         .filter((v) => v.length > 0);
 
-    const attr = { time: "", field: "", theme: "", region: "", tag: "" };
+    const attr = { time_name: "", field: "", theme: "", region: "", tag: "" };
     [...attrList.querySelectorAll(".attr-item")].forEach((item) => {
         const key = item.querySelector(".attr-key").value;
         const val = item.querySelector(".attr-val").value.trim();
@@ -201,5 +202,5 @@ function collectData() {
     const user = { name: username, email: useremail };
 
     const cover = document.getElementById("cover_image_url").value.trim();
-    return { title, con, ref, attr, user, cover};
+    return { title, con, time, ref, attr, user, cover};
 }

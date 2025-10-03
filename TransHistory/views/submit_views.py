@@ -36,14 +36,20 @@ def post(request):
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
         form = TestForm(request.POST)
-        
+        time_str = data.get('time', 0)  # 默认 0
+        try:
+            time = int(time_str)
+        except (ValueError, TypeError):
+            time = 0
+
 
         # 3. 保存到数据库
         node = HistoryNode.objects.create(
             title=data.get('title', ''),
             con=data.get('con', ''),
             ref=data.get('ref', []),
-            time_name=data.get('attr', {}).get('time', ''),
+            time=time,
+            time_name=data.get('attr', {}).get('time_name', ''),
             field=data.get('attr', {}).get('field', ''),
             theme=data.get('attr', {}).get('theme', ''),
             region=data.get('attr', {}).get('region', ''),
