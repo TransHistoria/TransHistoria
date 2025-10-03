@@ -1,26 +1,12 @@
-const the_item = document.querySelector('.timeline-item');
-const timeline = document.querySelector('.timeline');
-for (let i = 0; i < 7; i++) {
-    timeline.appendChild(the_item.cloneNode(true));
-}
-timeline.removeChild(the_item);
-const ids = [12,13,16,18,14,19,20]
-
-
 document.addEventListener("DOMContentLoaded", () => {
-    // 找到所有 t-item
-    const items = document.querySelectorAll(".timeline .timeline-item");
-    let i = 0;
-    items.forEach(item => {
-
-        const randomIndex = Math.floor(Math.random() * ids.length);
-        const id = ids[i]; // 随机获取 t-id
-
-        // 请求后端数据
-        fetch(`/api/historynode/${id}/`)  // 假设你的 Django URL 是 /api/historynode/<id>/
-            .then(response => response.json())
-            .then(data => {
-                // 更新前端
+    const the_item = document.querySelector('.timeline-item');
+    const timeline = document.querySelector('.timeline');
+    timeline.removeChild(the_item);
+    fetch(`/api/get_timeline/`)
+        .then(response => response.json())
+        .then(all_timepoint => {
+            all_timepoint.forEach(data => {
+                const item = the_item.cloneNode(true);
                 const titleElem = item;
                 const imageElem = item.querySelector(".timeline__img");
                 const yearElem = item.querySelector(".timeline__content-title");
@@ -30,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
                 if (titleElem) titleElem.dataset.text = data.title || "";
                 const randomIndex = Math.floor(Math.random() * 7) + 1;
                 if (imageElem) imageElem.src = `/static/asserts/images/index/${randomIndex}.jpg` || "";
-                if (yearElem) yearElem.textContent = data.time || "";
+                if (yearElem) yearElem.textContent = data.time_name || "";
                 if (data.mkdoc) {
                     aElem.style.display = "block";
                     aElem.href = `/detail/${data.mkdoc}`;
@@ -72,15 +58,18 @@ document.addEventListener("DOMContentLoaded", () => {
                         document.querySelectorAll(".tooltip-box.fixed").forEach(box => box.classList.remove("fixed"));
                     }
                 });
+                timeline.appendChild(item);
             })
-            .catch(err => console.error("Error fetching history node:", err));
-        i = i + 1;
-    });
+        })
+        .catch(err => console.error("Error fetching history node:", err))
+        .then(() => {
+            $("#timeline-1").timeline_scroll();
+        });
 });
 
 
 (function ($) {
-    $.fn.timeline = function () {
+    $.fn.timeline_scroll = function () {
         var selectors = {
             id: $(this),
             item: $(this).find(".timeline-item"),
@@ -92,6 +81,7 @@ document.addEventListener("DOMContentLoaded", () => {
             "background-image",
             "url(" + selectors.item.first().find(selectors.img).attr("src") + ")"
         );
+        console.log(selectors.item.first().find(selectors.img))
         var itemLength = selectors.item.length;
         const viewportCenter = window.innerHeight / 2;
         $(window).scroll(function () {
@@ -122,4 +112,3 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 })(jQuery);
 
-$("#timeline-1").timeline();

@@ -3,7 +3,7 @@ from .models import HistoryNode, Contributor
 
 @admin.register(HistoryNode)
 class HistoryNodeAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'time', 'field', 'theme', 'region', 'tag', 'created_at')
+    list_display = ('id', 'title', 'time', 'time_name', 'field', 'theme', 'region', 'tag', 'created_at')
     search_fields = ('title', 'con', 'field', 'theme', 'region', 'tag')
     list_filter = ('field', 'theme', 'region', 'tag', 'created_at')
     ordering = ('-created_at',)

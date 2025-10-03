@@ -43,7 +43,7 @@ def post(request):
             title=data.get('title', ''),
             con=data.get('con', ''),
             ref=data.get('ref', []),
-            time=data.get('attr', {}).get('time', ''),
+            time_name=data.get('attr', {}).get('time', ''),
             field=data.get('attr', {}).get('field', ''),
             theme=data.get('attr', {}).get('theme', ''),
             region=data.get('attr', {}).get('region', ''),

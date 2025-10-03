@@ -1,6 +1,7 @@
 from django.db import models
 from martor.models import MartorField
 from django.core.exceptions import ValidationError
+from django.core.validators import MinValueValidator, MaxValueValidator
 
 def validate_markdown_length(value):
     if len(value.split()) > 3000:
@@ -10,7 +11,12 @@ class HistoryNode(models.Model):
     title = models.CharField(max_length=255)
     con = models.TextField()
     ref = models.JSONField(default=list, blank=True)
-    time = models.CharField(max_length=100, blank=True)
+    time = models.IntegerField(
+        default=0,
+        blank=True,
+        validators=[MinValueValidator(-9999), MaxValueValidator(9999)]
+    )
+    time_name = models.CharField(max_length=100, blank=True)
     field = models.CharField(max_length=100, blank=True)
     theme = models.CharField(max_length=100, blank=True)
     region = models.CharField(max_length=100, blank=True)

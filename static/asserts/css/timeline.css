@@ -1,4 +1,6 @@
-main {
+/* @import url("https://fonts.googleapis.com/css?family=Cardo|Pathway+Gothic+One"); */
+
+main.container {
     padding: 0px;
     width: 100%;
 }
@@ -7,9 +9,6 @@ header {
     position: fixed;
     background: none;
 }
-
-
-@import url("https://fonts.googleapis.com/css?family=Cardo|Pathway+Gothic+One");
 
 .timeline {
     display: flex;
