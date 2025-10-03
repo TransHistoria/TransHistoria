@@ -1,4 +1,6 @@
 from django.shortcuts import render
+from django.shortcuts import get_object_or_404
+from ..models import HistoryNode
 # Create your views here.
 
 def index_A(request):
@@ -39,4 +41,5 @@ def about_submission(request):
     return render(request, 'about_submission.html')
 
 def dlog(request):
-    return render(request, 'dlog.html')
+    dlogs = HistoryNode.objects.all().filter(tag='Devlog').order_by('-created_at')
+    return render(request, 'dlog.html', {'dlogs':dlogs})

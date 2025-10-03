@@ -9,7 +9,7 @@ def validate_markdown_length(value):
 class HistoryNode(models.Model):
     title = models.CharField(max_length=255)
     con = models.TextField()
-    ref = models.JSONField(default=list)
+    ref = models.JSONField(default=list, blank=True)
     time = models.CharField(max_length=100, blank=True)
     field = models.CharField(max_length=100, blank=True)
     theme = models.CharField(max_length=100, blank=True)

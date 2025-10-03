@@ -1,14 +1,24 @@
 {% extends "base.html" %}
 {% load static %}
+{% load martortags %}
 {% block title %}光谱历史-开发日志{% endblock %}
 
 {% block extra_head %}
 <link href="{% static 'asserts/css/about_submission.css' %}" rel="stylesheet" />
+<link href="{% static 'martor/css/martor.bootstrap.min.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block main %}
 <div class="about-us">
   <div class="row1">
+    <div>
+      {% for dlog in dlogs %}
+        <div>
+          {{ dlog.details|safe_markdown }}
+          <hr style="width: 56.6vw" />
+        </div>
+      {% endfor %}
+    </div>
     <div class="about-col">
       <h3>
         <strong><i>予所欲涕泣陈词者，惟属望于新鲜活泼之青年，有以自觉而奋斗耳！

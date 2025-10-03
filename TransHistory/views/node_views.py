@@ -18,7 +18,7 @@ def get_historynodes(request):
     keyword = request.GET.get('q', '')      # 搜索关键词
 
     # 先查询全部
-    records = HistoryNode.objects.all()
+    records = HistoryNode.objects.all().exclude(tag="Devlog")
 
     # 如果传了tag，就按tag过滤
     if tags:
