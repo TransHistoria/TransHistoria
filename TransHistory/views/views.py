@@ -34,6 +34,10 @@ def archives(request):
     input = request.GET.get('input')
     return render(request, 'archives.html', {'search_keyword': input})
 
+def node(request, id):
+    node = get_object_or_404(HistoryNode, id=id)
+    return render(request, 'node.html', {'node': node})
+
 def about_us(request):
     return render(request, 'about_us.html')
 

@@ -37,11 +37,13 @@ function appendNode(node) {
         con = con.substring(0, 50) + '......';
     }
     nodeElem.innerHTML = `
+    <a href=\"/archives/node/${node.id}\">
     <img src=\"/static/asserts/images/index/${randomNumber}.jpg\" alt=\"${node.title}\">
     <div class=\"node-body\">
         <h2>${node.title}</h2>
         <p>${con}</p>
     </div>
+    </a>
     `;
     // <div class=\"tags\">${node.tags.map(t => `<span>${t}</span>`).join('')}</div>
     // 找到最短列

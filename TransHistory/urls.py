@@ -18,6 +18,7 @@ urlpatterns = [
     path("theory/", views.theory),
     path("gallery/", views.gallery),
     path("archives/", views.archives),
+    path("archives/node/<int:id>/", views.node, name="node"),
     path("about_us/", views.about_us),
     path("about_submission/", views.about_submission),
     path("dlog/", views.dlog),
