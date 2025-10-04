@@ -31,17 +31,21 @@ function createColumns(count) {
 function appendNode(node) {
     const nodeElem = document.createElement('div');
     nodeElem.className = 'node';
-    const randomNumber = Math.floor(Math.random() * 7) + 1;
-    let con = node.con;
-    if (con.length > 50) {
-        con = con.substring(0, 50) + '......';
+    var imgsrc;
+    if (node.cover){
+        imgsrc = `/media/${node.cover}`;
+    } else {
+        const randomNumber = Math.floor(Math.random() * 7) + 1;
+        imgsrc = `\"/static/asserts/images/index/${randomNumber}.jpg\"`;
     }
     nodeElem.innerHTML = `
-    <img src=\"/static/asserts/images/index/${randomNumber}.jpg\" alt=\"${node.title}\">
-    <div class=\"node-body\">
-        <h2>${node.title}</h2>
-        <p>${con}</p>
-    </div>
+        <a href=\"/archives/node/${node.id}\">
+            <img src=${imgsrc} alt=\"${node.title}\">
+            <div class=\"node-body\">
+                <h2>${node.title}</h2>
+                <p>${node.con}</p>
+            </div>
+        </a>
     `;
     // <div class=\"tags\">${node.tags.map(t => `<span>${t}</span>`).join('')}</div>
     // 找到最短列

@@ -1,7 +1,7 @@
 FROM docker.io/library/python:latest
 WORKDIR /opt
 COPY . /opt/
-RUN python3 -m pip install --no-cache-dir asgiref==3.9.1 Django==5.2.5 sqlparse==0.5.3 tzdata==2025.2
+RUN python3 -m pip install --no-cache-dir asgiref==3.9.1 Django==5.2.5 sqlparse==0.5.3 tzdata==2025.2 martor==1.7.15
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 EXPOSE 8000

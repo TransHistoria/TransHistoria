@@ -15,10 +15,6 @@
     align-items: center;
 }
 
-.row1 ul li {
-    height: 70px;
-}
-
 .about-col {
     flex-basis: 48%;
     padding: 30px 2px;

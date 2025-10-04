@@ -1,627 +1,165 @@
-<!DOCTYPE html>
+{% extends "base.html" %}
 {% load static %}
-<html lang="zh-CN">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, viewport-fit=cover"
-    />
-    <title>Hrans Historia 资料提交</title>
-    <style>
-      :root {
-        --bg: #ffffff;
-        --fg: #0f172a; /* slate-900 */
-        --muted: #64748b; /* slate-500 */
-        --primary: #111827; /* gray-900 */
-        --ring: #e5e7eb; /* gray-200 */
-        --card: #ffffff;
-        --shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
-        --radius: 16px;
-        --gap: 14px;
-      }
-      * {
-        box-sizing: border-box;
-      }
-      html,
-      body {
-        height: 100%;
-        background: var(--bg);
-        color: var(--fg);
-      }
-      body {
-        margin: 0;
-        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto,
-          "PingFang SC", "Hiragino Sans GB", "Noto Sans CJK SC",
-          "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
-      }
-      .wrap {
-        max-width: 840px;
-        margin: 0 auto;
-        padding: 20px clamp(16px, 4vw, 28px) 80px;
-      }
-      header {
-        position: sticky;
-        top: 0;
-        backdrop-filter: saturate(1.2) blur(8px);
-        background: rgba(255, 255, 255, 0.7);
-        border-bottom: 1px solid var(--ring);
-        z-index: 30;
-      }
-      header .bar {
-        max-width: 840px;
-        margin: 0 auto;
-        padding: 12px clamp(16px, 4vw, 28px);
-        display: flex;
-        justify-content: space-between;  /* 元素横向分散 */
-        align-items: center;
-        gap: 10px;
-      }
-      h1 {
-        font-size: clamp(18px, 4vw, 24px);
-        margin: 0;
-        letter-spacing: 0.2px;
-      }
+{% block title %}光谱历史-资料上传{% endblock %}
+{% block extra_head %}
+<link href="{% static 'plugins/css/bootstrap.min.css' %}" type="text/css" media="all" rel="stylesheet" />
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<link href="{% static 'plugins/css/ace.min.css' %}" rel="stylesheet" />
+<link href="{% static 'martor/css/martor.bootstrap.min.css' %}" rel="stylesheet" />
+<link href="{% static 'asserts/css/submit.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/submit.js' %}" defer></script>
+{% endblock %}
 
-      .card {
-        background: var(--card);
-        border: 1px solid var(--ring);
-        border-radius: var(--radius);
-        box-shadow: var(--shadow);
-        padding: clamp(16px, 3.6vw, 24px);
-      }
-      .section {
-        display: grid;
-        gap: var(--gap);
-        margin-top: 16px;
-      }
-      .grid {
-        display: grid;
-        gap: var(--gap);
-      }
-      .row {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 10px;
-      }
-
-      label {
-        font-size: 13px;
-        color: var(--muted);
-        display: block;
-        margin-bottom: 6px;
-      }
-      input[type="text"],
-      textarea,
-      select {
-        width: 100%;
-        border: 1px solid var(--ring);
-        border-radius: 12px;
-        padding: 12px 14px;
-        font-size: 15px;
-        background: #fff;
-        outline: none;
-        transition: box-shadow 0.15s, border-color 0.15s;
-      }
-      textarea {
-        min-height: 160px;
-        resize: vertical;
-      }
-      input[type="text"]:focus,
-      textarea:focus,
-      select:focus {
-        border-color: #cbd5e1;
-        box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
-      }
-
-      .list {
-        display: grid;
-        gap: 10px;
-      }
-      .list-item {
-        display: grid;
-        grid-template-columns: auto 1fr auto;
-        align-items: center;
-        gap: 10px;
-      }
-      .list-item .num {
-        width: 32px;
-        height: 32px;
-        line-height: 32px;
-        text-align: center;
-        border-radius: 10px;
-        background: #f8fafc;
-        border: 1px solid var(--ring);
-        font-size: 13px;
-        color: var(--muted);
-      }
-
-      .inline {
-        display: flex;
-        gap: 8px;
-        align-items: center;
-      }
-      .chip {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        border: 1px solid var(--ring);
-        border-radius: 999px;
-        padding: 8px 12px;
-        font-size: 14px;
-        background: #fff;
-      }
-
-      .icon-btn {
-        --size: 36px;
-        width: var(--size);
-        height: var(--size);
-        border-radius: 12px;
-        border: 1px solid var(--ring);
-        display: inline-grid;
-        place-items: center;
-        background: #fff;
-        cursor: pointer;
-        user-select: none;
-      }
-      .icon-btn:hover {
-        background: #f8fafc;
-      }
-      .icon {
-        font-size: 18px;
-      }
-
-      .divider {
-        height: 1px;
-        background: var(--ring);
-        margin: 10px 0;
-      }
-
-      .actions {
-        display: flex;
-        gap: 10px;
-        flex-wrap: wrap;
-      }
-      .btn {
-        appearance: none;
-        border: 1px solid var(--ring);
-        border-radius: 14px;
-        padding: 12px 16px;
-        background: #111827;
-        color: #fff;
-        font-size: 15px;
-        cursor: pointer;
-        box-shadow: var(--shadow);
-      }
-      .btn.secondary {
-        background: #fff;
-        color: var(--fg);
-      }
-
-      .muted {
-        color: var(--muted);
-        font-size: 13px;
-      }
-      .footnote {
-        font-size: 12px;
-        color: var(--muted);
-      }
-
-      #doc {
-        padding: 10px 14px;
-        border: 1px solid var(--ring);
-        border-radius: 12px;
-        background: #f9fafb; /* 淡灰背景 */
-        font-size: 14px;
-        cursor: pointer;
-      }
-      #doc::file-selector-button {
-        padding: 8px 14px;
-        border: none;
-        border-radius: 10px;
-        background: #111827;
-        color: #fff;
-        font-size: 14px;
-        cursor: pointer;
-      }
-      #doc::file-selector-button:hover {
-        background: #374151; /* hover 变深 */
-      }
-
-      .preview {
-        background: #0b1020;
-        color: #e5e7eb;
-        border-radius: 12px;
-        padding: 12px;
-        overflow: auto;
-        font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-          "Liberation Mono", "Courier New", monospace;
-        font-size: 13px;
-      }
-
-      @media (min-width: 680px) {
-        .row-2 {
-          grid-template-columns: 1fr 1fr;
-        }
-        .row-3 {
-          grid-template-columns: 1fr 1fr 1fr;
-        }
-        .list-item {
-          grid-template-columns: auto 1fr auto;
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header>
-      <div class="bar">
-        <h1>TransHistoria 资料提交</h1>
-        <div style="display: flex;">
-          <h3>欢迎登陆！</h3>
-          <h3 id="username">{{ user.username }}</h3>
-          <h3>，</h3>
-          <h3 id="useremail">{{ user.email }}</h3>
+{% block main%}
+<div class="bar">
+  <h1>TransHistoria 资料提交卡</h1>
+  <div style="display: flex;">
+    <h3>欢迎登陆！</h3>
+    <h3 id="username">{{ user.username }}</h3>
+    <h3>，</h3>
+    <h3 id="useremail">{{ user.email }}</h3>
+  </div>
+</div>
+<main class="wrap">
+  <form id="entryForm" class="grid" autocomplete="off" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <!-- 卡片：标题 / 正文 / 参考文献 -->
+    <section class="card section">
+      <div class="row">
+        <div>
+          <label for="title">标题（必填）</label>
+          <input id="title" name="title" type="text" placeholder="卡片标题" required />
         </div>
       </div>
-    </header>
 
-    <main class="wrap">
-      <form id="entryForm" class="grid" autocomplete="off" method="POST" enctype="multipart/form-data">
-        {% csrf_token %}
-        <!-- 卡片：标题 / 正文 / 参考文献 -->
-        <section class="card section">
-          <div class="row">
-            <div>
-              <label for="title">标题</label>
-              <input
-                id="title"
-                name="title"
-                type="text"
-                placeholder="卡片标题"
-                required
-              />
-            </div>
+      <div class="row">
+        <div>
+          <label for="content">正文（必填）</label>
+          <textarea id="content" name="content" placeholder="卡片内容" required></textarea>
+        </div>
+      </div>
+      
+      <div class="row" >
+        <div>
+          <label for="time">准确时间（数字，公元前用负数，公元后用正数）</label>
+          <input id="time" name="time" type="number" placeholder="时间"  min="-9999" max="99999999" step="1"/>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="inline" style="justify-content: space-between; width: 100%">
+          <label style="margin: 0">参考文献</label>
+          <div class="inline">
+            <button type="button" class="icon-btn" id="addRefBtn" title="添加参考文献">
+              <span class="icon">＋</span>
+            </button>
           </div>
-          <div class="row">
-            <div>
-              <label for="content">正文</label>
-              <textarea
-                id="content"
-                name="content"
-                placeholder="卡片内容"
-                required
-              ></textarea>
-            </div>
-          </div>
+        </div>
+        <div id="refList" class="list"></div>
+        <div class="footnote">按序编号</div>
+      </div>
+    </section>
 
-          <div class="row">
-            <div
-              class="inline"
-              style="justify-content: space-between; width: 100%"
-            >
-              <label style="margin: 0">参考文献</label>
-              <div class="inline">
-                <button
-                  type="button"
-                  class="icon-btn"
-                  id="addRefBtn"
-                  title="添加参考文献"
-                >
-                  <span class="icon">＋</span>
-                </button>
-              </div>
-            </div>
-            <div id="refList" class="list"></div>
-            <div class="footnote">按序编号</div>
-          </div>
-        </section>
+    <!-- 属性部分 -->
+    <section class="card section">
 
-        <!-- 属性部分 -->
-        <section class="card section">
-          <div
-            class="inline"
-            style="justify-content: space-between; width: 100%"
-          >
-            <label style="margin: 0">属性</label>
-            <div class="inline">
-              <button
-                type="button"
-                class="icon-btn"
-                id="addAttrBtn"
-                title="添加一行属性"
-              >
-                <span class="icon">＋</span>
-              </button>
-            </div>
-          </div>
-
-          <div id="attrList" class="list"></div>
-
-          <div class="divider"></div>
-
-          <div class="row">
-            <div>
-              <label>分类标签（唯一）</label>
-              <div class="inline" role="radiogroup" aria-label="分类标签">
-                <label class="chip"
-                  ><input
-                    type="radio"
-                    name="tag"
-                    value="事件"
-                    required
-                    style="margin-right: 8px"
-                  />事件</label
-                >
-                <label class="chip"
-                  ><input
-                    type="radio"
-                    name="tag"
-                    value="人物"
-                    style="margin-right: 8px"
-                  />人物</label
-                >
-                <label class="chip"
-                  ><input
-                    type="radio"
-                    name="tag"
-                    value="理论"
-                    style="margin-right: 8px"
-                  />理论</label
-                >
-                <label class="chip"
-                  ><input
-                    type="radio"
-                    name="tag"
-                    value="作品"
-                    style="margin-right: 8px"
-                  />作品</label
-                >
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div>
-              <label for="doc"
-                >详细资料附件（Word 或含 Markdown 的压缩包）</label
-              >
-              <input
-                id="doc"
-                name="doc"
-                type="file"
-                accept=".doc,.docx,.zip,.tar,.gz,.tgz,.tar.gz"
-              />
-              <div class="footnote">
-                （文件上传到静态资料库，并将文件名记入 JSON 的 doc 字段）
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="grid actions">
-          <button type="button" class="btn secondary" id="previewBtn">
-            预览 JSON
+      <div class="inline" style="justify-content: space-between; width: 100%">
+        <label style="margin: 0">属性</label>
+        <div class="inline">
+          <button type="button" class="icon-btn" id="addAttrBtn" title="添加一行属性">
+            <span class="icon">＋</span>
           </button>
-          <button type="button" class="btn secondary" onclick="location.reload();">清空</button>
-          <button type="submit" class="btn">提交</button>
-          <input type="hidden" name="json_data" id="json_data">
-          <span class="muted">提交后将以 JSON 结构传送到后端。</span>
-        </section>
-
-        <section class="section">
-          <label>JSON 预览</label>
-          <pre id="jsonPreview" class="preview" aria-live="polite">{ }</pre>
-        </section>
-      </form>
-    </main>
-
-    <template id="refItemTpl">
-      <div class="list-item ref-item">
-        <div class="num"></div>
-        <input
-          type="text"
-          class="ref-input"
-          placeholder="作者. 标题. 出版社/期刊/网址, 年份."
-        />
-        <button type="button" class="icon-btn remove-ref" title="移除此条">
-          <span class="icon">－</span>
-        </button>
+        </div>
       </div>
-    </template>
 
-    <template id="attrItemTpl">
-      <div class="list-item attr-item">
-        <select class="attr-key" aria-label="属性类型">
-          <option value="" disabled selected>选择属性</option>
-          <option value="time">时间</option>
-          <option value="field">领域</option>
-          <option value="theme">主题</option>
-          <option value="region">地区</option>
-        </select>
-        <input type="text" class="attr-val" placeholder="填写内容" />
-        <button type="button" class="icon-btn remove-attr" title="移除此行">
-          <span class="icon">－</span>
-        </button>
+      <div id="attrList" class="list"></div>
+
+      <div class="divider"></div>
+
+      <div class="row">
+        <div>
+          <label>分类标签（必填，唯一）</label>
+          <div class="inline" role="radiogroup" aria-label="分类标签">
+            <label class="chip"><input type="radio" name="tag" value="事件" required
+                style="margin-right: 8px" />事件</label>
+            <label class="chip"><input type="radio" name="tag" value="人物" style="margin-right: 8px" />人物</label>
+            <label class="chip"><input type="radio" name="tag" value="理论" style="margin-right: 8px" />理论</label>
+            <label class="chip"><input type="radio" name="tag" value="作品" style="margin-right: 8px" />作品</label>
+            <label class="chip"><input type="radio" name="tag" value="Devlog" style="margin-right: 8px" />Devlog</label>
+          </div>
+        </div>
       </div>
-    </template>
 
-    <script>
-      const refList = document.getElementById("refList");
-      const attrList = document.getElementById("attrList");
-      const addRefBtn = document.getElementById("addRefBtn");
-      const addAttrBtn = document.getElementById("addAttrBtn");
-      const refItemTpl = document.getElementById("refItemTpl");
-      const attrItemTpl = document.getElementById("attrItemTpl");
-      const form = document.getElementById("entryForm");
-      const preview = document.getElementById("jsonPreview");
-      const docInput = document.getElementById("doc");
+      <div class="row">
+        <label>详细资料（{{ form.details.help_text }}）</label>
+        {{ form.details }}
+      </div>
 
-      // 初始化
-      addRef();
-      addAttr();
-      updateRefNumbers();
-      refreshAttrOptions();
+      <div class="row">
+        <div>
+          <label for="doc">封面图片</label>
+          <input id="cover" name="cover_image" type="file" accept="image/*" />
+          <input type="hidden" id="cover_image_url" name="cover_image_url">
+          <img id="cover_preview" src="" alt="">
+          <div class="footnote">
+            添加任意比例的封面，大小不要大于10MB
+          </div>
+        </div>
+      </div>
+    </section>
 
-      // 添加参考文献
-      addRefBtn.addEventListener("click", () => {
-        addRef();
-        updateRefNumbers();
-      });
+    <section class="grid actions">
+      <button type="button" class="btn secondary" id="previewBtn">
+        预览 JSON
+      </button>
+      <button type="button" class="submit-btn secondary" onclick="location.reload();">清空</button>
+      <button type="submit" class="submit-btn">提交</button>
+      <input type="hidden" name="json_data" id="json_data">
+      <span class="muted">提交后将以 JSON 结构传送到后端。</span>
+    </section>
 
-      // 添加属性
-      addAttrBtn.addEventListener("click", () => {
-        addAttr();
-        refreshAttrOptions();
-      });
+    <section class="section">
+      <label>JSON 预览</label>
+      <pre id="jsonPreview" class="preview" aria-live="polite">{ }</pre>
+    </section>
+  </form>
+</main>
 
-      // 参考文献删除（事件委托）
-      refList.addEventListener("click", (e) => {
-        if (
-          e.target.classList.contains("remove-ref") ||
-          e.target.closest(".remove-ref")
-        ) {
-          e.target.closest(".ref-item").remove();
-          updateRefNumbers();
-        }
-      });
+<template id="refItemTpl">
+  <div class="list-item ref-item">
+    <div class="num"></div>
+    <input type="text" class="ref-input" placeholder="作者. 标题. 出版社/期刊/网址, 年份." />
+    <button type="button" class="icon-btn remove-ref" title="移除此条">
+      <span class="icon">－</span>
+    </button>
+  </div>
+</template>
 
-      // 属性删除（事件委托）
-      attrList.addEventListener("click", (e) => {
-        if (
-          e.target.classList.contains("remove-attr") ||
-          e.target.closest(".remove-attr")
-        ) {
-          e.target.closest(".attr-item").remove();
-          refreshAttrOptions();
-        }
-      });
-
-      // 属性选择变更，刷新禁用状态
-      attrList.addEventListener("change", (e) => {
-        if (e.target.classList.contains("attr-key")) {
-          refreshAttrOptions();
-        }
-      });
-
-      // JSON 预览按钮
-      document.getElementById("previewBtn").addEventListener("click", () => {
-        const data = collectData();
-        preview.textContent = JSON.stringify(data, null, 2);
-      });
-
-      var csrftoken = '{{ csrf_token }}';
-      function getCookie(name) {
-        let cookieValue = null;
-        if (document.cookie && document.cookie !== '') {
-            const cookies = document.cookie.split(';');
-            for (let i = 0; i < cookies.length; i++) {
-                const cookie = cookies[i].trim();
-                // Does this cookie string begin with the name we want?
-                if (cookie.substring(0, name.length + 1) === (name + '=')) {
-                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                    break;
-                }
-            }
-        }
-        return cookieValue;
-      }
-      csrftoken = getCookie('csrftoken');
-
-      // 表单提交
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-        const data = collectData();
-        // preview.textContent = JSON.stringify(data, null, 2);
-        document.getElementById('json_data').value = JSON.stringify(data);
-        const formData = new FormData(form);
-        try {
-          const res = await fetch('/api/', {
-            method: 'POST',
-            headers: {
-              'X-CSRFToken': csrftoken
-            },
-            body: formData
-          });
-
-          if (!res.ok) throw new Error('提交失败');
-          const result = await res.json();
-          console.log(result);
-          alert('提交成功，JSON 返回已打印到控制台');
-        } catch(err) {
-          console.error(err);
-          alert('提交失败：' + err.message);
-        }
-      });
-
-      function addRef(value = "") {
-        const node = refItemTpl.content.firstElementChild.cloneNode(true);
-        node.querySelector(".ref-input").value = value;
-        refList.appendChild(node);
-      }
-
-      function addAttr(key = "", val = "") {
-        const node = attrItemTpl.content.firstElementChild.cloneNode(true);
-        const sel = node.querySelector(".attr-key");
-        const input = node.querySelector(".attr-val");
-        if (key) sel.value = key;
-        if (val) input.value = val;
-        attrList.appendChild(node);
-        refreshAttrOptions();
-      }
-
-      function updateRefNumbers() {
-        [...refList.querySelectorAll(".ref-item")].forEach((item, idx) => {
-          item.querySelector(".num").textContent = idx + 1;
-        });
-      }
-
-      function getUsedAttrKeys() {
-        return new Set(
-          [...attrList.querySelectorAll(".attr-key")]
-            .map((s) => s.value)
-            .filter(Boolean)
-        );
-      }
-
-      function refreshAttrOptions() {
-        const used = getUsedAttrKeys();
-        const allKeys = ["time", "field", "theme", "region"];
-        addAttrBtn.disabled = used.size >= allKeys.length;
-        [...attrList.querySelectorAll(".attr-item")].forEach((item) => {
-          const sel = item.querySelector(".attr-key");
-          const current = sel.value;
-          [...sel.options].forEach((opt) => {
-            if (!opt.value) return;
-            opt.disabled = used.has(opt.value) && opt.value !== current;
-          });
-        });
-      }
-
-      function collectData() {
-        const title = document.getElementById("title").value.trim();
-        const con = document.getElementById("content").value.trim();
-        const ref = [...refList.querySelectorAll(".ref-input")]
-          .map((i) => i.value.trim())
-          .filter((v) => v.length > 0);
-
-        const attr = { time: "", field: "", theme: "", region: "", tag: "" };
-        [...attrList.querySelectorAll(".attr-item")].forEach((item) => {
-          const key = item.querySelector(".attr-key").value;
-          const val = item.querySelector(".attr-val").value.trim();
-          if (key && val) attr[key] = val;
-        });
-
-        const tag = (new FormData(form).get("tag") || "").toString();
-        attr.tag = tag;
-
-        const docFile = docInput.files && docInput.files[0];
-        const doc = docFile ? docFile.name : "";
-
-        const username = document.getElementById("username")?.textContent.trim();
-        const useremail = document.getElementById("useremail")?.textContent.trim();
-        const user = { name: username, email: useremail };
-        return { title, con, ref, attr, doc , user };
-      }
-    </script>
-  </body>
-</html>
+<template id="attrItemTpl">
+  <div class="list-item attr-item">
+    <select class="attr-key" aria-label="属性类型">
+      <option value="" disabled selected>选择属性</option>
+      <option value="time_name">时间</option>
+      <option value="field">领域</option>
+      <option value="theme">主题</option>
+      <option value="region">地区</option>
+    </select>
+    <input type="text" class="attr-val" placeholder="填写内容" />
+    <button type="button" class="icon-btn remove-attr" title="移除此行">
+      <span class="icon">－</span>
+    </button>
+  </div>
+</template>
+<script type="text/javascript" src="{% static 'plugins/js/jquery.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/ace.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/mode-markdown.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/ext-language_tools.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/theme-github.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/typo.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/spellcheck.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/highlight.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'plugins/js/emojis.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'martor/js/martor.bootstrap.min.js' %}"></script>
+{% endblock %}
