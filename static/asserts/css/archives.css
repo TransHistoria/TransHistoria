@@ -132,14 +132,18 @@
     padding: 0.75rem 0.5rem;
 }
 
-.node-body h2 {
+.node h2 {
     font-size: 1rem;
     margin: 0 0 0.5rem;
 }
 
-.node-body p {
+.node p {
     font-size: 0.875rem;
     margin: 0;
+}
+
+.node .more {
+    text-align: right;
 }
 
 @media screen and (max-width: 768px) {

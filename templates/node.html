@@ -5,12 +5,30 @@
 
 {% block extra_head %}
 <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" rel="stylesheet" />
+<style>
+    main.container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .details {
+        margin-top: 20px;
+        width: 80%;
+    }
+</style>
 {% endblock %}
 
 {% block main %}
-<div>
-    {{ node.title }}
-    {{ node.con }}
-    {{ node.details|safe_markdown }}
+<div class="details">
+    {% if node.cover %}
+        <img src="/media/{{ node.cover }}" alt="{{ node.title }}" class="cover">
+    {% endif %}
+    {% if node.details %}
+        {{ node.details|safe_markdown }}
+    {% else %}
+        <h1>{{ node.title }}</h1>
+        <p>{{ node.con }}</p>
+    {% endif %}
 </div>
 {% endblock %}
