@@ -22,7 +22,7 @@
 {% block main %}
 <div class="details">
     {% if node.cover %}
-        <img src="{{ node.cover }}" alt="{{ node.title }}" class="cover">
+        <img src="/media/{{ node.cover }}" alt="{{ node.title }}" class="cover">
     {% endif %}
     {% if node.details %}
         {{ node.details|safe_markdown }}
