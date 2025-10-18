@@ -33,7 +33,7 @@ function appendNode(node) {
     nodeElem.className = 'node';
     var imgsrc;
     if (node.cover){
-        imgsrc = `/media/${node.cover}`;
+        imgsrc = `${node.cover}`;
     } else {
         const randomNumber = Math.floor(Math.random() * 7) + 1;
         imgsrc = `\"/static/asserts/images/index/${randomNumber}.jpg\"`;
