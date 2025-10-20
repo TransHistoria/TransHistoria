@@ -90,7 +90,8 @@ cover.addEventListener('change', function () {
         method: "POST",
         body: formData,
         headers: {
-            "X-CSRFToken": csrftoken
+            "X-CSRFToken": csrftoken,
+            "cover": true
         }
     })
         .then(response => response.json())

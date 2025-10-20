@@ -51,10 +51,15 @@ def images_uploader(request):
             img_uuid = "{0}-{1}".format(uuid.uuid4().hex[:10], image.name.replace(' ', '-'))
             tmp_file = os.path.join(settings.MARTOR_UPLOAD_PATH, img_uuid)
             def_path = default_storage.save(tmp_file, ContentFile(image.read()))
+            cover = request.META.get("HTTP_COVER", False)
+            if cover == "true":
+                img_url = def_path
+            else:
+                img_url = os.path.join(settings.MEDIA_URL, def_path)
 
             data = json.dumps({
                 'status': 200,
-                'link': def_path,
+                'link': img_url,
                 'name': image.name
             })
             return HttpResponse(data, content_type='application/json')
