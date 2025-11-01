@@ -7,16 +7,21 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(all_timepoint => {
             all_timepoint.forEach(data => {
                 const item = the_item.cloneNode(true);
-                const titleElem = item;
+                const yearElem = item;
                 const imageElem = item.querySelector(".timeline__img");
-                const yearElem = item.querySelector(".timeline__content-title");
+                const titleElem = item.querySelector(".timeline__content-title");
                 const aElem = item.querySelector(".timeline__details");
                 const contentElem = item.querySelector(".timeline__content-desc");
 
-                if (titleElem) titleElem.dataset.text = data.title || "";
-                const randomIndex = Math.floor(Math.random() * 7) + 1;
-                if (imageElem) imageElem.src = `/static/asserts/images/index/${randomIndex}.jpg` || "";
-                if (yearElem) yearElem.textContent = data.time_name || "";
+                if (yearElem) yearElem.dataset.text = data.time_name || "";
+                var imgsrc;
+                if (data.cover){
+                    imgsrc = `/media/${data.cover}`;
+                } else {
+                    imgsrc = "";
+                }
+                if (imageElem) imageElem.src = imgsrc;
+                if (titleElem) titleElem.textContent = data.title || "";
                 if (data.mkdoc) {
                     aElem.style.display = "block";
                     aElem.href = `/detail/${data.mkdoc}`;
