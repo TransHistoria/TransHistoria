@@ -11,13 +11,8 @@
 {% block main %}
 <div class="about-us">
   <div class="row1">
-    <div>
-      {% for dlog in dlogs %}
-        <div>
-          {{ dlog.details|safe_markdown }}
-          <hr style="width: 56.6vw" />
-        </div>
-      {% endfor %}
+    <div class="about-col">
+      <img src="{% static 'asserts/images/新青年卷一第一号.jpg' %}" />
     </div>
     <div class="about-col">
       <h3>
@@ -35,8 +30,13 @@
       <h3>特别感谢（按字母顺序排序）</h3>
       <h4>祭子saiko（外援美工）</h4>
     </div>
-    <div class="about-col">
-      <img src="{% static 'asserts/images/新青年卷一第一号.jpg' %}" />
+    <div>
+      {% for dlog in dlogs %}
+        <div>
+          {{ dlog.details|safe_markdown }}
+          <hr style="width: 56.6vw" />
+        </div>
+      {% endfor %}
     </div>
   </div>
   <hr style="width: 56.6vw" />

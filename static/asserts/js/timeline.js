@@ -22,9 +22,9 @@ document.addEventListener("DOMContentLoaded", () => {
                 }
                 if (imageElem) imageElem.src = imgsrc;
                 if (titleElem) titleElem.textContent = data.title || "";
-                if (data.mkdoc) {
+                if (data.details) {
                     aElem.style.display = "block";
-                    aElem.href = `/detail/${data.mkdoc}`;
+                    aElem.href = `/archives/node/${data.id}`;
                 }
 
                 // 处理 t-content，添加引用 tooltip

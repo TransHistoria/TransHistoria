@@ -98,14 +98,6 @@ header .nav {
     cursor: pointer;
 }
 
-.cta {
-    padding: 10px 16px;
-    border: 1px solid var(--border);
-    border-radius: 12px;
-    background: #000000;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
 @media (max-width: 640px) {
 
     .menu-toggle {
@@ -132,7 +124,7 @@ header .nav {
         font-size: 24px;
     }
 
-    .menu a:not(.cta) {
+    .menu a {
         padding: 5px 0px;
         width: 100%;
     }

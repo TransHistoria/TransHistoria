@@ -1,12 +1,11 @@
 .search-container {
     display: flex;
     flex-direction: column;
-    align-items: center;
 }
 
 .search {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     align-items: flex-start;
     margin-bottom: 20px;
     gap: 10px;
@@ -18,12 +17,11 @@
     flex-direction: row;
     gap: 10px;
     width: 100%;
-    max-width: 400px;
 }
 
 .search-bar input {
     padding: 8px;
-    width: 300px;
+    width: 100%;
     border: 1px solid #ccc;
     border-radius: 4px;
     font-size: 14px;
@@ -54,8 +52,9 @@
 
 .tags {
     display: flex;
-    flex-wrap: wrap;
+    flex-direction: row;
     gap: 8px;
+    padding: 5px 0;
 }
 
 .tag-item {
@@ -83,6 +82,7 @@
     transition: all 0.2s ease;
     user-select: none;
     border: 1px solid #ccc;
+    text-wrap: nowrap;
 }
 
 /* 选中效果 */
@@ -152,6 +152,7 @@
         align-items: normal;
     }
     .search {
+        flex-direction: column;
         width: 100%;
     }
     .search-bar {
