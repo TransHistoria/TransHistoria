@@ -5,11 +5,13 @@ from ..models import HistoryNode
 def historynode_api(request, pk):
     node = get_object_or_404(HistoryNode, pk=pk)
     data = {
+        "id": node.id,
         "title": node.title,
         "con": node.con,
         "time": node.time,
         "mkdoc": node.mkdoc,
         "ref": node.ref,
+        "details": node.details,
     }
     return JsonResponse(data)
 
