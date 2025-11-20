@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const id = tIdElem.textContent.trim(); // 获取 t-id
 
         // 请求后端数据
-        fetch(`/api/historynode/${id}/`)  // 假设你的 Django URL 是 /api/historynode/<id>/
+        fetch(`/api/historynode/${id}/`)
             .then(response => response.json())
             .then(data => {
                 // 更新前端

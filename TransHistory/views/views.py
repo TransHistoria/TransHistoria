@@ -25,7 +25,10 @@ def people(request):
     return render(request, 'archives_field.html', {'tag': '人物'})
 
 def theory(request):
-    return render(request, 'archives_field.html', {'tag': '理论'})
+    concept_nodes = HistoryNode.objects.all().filter(tag='理论')
+    default_fontsize = 25
+    concept_ids = [[node.title, default_fontsize, node.id] for node in concept_nodes]
+    return render(request, 'theory.html', {'concept_ids': concept_ids})
 
 def gallery(request):
     return render(request, 'archives_field.html', {'tag': '艺术'})
