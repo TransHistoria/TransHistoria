@@ -19,7 +19,7 @@
     </div>
 </div>
 <script>
-    const concept_ids = "{{ concept_ids|safe }}" || [];
-    const concepts =  eval(concept_ids);
+    const concept_nodes_json = "{{ concept_nodes_json|safe }}" || [];
+    const concepts =  eval(concept_nodes_json);
 </script>
 {% endblock %}

@@ -48,97 +48,94 @@ const concepts_size = [
     ["ADD",25],
     ["TERF",30]
 ];
-for (let i = 0; i < concepts.length; i++) {
+const concepts_ls = concepts.map(item => [item['title'], item['fontsize'], item['id']]);
+for (let i = 0; i < concepts_ls.length; i++) {
     for (let j = 0; j < concepts_size.length; j++) {
-        if (concepts[i][0] === concepts_size[j][0]) {
-            concepts[i][1] = concepts_size[j][1];
+        if (concepts_ls[i][0] === concepts_size[j][0]) {
+            concepts_ls[i][1] = concepts_size[j][1];
             break;
         }
     }
 }
 function get_concept_content(id) {
-    fetch(`/api/historynode/${id}/`)
-        .then(response => response.json())
-        .then(data => {
-            // 创建div元素作为便利贴的容器，并添加类名"stickynote"
-            const sticky = document.createElement("div");
-            sticky.id = `node${data.id}`;
-            sticky.classList.add("stickynote");  
-            sticky.style.backgroundColor = sticky_color[color_index];
-            sticky.style.position = "absolute";
-            sticky.style.left = `10%`;
-            sticky.style.top = `30%`;
-            if (data.con.length > 100) {
-                sticky.style.width = `200px`;
-                sticky.style.height = `200px`;
-            }
-            color_index = (color_index + 1) % sticky_color.length;
-            const content = document.createElement("p");
-            content.classList.add("stickynote-text");
-            content.innerHTML = data.con || "";
-            sticky.appendChild(content);
-            const aElem = document.createElement("a"); 
-            aElem.textContent = "深入了解→";
-            aElem.classList.add("stickynote-link");
-            sticky.appendChild(aElem);
-            if (data.details) {
-                aElem.style.display = "block";
-                aElem.href = `/archives/node/${data.id}`;
-            }
-            else {
-                aElem.style.display = "none";
-            }
-            board.appendChild(sticky);
+    const data = concepts.find(item => item['id'] === id);
+    // 创建div元素作为便利贴的容器，并添加类名"stickynote"
+    const sticky = document.createElement("div");
+    sticky.id = `node${data.id}`;
+    sticky.classList.add("stickynote");  
+    sticky.style.backgroundColor = sticky_color[color_index];
+    sticky.style.position = "absolute";
+    sticky.style.left = `10%`;
+    sticky.style.top = `30%`;
+    if (data.con.length > 100) {
+        sticky.style.width = `200px`;
+        sticky.style.height = `200px`;
+    }
+    color_index = (color_index + 1) % sticky_color.length;
+    const content = document.createElement("p");
+    content.classList.add("stickynote-text");
+    content.innerHTML = data.con || "";
+    sticky.appendChild(content);
+    const aElem = document.createElement("a"); 
+    aElem.textContent = "深入了解→";
+    aElem.classList.add("stickynote-link");
+    sticky.appendChild(aElem);
+    if (data.details) {
+        aElem.style.display = "block";
+        aElem.href = `/archives/node/${data.id}`;
+    }
+    else {
+        aElem.style.display = "none";
+    }
+    board.appendChild(sticky);
 
-            // 创建可拖动便利贴的对象
-            const draggable = Draggable.create(sticky, {
-                // 设置拖动方向为水平和垂直
-                type: "x,y", 
-                // 拖动开始时的回调函数
-                onDragStart: function () { 
-                    // 启用惯性动画，外部js库
-                    InertiaPlugin.track(this.target, "x"); 
-                    // 拖动开始时的动画效果
-                    grabNoteAnimation(this.target); 
-                },
-                // 拖动中的回调函数
-                onDrag: function () { 
-                    // 获取水平方向上的速度
-                    let dx = InertiaPlugin.getVelocity(this.target, "x"); 
-                    // 调用GSAP库
+    // 创建可拖动便利贴的对象
+    const draggable = Draggable.create(sticky, {
+        // 设置拖动方向为水平和垂直
+        type: "x,y", 
+        // 拖动开始时的回调函数
+        onDragStart: function () { 
+            // 启用惯性动画，外部js库
+            InertiaPlugin.track(this.target, "x"); 
+            // 拖动开始时的动画效果
+            grabNoteAnimation(this.target); 
+        },
+        // 拖动中的回调函数
+        onDrag: function () { 
+            // 获取水平方向上的速度
+            let dx = InertiaPlugin.getVelocity(this.target, "x"); 
+            // 调用GSAP库
+            gsap.to(this.target, { 
+                // 根据速度旋转便利贴(所以会有越快越歪)
+                rotation: dx * -0.003, 
+                duration: 0.5,
+                ease: "elastic.out(1.8, 0.6)",
+                // 动画完成后的回调函数
+                onComplete: function () { 
+                    // 旋转回初始状态
                     gsap.to(this.target, { 
-                        // 根据速度旋转便利贴(所以会有越快越歪)
-                        rotation: dx * -0.003, 
+                        rotation: 0,
                         duration: 0.5,
-                        ease: "elastic.out(1.8, 0.6)",
-                        // 动画完成后的回调函数
-                        onComplete: function () { 
-                            // 旋转回初始状态
-                            gsap.to(this.target, { 
-                                rotation: 0,
-                                duration: 0.5,
-                                ease: "elastic.out(1.8, 0.6)"
-                            });
-                        }
+                        ease: "elastic.out(1.8, 0.6)"
                     });
-                },
-                // 拖动结束时的回调函数
-                onDragEnd: function () {
-                    releaseNoteAnimation(this.target); 
-                },
-
-                // 避免拖动时误触发内部元素的点击事件
-                dragClickables: false, 
-            }); 
-
-            sticky.addEventListener("dblclick", function() {
-                if (draggable) {
-                    draggable[0].disable();
                 }
-                sticky.remove();
             });
-        })
-        .catch(err => console.error("Error fetching history node:", err));
+        },
+        // 拖动结束时的回调函数
+        onDragEnd: function () {
+            releaseNoteAnimation(this.target); 
+        },
+
+        // 避免拖动时误触发内部元素的点击事件
+        dragClickables: false, 
+    }); 
+
+    sticky.addEventListener("dblclick", function() {
+        if (draggable) {
+            draggable[0].disable();
+        }
+        sticky.remove();
+    });
 }
 document.addEventListener('DOMContentLoaded', () => {
     const cloud = document.getElementById('concept_cloud')
@@ -146,7 +143,7 @@ document.addEventListener('DOMContentLoaded', () => {
     WordCloud(
         cloud,
         {
-            list: concepts,
+            list: concepts_ls,
             fontFamily: "チョークS, 楷体",
             color: "random-light",
             rotationSteps: 2,
