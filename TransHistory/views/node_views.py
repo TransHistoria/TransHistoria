@@ -37,6 +37,12 @@ def get_historynodes(request):
     data = list(records.values())  # 转为dict列表返回
     return JsonResponse(data, safe=False)
 
+
+def get_theory_nodes(request):
+    records = HistoryNode.objects.all().filter(tag="理论")
+    data = list(records.values())  # 转为dict列表返回
+    return JsonResponse(data, safe=False)
+
 def get_timeline(request):
     records = HistoryNode.objects.all().filter(tag="事件").order_by('time')
     data = list(records.values())  # 转为dict列表返回

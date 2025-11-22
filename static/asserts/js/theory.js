@@ -1,5 +1,8 @@
 // 便利贴部分参考：https://blog.csdn.net/m0_63398413/article/details/134225206
 
+var concepts = [];
+var concepts_ls = [];
+
 const sticky_color = [
     '#f0c2a2',
     '#fffbc7',
@@ -10,6 +13,7 @@ const sticky_color = [
 ]
 var color_index = Math.floor(Math.random() * sticky_color.length);
 
+const default_fontsize = 25;
 const concepts_size = [
     ["社会性别",35],
     ["指派性别",25],
@@ -48,15 +52,8 @@ const concepts_size = [
     ["ADD",25],
     ["TERF",30]
 ];
-const concepts_ls = concepts.map(item => [item['title'], item['fontsize'], item['id']]);
-for (let i = 0; i < concepts_ls.length; i++) {
-    for (let j = 0; j < concepts_size.length; j++) {
-        if (concepts_ls[i][0] === concepts_size[j][0]) {
-            concepts_ls[i][1] = concepts_size[j][1];
-            break;
-        }
-    }
-}
+
+
 function get_concept_content(id) {
     const data = concepts.find(item => item['id'] === id);
     // 创建div元素作为便利贴的容器，并添加类名"stickynote"
@@ -138,30 +135,47 @@ function get_concept_content(id) {
     });
 }
 document.addEventListener('DOMContentLoaded', () => {
-    const cloud = document.getElementById('concept_cloud')
-    const blackboard = document.querySelector('.blackboard');
-    WordCloud(
-        cloud,
-        {
-            list: concepts_ls,
-            fontFamily: "チョークS, 楷体",
-            color: "random-light",
-            rotationSteps: 2,
-            click: function(item) {
-                const currentNode = document.getElementById(`node${item[2]}`);
-                if (currentNode) {
-                    // 如果便利贴已经存在，则不创建新的
-                    return;
-                } else {
-                    // 创建新的便利贴
-                    get_concept_content(item[2]);
+    
+    fetch('/api/get_theory_nodes/')
+        .then(response => response.json())
+        .then(data => {
+            concepts = data;
+            concepts_ls = concepts.map(item => [item['title'], default_fontsize, item['id']]);
+            for (let i = 0; i < concepts_ls.length; i++) {
+                for (let j = 0; j < concepts_size.length; j++) {
+                    if (concepts_ls[i][0] === concepts_size[j][0]) {
+                        concepts_ls[i][1] = concepts_size[j][1];
+                        break;
+                    }
                 }
             }
+            
+            const cloud = document.getElementById('concept_cloud')
+            const blackboard = document.querySelector('.blackboard');
+            WordCloud(
+                cloud,
+                {
+                    list: concepts_ls,
+                    fontFamily: "チョークS, 楷体",
+                    color: "random-light",
+                    rotationSteps: 2,
+                    click: function(item) {
+                        const currentNode = document.getElementById(`node${item[2]}`);
+                        if (currentNode) {
+                            // 如果便利贴已经存在，则不创建新的
+                            return;
+                        } else {
+                            // 创建新的便利贴
+                            get_concept_content(item[2]);
+                        }
+                    }
+                }
+            );
+            cloud.style.position = "relative";
+            cloud.style.backgroundColor = "transparent"; // 设置背景颜色为透明
+            blackboard.style.height = cloud.offsetHeight + 80 + "px";
         }
-    );
-    cloud.style.position = "relative";
-    cloud.style.backgroundColor = "transparent"; // 设置背景颜色为透明
-    blackboard.style.height = cloud.offsetHeight + 80 + "px";
+        );
 });
 
 // 拖动便利贴时的抓取动画

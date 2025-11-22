@@ -124,8 +124,8 @@ body {
 /* 橡皮擦 */
 #eraser {
     position: absolute;
-    width: 50px;
-    height: 50px;
+    width: 65px;
+    height: 49px;
     bottom: 10px;
     right: 10px;
     cursor: pointer;

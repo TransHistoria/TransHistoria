@@ -25,18 +25,7 @@ def people(request):
     return render(request, 'archives_field.html', {'tag': '人物'})
 
 def theory(request):
-    concept_nodes = HistoryNode.objects.all().filter(tag='理论')
-    default_fontsize = 25
-    concept_nodes_json = [
-        {
-            "id": node.id,
-            "title": node.title,
-            "con": node.con,
-            "fontsize": default_fontsize,
-        }
-        for node in concept_nodes
-    ]
-    return render(request, 'theory.html', {'concept_nodes_json': concept_nodes_json})
+    return render(request, 'theory.html')
 
 def gallery(request):
     return render(request, 'archives_field.html', {'tag': '艺术'})
