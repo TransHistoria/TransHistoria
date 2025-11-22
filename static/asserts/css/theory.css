@@ -9,11 +9,6 @@ body {
 	background-size: cover;
 }
 
-.theory-container {
-    display: flex;
-    flex-direction: column;
-}
-
 .blackboard {
 	position: relative;
     width: 90%;
@@ -51,6 +46,7 @@ body {
 	position: absolute;
 	width: 100%;
 	height: 100%;
+    padding-top: 10px;
 	background-image: linear-gradient(
 			175deg,
 			transparent,
@@ -76,7 +72,12 @@ body {
 	font-size: 2.2em;
 	color: rgb(255, 255, 255);
 	text-align: center;
-	padding-top: 20px;
+}
+
+#concept_cloud {
+    height: 100%;
+    width: 100%;
+    margin-top: 50px;
 }
 
 .form {
@@ -118,4 +119,19 @@ body {
 
 .stickynote-link {
     font-size: 10px;
+}
+
+/* 橡皮擦 */
+#eraser {
+    position: absolute;
+    width: 50px;
+    height: 50px;
+    bottom: 10px;
+    right: 10px;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.3s;
+}
+#eraser:hover {
+    opacity: 1;
 }

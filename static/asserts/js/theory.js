@@ -141,8 +141,10 @@ function get_concept_content(id) {
         .catch(err => console.error("Error fetching history node:", err));
 }
 document.addEventListener('DOMContentLoaded', () => {
+    const cloud = document.getElementById('concept_cloud')
+    const blackboard = document.querySelector('.blackboard');
     WordCloud(
-        document.getElementById('concept_cloud'),
+        cloud,
         {
             list: concepts,
             fontFamily: "チョークS, 楷体",
@@ -160,6 +162,9 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     );
+    cloud.style.position = "relative";
+    cloud.style.backgroundColor = "transparent"; // 设置背景颜色为透明
+    blackboard.style.height = cloud.offsetHeight + 80 + "px";
 });
 
 // 拖动便利贴时的抓取动画
@@ -207,3 +212,10 @@ function releaseNoteAnimation(target) {
     timeline.play();
 }
 
+document.getElementById("eraser").addEventListener("click", function() {
+    const stickynotes = document.querySelectorAll(".stickynote");
+    stickynotes.forEach(function(note) {
+        note.remove();
+        }
+    );
+});

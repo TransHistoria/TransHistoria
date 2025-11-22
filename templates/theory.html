@@ -12,9 +12,10 @@
 {% endblock %}
 
 {% block main %}
-<div class="theory-container">
-    <div id="board">
-        <div class="blackboard" id="concept_cloud"></div>
+<div id="board">
+    <div class="blackboard">
+        <div id="concept_cloud"></div>
+        <img src="{% static 'asserts/images/eraser.png' %}" id="eraser" alt="">
     </div>
 </div>
 <script>
