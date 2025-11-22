@@ -4,116 +4,22 @@
 
 {% block extra_head %}
 <script src="{% static 'asserts/js/wordcloud2.js' %}" defer></script>
-<!-- <script src="{% static 'asserts/js/theory.js' %}" defer></script> -->
-<style>
-    .theory-container {
-        display: flex;
-        flex-direction: column;
-        margin-top: 20px;
-    }
-    #concept_cloud {
-        width: 100%;
-        height: 400px;
-    }
-    #concept_description {
-        margin-top: 20px;
-        padding: 15px;
-    }
-    #concept_details {
-        display: none;
-    }
-</style>
+<link href="{% static 'asserts/css/theory.css' %}" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/Draggable.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/InertiaPlugin.min.js"></script>
+<script src="{% static 'asserts/js/theory.js' %}" defer></script>
 {% endblock %}
 
 {% block main %}
-<div class="theory-container">
-    <div id="concept_cloud"></div>
-    <div id="concept_description">
-        <h2 id="concept_title"></h2>
-        <p id="concept_content"></p>
-        <a id="concept_details">了解更多 →</a>
+<div id="board">
+    <div class="blackboard">
+        <div id="concept_cloud"></div>
+        <img src="{% static 'asserts/images/eraser.png' %}" id="eraser" alt="">
     </div>
 </div>
-
 <script>
-    const concept_ids = "{{ concept_ids|safe }}" || [];
-    const concepts =  eval(concept_ids);
-    const concepts_size = [
-        ["社会性别",35],
-        ["指派性别",25],
-        ["性/别",25],
-        ["性别认同",30],
-        ["性别表达",25],
-        ["性别规范",25],
-        ["性别期待",25],
-        ["性别焦虑",25],
-        ["性别过渡",30],
-        ["性身份障碍&易性证",25],
-        ["HRT",25],
-        ["SRS",25],
-        ["疾病&障碍&失能",25],
-        ["典型性",25],
-        ["多样性",25],
-        ["操演性",25],
-        ["可哀悼性",25],
-        ["权力",30],
-        ["强奸罪",25],
-        ["性交易",25],
-        ["暴力",25],
-        ["交叉性",25],
-        ["性别框架",25],
-        ["恐跨",30],
-        ["自我形象",25],
-        ["固有偏好",25],
-        ["身体情感",25],
-        ["Transgender",35],
-        ["Queer",25],
-        ["Intersex",25],
-        ["Woman",25],
-        ["ASD",25],
-        ["ADHD",25],
-        ["ND",25],
-        ["ADD",25],
-        ["TERF",30]
-    ];
-    for (let i = 0; i < concepts.length; i++) {
-        for (let j = 0; j < concepts_size.length; j++) {
-            if (concepts[i][0] === concepts_size[j][0]) {
-                concepts[i][1] = concepts_size[j][1];
-                break;
-            }
-        }
-    }
-    function get_concept_content(id) {
-        fetch(`/api/historynode/${id}/`)
-            .then(response => response.json())
-            .then(data => {
-                const aElem = document.getElementById("concept_details");
-                document.getElementById('concept_title').innerText = data.title;
-                document.getElementById('concept_content').innerHTML = data.con || "";
-                
-                if (data.details) {
-                    aElem.style.display = "block";
-                    aElem.href = `/archives/node/${data.id}`;
-                }
-                else {
-                    aElem.style.display = "none";
-                }
-            })
-            .catch(err => console.error("Error fetching history node:", err));
-    }
-    document.addEventListener('DOMContentLoaded', () => {
-        WordCloud(
-            document.getElementById('concept_cloud'),
-            {
-                list: concepts,
-                rotationSteps: 2,
-                click: function(item) {
-                    document.getElementById('concept_title').innerText = item[0];
-                    get_concept_content(item[2]);
-                }
-            }
-        );
-    });
+    const concept_nodes_json = "{{ concept_nodes_json|safe }}" || [];
+    const concepts =  eval(concept_nodes_json);
 </script>
 {% endblock %}
