@@ -29,10 +29,10 @@ def theory(request):
     default_fontsize = 25
     concept_nodes_json = [
         {
-            'id': node.id,
-            'title': node.title,
-            'con': node.con,
-            'fontsize': default_fontsize,
+            "id": node.id,
+            "title": node.title,
+            "con": node.con,
+            "fontsize": default_fontsize,
         }
         for node in concept_nodes
     ]
