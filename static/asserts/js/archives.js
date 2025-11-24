@@ -31,16 +31,14 @@ function createColumns(count) {
 function appendNode(node) {
     const nodeElem = document.createElement('div');
     nodeElem.className = 'node';
-    var imgsrc;
+    var img = ``;
     if (node.cover){
-        imgsrc = `/media/${node.cover}`;
-    } else {
-        const randomNumber = Math.floor(Math.random() * 7) + 1;
-        imgsrc = `\"/static/asserts/images/index/${randomNumber}.jpg\"`;
+        const imgsrc = `/media/${node.cover}`;
+        img = `<img src=${imgsrc} alt=\"${node.title}\">`;
     }
     nodeElem.innerHTML = `
         <a href=\"/archives/node/${node.id}\">
-            <img src=${imgsrc} alt=\"${node.title}\">
+            ${img}
             <div class=\"node-body\">
                 <h2>${node.title}</h2>
                 <p>${node.con}</p>
