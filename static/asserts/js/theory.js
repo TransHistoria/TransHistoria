@@ -75,6 +75,7 @@ function get_concept_content(id) {
     sticky.appendChild(content);
     const aElem = document.createElement("a"); 
     aElem.textContent = "深入了解→";
+    aElem.target = "_blank";
     aElem.classList.add("stickynote-link");
     sticky.appendChild(aElem);
     if (data.details) {

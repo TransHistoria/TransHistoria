@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}光谱历史-历史馆{% endblock %}
+{% block extra_head %}
+<link href="{% static 'asserts/css/gallery.css' %}" rel="stylesheet" />
+<script src="{% static 'asserts/js/gallery.js' %}" defer></script>
+{% endblock %}
+
+{% block main %}
+
+<button class="js-toggle-fullscreen-btn toggle-fullscreen-btn" aria-label="Enter fullscreen mode" hidden>
+    <svg class="toggle-fullscreen-svg" width="28" height="28" viewBox="-2 -2 28 28">
+        <g class="icon-fullscreen-enter">
+            <path d="M 2 9 v -7 h 7" />
+            <path d="M 22 9 v -7 h -7" />
+            <path d="M 22 15 v 7 h -7" />
+            <path d="M 2 15 v 7 h 7" />
+        </g>
+        <g class="icon-fullscreen-leave">
+            <path d="M 24 17 h -7 v 7" />
+            <path d="M 0 17 h 7 v 7" />
+            <path d="M 0 7 h 7 v -7" />
+            <path d="M 24 7 h -7 v -7" />
+        </g>
+    </svg>
+</button>
+
+<div class="gallery-container">
+    <div class="gallery"></div>
+</div>
+
+{% endblock %}

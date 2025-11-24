@@ -43,6 +43,11 @@ def get_theory_nodes(request):
     data = list(records.values())  # 转为dict列表返回
     return JsonResponse(data, safe=False)
 
+def get_gallery_nodes(request):
+    records = HistoryNode.objects.all().filter(tag="作品").order_by('-created_at')
+    data = list(records.values())  # 转为dict列表返回
+    return JsonResponse(data, safe=False)
+
 def get_timeline(request):
     records = HistoryNode.objects.all().filter(tag="事件").order_by('time')
     data = list(records.values())  # 转为dict列表返回

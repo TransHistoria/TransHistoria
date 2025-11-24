@@ -28,6 +28,7 @@ urlpatterns = [
     path('api/historynode/<int:pk>/', node.historynode_api, name='historynode_api'),
     path('api/get_historynodes/', node.get_historynodes, name='search_historynodes_api'),
     path('api/get_theory_nodes/', node.get_theory_nodes, name='get_theory_nodes_api'),
+    path('api/get_gallery_nodes/', node.get_gallery_nodes, name='get_gallery_nodes_api'),
     path('api/get_timeline/', node.get_timeline, name='get_timeline_api'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
