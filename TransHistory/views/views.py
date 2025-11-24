@@ -28,7 +28,7 @@ def theory(request):
     return render(request, 'theory.html')
 
 def gallery(request):
-    return render(request, 'archives_field.html', {'tag': '艺术'})
+    return render(request, 'gallery.html')
 
 def archives(request):
     input = request.GET.get('input')
