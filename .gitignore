@@ -14,3 +14,9 @@ yarn.lock
 
 # container
 /container
+
+# media
+/media
+
+# database
+/db.sqlite3
