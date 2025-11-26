@@ -1,0 +1,209 @@
+/* 浮动工具栏样式 */
+.ce-floating-toolbar {
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    z-index: 1000;
+    font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+    transition: all 0.3s ease;
+}
+
+.floating-toolbar-content {
+    display: flex;
+    flex-direction: row;
+    padding: 10px 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f7f9fb 100%);
+    border-radius: 8px;
+    box-shadow: 0 8px 32px rgba(16, 24, 40, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    align-items: center;
+    animation: slideInUp 0.3s ease;
+    position: relative;
+}
+
+.ce-floating-toolbar.collapsed .floating-toolbar-content {
+    display: none;
+}
+
+.ce-floating-toolbar.collapsed::after {
+    content: '▲ 工具栏';
+    position: fixed;
+    left: 50%;
+    bottom: 20px;
+    transform: translateX(-50%);
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #ffffff 0%, #f7f9fb 100%);
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    border-radius: 8px;
+    font-size: 14px;
+    cursor: pointer;
+    box-shadow: 0 8px 32px rgba(16, 24, 40, 0.15);
+    color: #666;
+}
+
+@keyframes slideInUp {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* 分隔线（纵向） */
+.floating-divider-vertical {
+    width: 1px;
+    height: 24px;
+    background: linear-gradient(180deg, transparent, rgba(16, 24, 40, 0.1), transparent);
+    margin: 0 4px;
+}
+
+/* 按钮 */
+.floating-btn {
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #e6eef6;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: #333;
+    height: 32px;
+}
+
+.floating-btn:hover {
+    background: #f5f7fa;
+    border-color: #0b74ff;
+    color: #0b74ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 116, 255, 0.1);
+}
+
+.floating-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(11, 116, 255, 0.1);
+}
+
+/* 文件上传按钮 */
+.floating-file-btn input[type="file"] {
+    display: none;
+}
+
+.floating-file-btn {
+    padding: 8px 14px;
+    background: #fff;
+    border: 1px solid #e6eef6;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    color: #333;
+    height: 32px;
+    margin: 0;
+}
+
+.floating-file-btn:hover {
+    background: #f5f7fa;
+    border-color: #0b74ff;
+    color: #0b74ff;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(11, 116, 255, 0.1);
+}
+
+.floating-file-btn:active {
+    transform: translateY(0);
+    box-shadow: 0 2px 4px rgba(11, 116, 255, 0.1);
+}
+
+/* 最小化按钮 */
+.floating-collapse-btn {
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: #fff;
+    border: 1px solid #e6eef6;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+    color: #666;
+    flex-shrink: 0;
+}
+
+.floating-collapse-btn:hover {
+    background: #f5f7fa;
+    border-color: #0b74ff;
+    color: #0b74ff;
+}
+
+/* 响应式设计 */
+@media (max-width: 1200px) {
+    .floating-toolbar-content {
+        padding: 8px 12px;
+    }
+    
+    .floating-btn,
+    .floating-file-btn {
+        padding: 6px 10px;
+        font-size: 13px;
+    }
+}
+
+@media (max-width: 768px) {
+    .ce-floating-toolbar {
+        left: auto;
+        right: 10px;
+        bottom: 10px;
+        transform: none;
+    }
+
+    .floating-toolbar-content {
+        flex-direction: row;
+        padding: 8px 10px;
+        max-width: calc(100vw - 30px);
+        overflow-x: auto;
+    }
+
+    .floating-btn,
+    .floating-file-btn {
+        padding: 6px 10px;
+        font-size: 12px;
+        min-width: auto;
+    }
+}
+
+/* 滚动条样式 */
+.floating-toolbar-content::-webkit-scrollbar {
+    height: 4px;
+}
+
+.floating-toolbar-content::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.floating-toolbar-content::-webkit-scrollbar-thumb {
+    background: rgba(16, 24, 40, 0.15);
+    border-radius: 2px;
+}
+
+.floating-toolbar-content::-webkit-scrollbar-thumb:hover {
+    background: rgba(16, 24, 40, 0.25);
+}

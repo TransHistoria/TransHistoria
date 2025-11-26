@@ -1,0 +1,49 @@
+<div class="ce-toolbar" role="toolbar" aria-label="Collage editor toolbar">
+
+  <div class="ce-group">
+    <div style="display:flex;gap:6px;align-items:center;margin-left:8px">
+      <label style="font-size:12px;color:var(--muted);margin-right:6px">画布尺寸:</label>
+      <select id="canvas-size-presets"
+        style="width:180px;padding:6px;border-radius:6px;border:1px solid #e6eef6;background:#fff">
+        <option value="auto">自动（不修改）</option>
+        <option value="360x800">手机 - 360 × 800</option>
+        <option value="800x360">手机 横向 - 800 × 360</option>
+        <option value="768x1024">平板 - 768 × 1024</option>
+        <option value="1024x768">平板 横向 - 1024 × 768</option>
+        <option value="1024x768">Web 小 - 1024 × 768</option>
+        <option value="1366x768">Web 中 - 1366 × 768</option>
+        <option value="1920x1080">Web 大 - 1920 × 1080</option>
+      </select>
+      <button class="ce-btn" data-action="set-canvas-size" title="设置画布大小">应用尺寸</button>
+    </div>
+  </div>
+
+  <div class="ce-group">
+    <select class="ce-select" data-action="fill-mode" title="填充模式">
+      <option value="cover">Cover</option>
+      <option value="contain">Contain</option>
+      <option value="fill">Fill</option>
+      <option value="center">Center</option>
+    </select>
+    <div style="display:flex;gap:6px;align-items:center;margin-left:10px">
+      <label style="font-size:12px;color:var(--muted);">分割线:</label>
+      <input type="number" id="splitter-width" placeholder="宽(px)" style="width:70px" />
+      <input type="color" id="splitter-color" value="#e6eef6"
+        style="width:44px;height:28px;padding:0;border:none;background:transparent;" />
+      <button class="ce-btn" data-action="set-splitter-config" title="设置分割线">设置</button>
+    </div>
+    <button class="ce-btn primary" data-action="export" title="预览拼图">预览</button>
+    <!-- 本地调试 -->
+    <button class="floating-btn" data-action="save" title="本地调试">本地调试</button>
+    <!-- 保存到服务器 -->
+    <button class="floating-btn" data-action="save-to-server" title="保存到服务器">保存</button>
+
+    <!-- 加载 -->
+    <label class="floating-file-btn">
+      <input type="file" accept=".json" id="load-json-input" />
+      加载
+    </label>
+    <!-- 关闭 -->
+    <a href="{% url 'dashboard' %}" class="floating-btn close-btn" title="关闭编辑器">关闭</a>
+  </div>
+</div>

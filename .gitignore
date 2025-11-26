@@ -1,9 +1,18 @@
 # virtualenv
 /.run
+/.vscode
 
 # python cache
 __pycache__
 *.pyc
 
 # container
+/container
+
+# media
+/media
+
+# database
+/db.sqlite3
+
 /container/data

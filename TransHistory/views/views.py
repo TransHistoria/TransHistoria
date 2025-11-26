@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.shortcuts import get_object_or_404
 from ..models import HistoryNode
+from django.contrib.auth.decorators import login_required
 # Create your views here.
 
 def index_A(request):
@@ -22,7 +23,7 @@ def timepoint(request, uuid, mkdoc_path):
     return render(request, 'detail.html', {'basePath': f"/media/mkdocs/{uuid}/", 'homepage': mkdoc_path})
 
 def people(request):
-    return render(request, 'archives_field.html', {'tag': '人物'})
+    return render(request, 'people.html')
 
 def theory(request):
     return render(request, 'theory.html')
@@ -47,3 +48,11 @@ def about_submission(request):
 def dlog(request):
     dlogs = HistoryNode.objects.all().filter(tag='Devlog').order_by('-created_at')
     return render(request, 'dlog.html', {'dlogs':dlogs})
+
+def dashboard(request):
+    return render(request, 'dashboard.html')
+
+@login_required
+def collage_editor(request):
+    page = request.GET.get('page', 'index')
+    return render(request, 'collage_editor.html', {'page': page})
