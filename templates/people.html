@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}人物史 - TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/people.css' %}" rel="stylesheet" />
+
+{% endblock %}
+
+{% block main %}
+<div class="people-container">
+  <div class="collage-container" id="collage-container">
+    <!-- 拼贴画内容将通过JavaScript动态生成 -->
+    <div class="loading-indicator">
+      <div class="spinner"></div>
+      <p>正在加载人物数据...</p>
+    </div>
+  </div>
+</div>
+<script src="{% static 'asserts/js/people.js' %}"></script>
+{% endblock %}

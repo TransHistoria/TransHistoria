@@ -7,7 +7,6 @@ from ..models import HistoryNode, Contributor
 from django import forms
 from martor.fields import MartorFormField
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.decorators import login_required
 
 
 class TestForm(forms.Form):

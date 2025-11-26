@@ -1,5 +1,6 @@
 # virtualenv
 /.run
+/.vscode
 
 # python cache
 __pycache__

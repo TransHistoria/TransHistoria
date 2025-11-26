@@ -12,6 +12,7 @@
   <h2>用户登录</h2>
   <form method="post">
     {% csrf_token %}
+    <input type="hidden" name="next" value="{% url 'dashboard' %}">
     {{ form.non_field_errors }}
     <div>
       {{ form.username.errors }}

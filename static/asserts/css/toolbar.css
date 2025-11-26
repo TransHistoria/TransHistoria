@@ -1,0 +1,40 @@
+.ce-toolbar {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  padding: 10px;
+  background: linear-gradient(180deg, #ffffff, #f7f9fb);
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(16,24,40,0.06);
+  font-family: Inter, system-ui, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  margin: 12px;
+}
+.ce-group { display: flex; gap: 8px; align-items:center; }
+.ce-btn {
+  background: #fff;
+  border: 1px solid #e6eef6;
+  padding: 6px 10px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+}
+.ce-btn.primary {
+  background: #0b74ff;
+  color: #fff;
+  border-color: #0b74ff;
+}
+.ce-btn:active { transform: translateY(1px); }
+.ce-select {
+  padding: 6px;
+  border-radius: 6px;
+  border: 1px solid #e6eef6;
+  background: #fff;
+}
+.ce-file input[type="file"] { display: none; }
+.ce-file {
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  border: 1px solid #e6eef6;
+  background: #fff;
+}

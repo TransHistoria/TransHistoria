@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Collage Editor</title>
+  <link rel="stylesheet" href="{% static 'asserts/css/collage_editor.css' %}" />
+  <link rel="stylesheet" href="{% static 'asserts/css/toolbar.css' %}" />
+  <link rel="stylesheet" href="{% static 'asserts/css/floating_toolbar.css' %}" />
+  <style>
+    /* 加载动画样式 */
+    .loading-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(255, 255, 255, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+      transition: opacity 0.3s ease;
+    }
+
+    .loading-spinner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 5px solid #f3f3f3;
+      border-top: 5px solid #0b74ff;
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .loading-spinner p {
+      margin: 0;
+      color: #666;
+      font-size: 16px;
+    }
+
+    /* 加载完成后隐藏动画 */
+    .loading-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+  <!-- 加载动画遮罩 -->
+  <div id="loading-overlay" class="loading-overlay">
+    <div class="loading-spinner">
+      <div class="spinner"></div>
+      <p>正在加载拼贴画数据...</p>
+    </div>
+  </div>
+
+  <div id="app">
+    <div id="toolbar">
+      {% include "toolbar.html" %}
+    </div>
+    <div id="canvas-wrapper">
+      <div id="canvas" tabindex="0"></div>
+    </div>
+    <div id="canvas-controls" aria-hidden="false">
+      <div class="canvas-controls-inner">
+        <button id="canvas-increase" class="ce-btn">＋ 增加高度（+50%）</button>
+        <button id="canvas-decrease" class="ce-btn">－ 减少高度（-50%）</button>
+        <span style="margin-left: 20px; color: #666; font-size: 14px;">缩放:</span>
+        <input type="range" id="canvas-zoom" min="25" max="200" value="100" style="width: 120px; margin: 0 8px;">
+        <span id="zoom-percent" style="color: #666; font-size: 14px; min-width: 40px;">100%</span>
+        <button id="canvas-zoom-fit" class="ce-btn" style="margin-left: 12px;">适应窗口</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 浮动工具栏 -->
+  <div id="floating-toolbar">
+    {% include "floating_toolbar.html" %}
+  </div>
+
+  <script>
+    // 将page参数传递给JavaScript
+    window.pageType = "{{ page|default:'index' }}";
+    // 设置API基础URL
+    window.apiBaseUrl = "/api";
+  </script>
+  <script src="{% static 'asserts/js/collage_editor/collage_editor.js' %}"></script>
+  <script src="{% static 'asserts/js/collage_editor/toolbar.js' %}"></script>
+  <script src="{% static 'asserts/js/collage_editor/floating_toolbar.js' %}"></script>
+  <script src="{% static 'asserts/js/collage_editor/persistence.js' %}"></script>
+  <script src="{% static 'asserts/js/collage_editor/regions.js' %}"></script>
+  <script>
+    // 页面加载完成后自动加载对应的JSON文件
+    document.addEventListener('DOMContentLoaded', async () => {
+      // 获取加载动画元素
+      const loadingOverlay = document.getElementById('loading-overlay');
+
+      try {
+        const pageType = window.pageType || 'index';
+        const response = await fetch(`${window.apiBaseUrl}/load_collage/?page=${pageType}`);
+
+        if (response.ok) {
+          const data = await response.json();
+          if (data.success && data.content) {
+            // 创建一个虚拟的File对象，然后使用现有的导入功能
+            const blob = new Blob([data.content], { type: 'application/json' });
+            const file = new File([blob], `${pageType}.json`, { type: 'application/json' });
+
+            // 使用CESave的导入功能
+            if (window.CESave && window.CESave.importStateFromJSON) {
+              await window.CESave.importStateFromJSON(file);
+              console.log(`已成功加载 ${pageType} 页面的拼贴画数据`);
+            }
+          } else {
+            console.log(`没有找到 ${pageType} 页面的拼贴画数据，将使用空白画布`);
+          }
+        } else {
+          console.log(`加载 ${pageType} 页面的拼贴画数据失败，将使用空白画布`);
+        }
+      } catch (error) {
+        console.error('加载拼贴画数据时出错:', error);
+      } finally {
+        // 无论成功或失败，都隐藏加载动画
+        if (loadingOverlay) {
+          loadingOverlay.classList.add('hidden');
+          // 延迟移除元素，确保过渡动画完成
+          setTimeout(() => {
+            loadingOverlay.style.display = 'none';
+          }, 300);
+        }
+      }
+    });
+  </script>
+</body>
+</html>

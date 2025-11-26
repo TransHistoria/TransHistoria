@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}操作台 - TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/dashboard.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<div class="dashboard-container">
+  <h1>操作台</h1>
+  <p>欢迎回来，{{ user.username }}！</p>
+
+  <div class="action-cards">
+    <div class="action-card">
+      <div class="card-icon">
+        <i class="icon-document"></i>
+      </div>
+      <h3>提交资料</h3>
+      <p>提交新的历史资料和内容</p>
+      <a href="{% url 'submit' %}" class="btn">提交资料</a>
+    </div>
+
+    <div class="action-card">
+      <div class="card-icon">
+        <i class="icon-collage"></i>
+      </div>
+      <h3>编辑首页拼图（大）</h3>
+      <p>编辑网站首页的拼贴画布局</p>
+      <a href="{% url 'collage_editor' %}?page=index" class="btn">编辑首页拼图</a>
+    </div>
+
+    <div class="action-card">
+      <div class="card-icon">
+        <i class="icon-collage"></i>
+      </div>
+      <h3>编辑首页拼图（小）</h3>
+      <p>编辑网站首页的拼贴画布局，适应手机</p>
+      <a href="{% url 'collage_editor' %}?page=index_mobile" class="btn">编辑首页拼图</a>
+    </div>
+
+    <div class="action-card">
+      <div class="card-icon">
+        <i class="icon-collage"></i>
+      </div>
+      <h3>编辑人物页拼图（大）</h3>
+      <p>编辑人物页面的拼贴画布局</p>
+      <a href="{% url 'collage_editor' %}?page=people" class="btn">编辑人物页拼图</a>
+    </div>
+
+    <div class="action-card">
+      <div class="card-icon">
+        <i class="icon-collage"></i>
+      </div>
+      <h3>编辑人物页拼图（小）</h3>
+      <p>编辑人物页面的拼贴画布局，适应手机</p>
+      <a href="{% url 'collage_editor' %}?page=people_mobile" class="btn">编辑人物页拼图</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
