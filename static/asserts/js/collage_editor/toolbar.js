@@ -81,6 +81,42 @@
       dispatchAction('set-splitter-config', { width, color });
       return;
     }
+    if (action === 'initialize') {
+      // 显示确认对话框
+      if (confirm('确定要初始化画布吗？这将清空所有内容并重置为当前尺寸设置。')) {
+        // 获取当前画布尺寸设置
+        const sel = container.querySelector('#canvas-size-presets');
+        let width = null, height = null;
+        if (sel && sel.value && sel.value !== 'auto') {
+          const parts = sel.value.split('x');
+          if (parts.length === 2) {
+            width = parseInt(parts[0], 10);
+            height = parseInt(parts[1], 10);
+          }
+        }
+
+        // 清空画布并重置区域ID
+        if (window.CERegions) {
+          // 获取当前画布元素
+          const canvas = document.getElementById('canvas');
+          if (canvas) {
+            // 创建新的根区域
+            window.CERegions.createRoot();
+
+            // 应用画布尺寸
+            if (width && height) {
+              dispatchAction('set-canvas-size', { width, height });
+            }
+
+            // 显示初始化成功消息
+            alert('画布已成功初始化！');
+          }
+        } else {
+          alert('无法初始化画布，请刷新页面后重试。');
+        }
+      }
+      return;
+    }
     dispatchAction(action);
   });
 

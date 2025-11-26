@@ -41,6 +41,9 @@
 
   function createRoot(){
     canvas.innerHTML='';
+    idCounter = 1;
+    regions.clear();
+    selectedId = null;
     const rootId = String(idCounter++);
     const root = createRegionElement(rootId);
     root.style.width='100%';
@@ -69,9 +72,6 @@
     const a = createRegionElement(aId);
     const b = createRegionElement(bId);
 
-    a.style.flex='1 1 0%';
-    b.style.flex='1 1 0%';
-
     const splitter = document.createElement('div');
     splitter.className = 'splitter ' + (dir==='vertical'?'vertical':'horizontal');
     splitter.innerHTML='<div class="handle"></div>';
@@ -82,7 +82,7 @@
     container.appendChild(splitter);
     container.appendChild(b);
 
-    initSplitter(splitter, container, a, b, dir);
+    initSplitter(splitter, container, dir);
 
     const meta = regions.get(String(id));
     if(meta && meta.image) attachImageToRegion(aId, meta.image.src, meta.fillMode);
@@ -91,7 +91,7 @@
     return {aId,bId};
   }
 
-  function initSplitter(splitter, container, a, b, dir){
+  function initSplitter(splitter, container, dir){
     let dragging=false, startPos=0, startFlexA=1, startFlexB=1, pointerId=null;
 
     const handleMove = ev=>{
@@ -106,6 +106,8 @@
       const minFlex=0.1;
       if(newFlexA<minFlex) newFlexA=minFlex;
       if(newFlexB<minFlex) newFlexB=minFlex;
+      const a = splitter.previousElementSibling;
+      const b = splitter.nextElementSibling;
       a.style.flex=`${newFlexA} 1 0%`;
       b.style.flex=`${newFlexB} 1 0%`;
     };
@@ -126,8 +128,11 @@
       dragging=true;
       pointerId=ev.pointerId;
       splitter.setPointerCapture(pointerId);
+      const a = splitter.previousElementSibling;
+      const b = splitter.nextElementSibling;
       const aStyle = window.getComputedStyle(a);
       const bStyle = window.getComputedStyle(b);
+      console.debug && console.debug('CE splitter', container, a, b);
       startFlexA=parseFloat(aStyle.flexGrow)||1;
       startFlexB=parseFloat(bStyle.flexGrow)||1;
       startPos = dir==='vertical'?ev.clientX:ev.clientY;
