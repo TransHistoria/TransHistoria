@@ -241,7 +241,7 @@
 
                     // Initialize splitter drag behavior
                     try {
-                        window.CERegions.initSplitterForReconstructed(splitter, container, childA, childB, node.dir);
+                        window.CERegions.initSplitterForReconstructed(splitter, container, node.dir);
                     } catch (err) {
                         console.warn('Failed to init splitter:', err);
                     }
