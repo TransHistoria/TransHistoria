@@ -97,6 +97,7 @@ img {
 .info-card.visible {
   opacity: 1;
   display: flex;
+  pointer-events: n;
 }
 
 .info-card h3 {
