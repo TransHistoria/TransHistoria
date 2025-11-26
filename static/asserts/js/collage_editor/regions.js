@@ -217,7 +217,7 @@
   function removeImageFromRegion(id){
     const meta = regions.get(String(id));
     if(!meta) return;
-    if(meta.imgEl){ meta.imgEl.remove(); meta.imgEl=null; meta.image=null; }
+    if(meta.imgEl){ meta.imgEl.remove(); meta.imgEl=null; meta.image=null; meta.nodeId=null; }
     if(!meta.el.querySelector('.placeholder')){
       const ph = document.createElement('div');
       ph.className='placeholder';

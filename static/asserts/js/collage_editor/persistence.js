@@ -52,6 +52,11 @@
 
         if (el.classList.contains('split')) {
             const dir = el.classList.contains('vertical') ? 'vertical' : 'horizontal';
+            const cs = window.getComputedStyle(el);
+            const flexGrow = parseFloat(cs.flexGrow) || 1;
+            const flexShrink = parseFloat(cs.flexShrink) || 1;
+            const flexBasis = cs.flexBasis || '0%';
+
             const children = [];
             for (const child of el.children) {
                 if (child.classList.contains('region')) {
@@ -66,6 +71,11 @@
             return {
                 type: 'split',
                 dir,
+                flex: {
+                    grow: flexGrow,
+                    shrink: flexShrink,
+                    basis: flexBasis
+                },
                 children // [childA, childB] or nested splits, excluding splitters
             };
         }
@@ -221,7 +231,13 @@
             container.style.height = '100%';
             container.style.minWidth = '0';
             container.style.minHeight = '0';
-            container.style.flex = '1 1 0%';
+
+            // 使用保存的flex属性，如果没有保存则使用默认值
+            if (node.flex) {
+                container.style.flex = `${node.flex.grow || 1} ${node.flex.shrink || 1} ${node.flex.basis || '0%'}`;
+            } else {
+                container.style.flex = '1 1 0%';
+            }
 
             // node.children should have exactly 2 items (pane A and pane B, which can themselves be regions or splits)
             if (node.children && node.children.length >= 2) {
