@@ -1,0 +1,18 @@
+# virtualenv
+/.run
+
+# python cache
+__pycache__
+*.pyc                                                                                                                                                                                                                                                                          
+
+# container
+/container
+
+# git
+/.git
+/.gitignore
+/.github
+
+# dockerfile itself
+/.dockerignore
+/Dockerfile

@@ -1,0 +1,16 @@
+services:
+  app:
+    image: "ghcr.io/transhistoria/transhistoria:latest"
+    container_name: "transhistoria"
+    pull_policy: always
+    ports:
+      - "127.0.0.1:8000:8000"
+    volumes:
+      - ./data/db.sqlite3:/opt/db.sqlite3
+      - ./data/media/:/opt/media/
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://127.0.0.1:8000/ || exit 1"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
