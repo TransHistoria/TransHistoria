@@ -3,16 +3,34 @@
 {% block title %}光谱历史-主页{% endblock %}
 
 {% block extra_head %}
+<link href="{% static 'asserts/css/collage.css' %}" rel="stylesheet" />
 <link href="{% static 'asserts/css/index.css' %}" rel="stylesheet" />
 {% endblock %}
 
 {% block main %}
-<div class="top">
-  <div class="title">
-    <p class="title-2">Transgender's History</p>
-    <p class="title-1">跨性别历史</p>
-    <p class="title-2">我们的历史，我们的声音</p>
-    <a href="/history/timeline">进入时间线</a>
+<div class="index-container" id="index-container">
+  <div class="collage-container" id="collage-container">
+    <!-- 拼贴画内容将通过JavaScript动态生成 -->
+    <div class="loading-indicator">
+      <div class="spinner"></div>
+      <p>正在加载历史数据...</p>
+    </div>
+  </div>
+  <div class="top" id="top-element">
+    <div class="title">
+      <p class="title-2">Transgender's History</p>
+      <p class="title-1">跨性别历史</p>
+      <p class="title-2">我们的历史，我们的声音</p>
+      <a href="/history/timeline">进入时间线</a>
+    </div>
   </div>
 </div>
+<script src="{% static 'asserts/js/collage_editor/render.js' %}"></script>
+<script src="{% static 'asserts/js/index-scroll.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    initPage('/api/get_historynodes/', 'index', true, 1.5, 'outer', true);
+    initScrollEffect();
+  });
+</script>
 {% endblock %}

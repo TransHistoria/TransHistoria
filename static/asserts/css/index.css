@@ -1,31 +1,37 @@
 main.container {
     width: 100%;
-    height: 100vh;
-    background-image: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.7)), url('../images/index_backgroung.jpg');
+    min-height: auto;
     background-position: center;
     background-size: cover;
-    padding-left: 8%;
-    padding-right: 8%;
     box-sizing: border-box;
     background-repeat: no-repeat;
 }
 
 
 header {
-    background: none;
+    position: relative;
     backdrop-filter: blur(0px);
+    z-index: 100;
 }
 
 .top {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.4);
     display: flex;
     align-items: center;
-    height: -webkit-fill-available;
+    z-index: 10;
+    transition: transform 0.3s ease-out;
 }
 
 .title {
     display: flex;
     flex-direction: column;
     margin-top: 20%;
+    margin-left: 10%;
     min-width: 300px;
     flex-shrink: 0;
 }
@@ -66,9 +72,6 @@ header {
 
 @media (max-width: 640px) {
 
-    .top {
-        justify-content: center;
-    }
     .title {
         align-items: center;
         margin-top: 50%;
