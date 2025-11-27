@@ -5,17 +5,24 @@
 {% block extra_head %}
 <link href="{% static 'asserts/css/collage.css' %}" rel="stylesheet" />
 <link href="{% static 'asserts/css/index.css' %}" rel="stylesheet" />
+<style>
+  .collage-container {
+    background-image: url('/media/config/images/index.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  @media (max-width: 640px) {
+    .collage-container {
+      background-image: url('/media/config/images/index_mobile.png');
+    }
+  }
+</style>
 {% endblock %}
 
 {% block main %}
 <div class="index-container" id="index-container">
-  <div class="collage-container" id="collage-container">
-    <!-- 拼贴画内容将通过JavaScript动态生成 -->
-    <div class="loading-indicator">
-      <div class="spinner"></div>
-      <p>正在加载历史数据...</p>
-    </div>
-  </div>
+  <div class="collage-container" id="collage-container"></div>
   <div class="top" id="top-element">
     <div class="title">
       <p class="title-2">Transgender's History</p>
