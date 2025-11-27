@@ -4,7 +4,7 @@
 {% block title %}人物史 - TransHistoria{% endblock %}
 
 {% block extra_head %}
-<link href="{% static 'asserts/css/people.css' %}" rel="stylesheet" />
+<link href="{% static 'asserts/css/collage.css' %}" rel="stylesheet" />
 
 {% endblock %}
 
@@ -18,5 +18,8 @@
     </div>
   </div>
 </div>
-<script src="{% static 'asserts/js/people.js' %}"></script>
+<script src="{% static 'asserts/js/collage_editor/render.js' %}"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => initPage('/api/get_people_nodes/', 'people'));
+</script>
 {% endblock %}
