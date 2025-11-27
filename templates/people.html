@@ -5,18 +5,24 @@
 
 {% block extra_head %}
 <link href="{% static 'asserts/css/collage.css' %}" rel="stylesheet" />
-
+<style>
+  .collage-container {
+    background-image: url('/media/config/images/people.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+  }
+  @media (max-width: 640px) {
+    .collage-container {
+      background-image: url('/media/config/images/people_mobile.png');
+    }
+  }
+</style>
 {% endblock %}
 
 {% block main %}
 <div class="people-container">
-  <div class="collage-container" id="collage-container">
-    <!-- 拼贴画内容将通过JavaScript动态生成 -->
-    <div class="loading-indicator">
-      <div class="spinner"></div>
-      <p>正在加载人物数据...</p>
-    </div>
-  </div>
+  <div class="collage-container" id="collage-container"></div>
 </div>
 <script src="{% static 'asserts/js/collage_editor/render.js' %}"></script>
 <script>

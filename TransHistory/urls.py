@@ -33,6 +33,7 @@ urlpatterns = [
     path('api/get_timeline/', node.get_timeline, name='get_timeline_api'),
     path('api/save_collage/', node.save_collage, name='save_collage_api'),
     path('api/load_collage/', node.load_collage, name='load_collage_api'),
+    path('api/upload_collage_image/', node.upload_collage_image, name='upload_collage_image_api'),
     path("login/", auth_views.LoginView.as_view(), name="login"),
     path("logout/", auth_views.LogoutView.as_view(), name="logout"),
     path("dashboard/", views.dashboard, name="dashboard"),

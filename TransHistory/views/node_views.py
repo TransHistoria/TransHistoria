@@ -122,3 +122,70 @@ def load_collage(request):
             }, status=500)
 
     return JsonResponse({'success': False, 'message': '仅支持GET请求'}, status=405)
+
+def upload_collage_image(request):
+    import os
+    from django.conf import settings
+    from django.core.files.storage import default_storage
+    from django.core.files.base import ContentFile
+    from django.http import JsonResponse
+    
+    if request.method == 'POST':
+        try:
+            # 获取上传的图片文件
+            if 'image' in request.FILES:
+                image = request.FILES['image']
+                
+                # 检查文件类型
+                image_types = [
+                    'image/png', 'image/jpg',
+                    'image/jpeg', 'image/pjpeg', 'image/gif'
+                ]
+                if image.content_type not in image_types:
+                    return JsonResponse({
+                        'status': 'error',
+                        'message': '不支持的图片格式'
+                    }, status=400)
+                
+                # 获取页面类型，如果没有则使用默认值
+                page_type = request.POST.get('page_type', 'default')
+                
+                # 生成文件名，不使用UUID，直接使用页面类型
+                filename = f"{page_type}.png"
+                
+                # 确保目录存在
+                upload_dir = os.path.join('config', 'images')
+                if not os.path.exists(os.path.join(settings.MEDIA_ROOT, upload_dir)):
+                    os.makedirs(os.path.join(settings.MEDIA_ROOT, upload_dir))
+                
+                # 文件路径
+                file_path = os.path.join(upload_dir, filename)
+
+                # 如果文件已存在，先删除
+                if default_storage.exists(file_path):
+                    default_storage.delete(file_path)
+
+                # 保存新文件
+                saved_path = default_storage.save(file_path, ContentFile(image.read()))
+                
+                # 返回成功响应
+                return JsonResponse({
+                    'status': 'success',
+                    'message': '图片上传成功',
+                    'path': os.path.join(settings.MEDIA_URL, saved_path)
+                })
+            else:
+                return JsonResponse({
+                    'status': 'error',
+                    'message': '没有找到图片文件'
+                }, status=400)
+        except Exception as e:
+            return JsonResponse({
+                'status': 'error',
+                'message': f'上传过程中出错: {str(e)}'
+            }, status=500)
+    
+    return JsonResponse({
+        'status': 'error', 
+        'message': '仅支持POST请求'
+    }, status=405)

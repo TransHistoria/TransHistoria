@@ -255,8 +255,6 @@ var allNodes = [];
       canvasEl.style.flex = '0 0 auto';
       // center canvas horizontally
       canvasEl.style.margin = '12px auto';
-    } else if (action === 'export') {
-      exportCanvasPNG();
     } else if (action === 'set-splitter-config') {
       const canvasEl = document.getElementById('canvas');
       if (!canvasEl) return;
@@ -298,168 +296,12 @@ var allNodes = [];
     }
   });
 
-  
-
   function readFileAsDataURL(file) {
     return new Promise((res, rej) => {
       const fr = new FileReader();
       fr.onload = () => res(fr.result);
       fr.onerror = rej;
       fr.readAsDataURL(file);
-    });
-  }
-
-  async function exportCanvasPNG() {
-    const canvasEl = document.createElement('canvas');
-    // use bounding box of canvas
-    const canvasRoot = document.getElementById('canvas');
-    const box = canvasRoot.getBoundingClientRect();
-
-    // 获取缩放比例
-    const cs = window.getComputedStyle(canvasRoot);
-    const scale = parseFloat(cs.getPropertyValue('--canvas-scale')) || 1;
-
-    // 计算实际尺寸（不受缩放影响）
-    canvasEl.width = Math.max(1, Math.floor(box.width / scale));
-    canvasEl.height = Math.max(1, Math.floor(box.height / scale));
-    const ctx = canvasEl.getContext('2d');
-    ctx.fillStyle = '#ffffff';
-    ctx.fillRect(0, 0, canvasEl.width, canvasEl.height);
-
-    // render recursively by walking DOM of canvasRoot
-    await drawElementToCanvas(canvasRoot, ctx, 0, 0, canvasEl.width, canvasEl.height);
-    // open in new tab
-    const url = canvasEl.toDataURL('image/png');
-    const w = window.open('');
-    w.document.write(`<img src="${url}" style="max-width:100%;">`);
-  }
-
-  async function drawElementToCanvas(el, ctx, offsetX, offsetY, w, h) {
-    // if it's a simple region with image draw it; else recurse into children
-    if (el.classList.contains('region') && el.dataset.regionId) {
-      const id = el.dataset.regionId;
-      const meta = window.CERegions.regionsMap.get(id);
-      const rect = el.getBoundingClientRect();
-      const parentRect = document.getElementById('canvas').getBoundingClientRect();
-
-      // 获取缩放比例
-      const canvasRoot = document.getElementById('canvas');
-      const cs = window.getComputedStyle(canvasRoot);
-      const scale = parseFloat(cs.getPropertyValue('--canvas-scale')) || 1;
-
-      // 计算实际位置和尺寸（不受缩放影响）
-      const x = Math.round((rect.left - parentRect.left) / scale);
-      const y = Math.round((rect.top - parentRect.top) / scale);
-      const width = Math.round(rect.width / scale);
-      const height = Math.round(rect.height / scale);
-
-      // clip to region to prevent images from overflowing into neighbors
-      ctx.save();
-      ctx.beginPath();
-      ctx.rect(x, y, width, height);
-      ctx.clip();
-
-      // draw background (inside clip)
-      ctx.fillStyle = '#efefef';
-      ctx.fillRect(x, y, width, height);
-
-      if (meta && meta.image) {
-        const img = await loadImage(meta.image.src);
-        // If there's a transform-based crop (translate/scale) use it
-        if (meta.crop && (meta.crop.scale !== undefined)) {
-          const imgScale = meta.crop.scale || 1;
-          const tx = meta.crop.x || 0;
-          const ty = meta.crop.y || 0;
-          // move origin to region top-left, then apply user's transform
-          ctx.save();
-          ctx.translate(x, y);
-          ctx.transform(imgScale, 0, 0, imgScale, tx, ty);
-          ctx.drawImage(img, 0, 0);
-          ctx.restore();
-        } else {
-          // fallback: draw respecting fillMode (cover / contain)
-          const iw = img.naturalWidth || img.width;
-          const ih = img.naturalHeight || img.height;
-          const rw = width;
-          const rh = height;
-          const sx = rw / iw;
-          const sy = rh / ih;
-          let imgScale;
-          if (meta.fillMode === 'contain') {
-            imgScale = Math.min(sx, sy);
-          } else {
-            // default to cover
-            imgScale = Math.max(sx, sy);
-          }
-          const dw = iw * imgScale;
-          const dh = ih * imgScale;
-          const ox = Math.round(x + (rw - dw) / 2);
-          const oy = Math.round(y + (rh - dh) / 2);
-          ctx.drawImage(img, ox, oy, Math.round(dw), Math.round(dh));
-        }
-      }
-
-      ctx.restore();
-    } else if (el.classList.contains('splitter')) {
-      // draw splitter bar into export canvas: entire line should have the visual color
-      const rect = el.getBoundingClientRect();
-      const parentRect = document.getElementById('canvas').getBoundingClientRect();
-      const canvasRoot = document.getElementById('canvas');
-      const cs = window.getComputedStyle(canvasRoot);
-
-      // 获取缩放比例
-      const scale = parseFloat(cs.getPropertyValue('--canvas-scale')) || 1;
-
-      // visual width/thickness as set in --splitter-width
-      let vis = cs.getPropertyValue('--splitter-width') || '';
-      vis = vis.trim();
-      let visPx = 0;
-      if (vis) {
-        if (vis.endsWith('px')) visPx = parseFloat(vis);
-        else visPx = parseFloat(vis);
-      } else {
-        // fallback to the element's dimension if var not set
-        visPx = (rect.width >= rect.height) ? rect.width : rect.height;
-      }
-      // if visual width is zero, don't draw
-      if (!visPx) return;
-
-      // determine if vertical or horizontal split, and draw the entire line with visual thickness
-      const isVertical = rect.width < rect.height; // vertical splitter is narrow, tall
-      const sx = Math.round((rect.left - parentRect.left) / scale);
-      const sy = Math.round((rect.top - parentRect.top) / scale);
-      let sw, sh;
-      if (isVertical) {
-        // vertical line: width = visual thickness, height = full splitter height
-        sw = Math.round(visPx);
-        sh = Math.round(rect.height / scale);
-        // center horizontally
-        const cx = Math.round(sx + (rect.width / scale - visPx) / 2);
-        ctx.fillStyle = cs.getPropertyValue('--splitter-color')?.trim() || 'rgba(16,24,40,0.06)';
-        ctx.fillRect(cx, sy, sw, sh);
-      } else {
-        // horizontal line: width = full splitter width, height = visual thickness
-        sw = Math.round(rect.width / scale);
-        sh = Math.round(visPx);
-        // center vertically
-        const cy = Math.round(sy + (rect.height / scale - visPx) / 2);
-        ctx.fillStyle = cs.getPropertyValue('--splitter-color')?.trim() || 'rgba(16,24,40,0.06)';
-        ctx.fillRect(sx, cy, sw, sh);
-      }
-    } else {
-      for (const child of Array.from(el.children)) {
-        await drawElementToCanvas(child, ctx, offsetX, offsetY, w, h);
-      }
-    }
-  }
-
-  function loadImage(src) {
-    return new Promise((res, rej) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => res(img);
-      img.onerror = rej;
-      img.src = src;
     });
   }
 })();

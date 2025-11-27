@@ -27,7 +27,6 @@ async function loadNodes(url) {
         console.log('已加载节点数据:', Nodes);
     } catch (error) {
         console.error('加载节点数据时出错:', error);
-        document.querySelector('.loading-indicator p').textContent = '加载节点数据失败';
     }
 }
 
@@ -51,7 +50,6 @@ async function loadCollageConfig(config) {
         }
     } catch (error) {
         console.error('加载拼贴画配置时出错:', error);
-        document.querySelector('.loading-indicator p').textContent = '加载拼贴画配置失败';
     }
 }
 
@@ -96,17 +94,16 @@ function initInfoCard(node){
 // 渲染拼贴画
 function renderCollage(grayColor, scale, contentMode) {
     const container = document.getElementById('collage-container');
-    container.innerHTML = '';
 
     if (!collageData) {
-        container.innerHTML = '<div class="error-message">拼贴画配置无效</div>';
+        console.error('拼贴画配置无效')
         return;
     }
 
     // 从canvas获取尺寸
     const canvas = collageData.canvas || {};
-    const originalWidth = parseInt(canvas.width) || 800;
-    const originalHeight = parseInt(canvas.height) || 600;
+    const originalWidth = parseInt(canvas.width) || 1920;
+    const originalHeight = parseInt(canvas.height) || 1080;
 
     // 获取当前屏幕可用宽度
     const screenWidth = window.innerWidth;
@@ -388,27 +385,6 @@ function renderCollage(grayColor, scale, contentMode) {
 
     collage.appendChild(flexContainer);
     container.appendChild(collage);
-
-    // 隐藏加载指示器
-    const loadingIndicator = container.querySelector('.loading-indicator');
-    if (loadingIndicator) {
-        loadingIndicator.style.display = 'none';
-    }
-
-    window.addEventListener("mouseout", (e) => {
-        if (!e.relatedTarget && !e.toElement) {
-            //真正离开浏览器窗口
-            forceCardLeave();
-        }
-    });
-
-    function forceCardLeave() {
-        const card = document.querySelector(".info-card.visible");
-        if (!card) return;
-        card.classList.remove("visible");
-    }
-
-
 }
 
 // 初始化随机着色
@@ -492,6 +468,26 @@ function clearAllColorTimers() {
     colorTimers = [];
 }
 
+
+function initBackgroundImage() {
+    
+    const container = document.getElementById('collage-container');
+
+    let originalWidth = 1920;
+    let originalHeight = 1080;
+    if (isMobile) {
+        originalWidth = 360;
+        originalHeight = 800;
+    }
+    // 获取当前屏幕可用宽度
+    const screenWidth = window.innerWidth;
+
+    // 计算缩放比例
+    const canvasScale = screenWidth / originalWidth;
+    
+    container.style.height = `${originalHeight * canvasScale}px`
+}
+
 // 初始化页面
 async function initPage(nodeApiUrl, config, grayColor = false, scale, contentMode = "inner", random = false) {
     // 检测设备类型
@@ -509,6 +505,8 @@ async function initPage(nodeApiUrl, config, grayColor = false, scale, contentMod
             });
         }
     });
+
+    initBackgroundImage();
 
     // 加载所有数据
     await Promise.all([
