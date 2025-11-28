@@ -142,14 +142,42 @@
     // render recursively by walking DOM of canvasRoot
     await drawElementToCanvas(canvasRoot, ctx, 0, 0, canvasEl.width, canvasEl.height);
 
-    // 转换为Blob并上传到服务器
-    canvasEl.toBlob(async (blob) => {
+    // 对画布进行灰度处理，类似于CSS的grayscale(100%)
+    const processedCanvas = document.createElement('canvas');
+    processedCanvas.width = canvasEl.width;
+    processedCanvas.height = canvasEl.height;
+    const processedCtx = processedCanvas.getContext('2d');
+
+    // 先绘制原图
+    processedCtx.drawImage(canvasEl, 0, 0);
+
+    // 获取图像数据
+    const imageData = processedCtx.getImageData(0, 0, processedCanvas.width, processedCanvas.height);
+    const data = imageData.data;
+
+    // 灰度处理，类似于CSS的grayscale(100%)
+    for (let i = 0; i < data.length; i += 4) {
+      // 使用标准灰度转换公式，与CSS filter: grayscale(100%)效果相同
+      const gray = data[i] * 0.299 + data[i + 1] * 0.587 + data[i + 2] * 0.114;
+
+      // 设置RGB值为灰度值
+      data[i] = gray;     // R
+      data[i + 1] = gray; // G
+      data[i + 2] = gray; // B
+      // Alpha通道保持不变
+    }
+
+    // 将处理后的图像数据放回画布
+    processedCtx.putImageData(imageData, 0, 0);
+
+    // 转换为Blob并上传到服务器，使用JPEG格式以实现压缩
+    processedCanvas.toBlob(async (blob) => {
       // 获取当前页面类型
       const pageType = window.pageType || 'default';
 
       // 创建FormData对象
       const formData = new FormData();
-      formData.append('image', blob, `${pageType}.png`);
+      formData.append('image', blob, `${pageType}.jpg`);
       formData.append('page_type', pageType); // 添加页面类型参数
 
       try {
@@ -176,10 +204,10 @@
         console.error('上传过程中出错:', error);
         alert('上传过程中出错，请重试！');
       }
-    });
+    }, 'image/jpeg', 0.85); // 使用JPEG格式，质量为85%，实现压缩
 
-    // 仍然在新标签页中打开图片
-    const url = canvasEl.toDataURL('image/png');
+    // 在新标签页中打开处理后的图片
+    const url = processedCanvas.toDataURL('image/jpeg', 0.85);
     const w = window.open('');
     w.document.write(`<img src="${url}" style="max-width:100%;">`);
   }
