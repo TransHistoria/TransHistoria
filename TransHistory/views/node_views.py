@@ -150,8 +150,8 @@ def upload_collage_image(request):
                 # 获取页面类型，如果没有则使用默认值
                 page_type = request.POST.get('page_type', 'default')
                 
-                # 生成文件名，不使用UUID，直接使用页面类型
-                filename = f"{page_type}.png"
+                # 生成文件名，使用JPEG格式
+                filename = f"{page_type}.jpg"
                 
                 # 确保目录存在
                 upload_dir = os.path.join('config', 'images')
