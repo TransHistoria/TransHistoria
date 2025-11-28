@@ -233,6 +233,7 @@ function renderCollage(grayColor, scale, contentMode) {
                                     e.stopPropagation();
                                     body.removeChild(infoCard);
                                 })
+                                infoCard.querySelector('p').style.maxWidth = '50%';
                                 body.appendChild(infoCard);
                             }
                         }

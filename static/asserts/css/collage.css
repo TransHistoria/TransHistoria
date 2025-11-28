@@ -113,6 +113,14 @@ img {
   align-self: center; /* 确保段落本身在容器中居中 */
 }
 
+.info-card a {
+  margin: 1.5vmin 0 0 0;
+  text-decoration: none;
+  font-size: clamp(0.8rem, 2vmin, 1.2rem); /* 响应式字体大小，在0.8rem到1.2rem之间，根据视口大小调整 */
+  line-height: 1.5;
+  cursor: pointer;
+}
+
 /* 加载指示器 */
 .loading-indicator {
   display: flex;

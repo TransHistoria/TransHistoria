@@ -168,6 +168,10 @@ main.container {
     flex-grow: 2;
 }
 
+.footer .col-3 {
+    text-align: left;
+}
+
 .footer .col-3 p {
     margin: 5px 0px;
 }
