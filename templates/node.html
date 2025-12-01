@@ -19,11 +19,20 @@
         flex-direction: column;
         align-items: center
     }
+
+    .details p {
+        width: 100%;
+    }
+
+    .details img {
+        margin: 10px 0;
+    }
+    
 </style>
 {% endblock %}
 
 {% block main %}
-<div class="details">
+<div class="details martor-preview">
     {% if node.cover %}
         <img src="/media/{{ node.cover }}" alt="{{ node.title }}" class="cover">
     {% endif %}
@@ -34,4 +43,15 @@
         <p>{{ node.con }}</p>
     {% endif %}
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const img = document.querySelectorAll('p img')
+        img.forEach(
+            function (img) {
+                const p = img.parentNode
+                p.style.display = 'contents';
+            }
+        )
+    })
+</script>
 {% endblock %}
