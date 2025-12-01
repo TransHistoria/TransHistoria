@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% load static %}
 {% load martortags %}
-{% block title %}TransHistori-节点详情{% endblock %}
+{% block title %}TransHistoria节点详情{% endblock %}
 
 {% block extra_head %}
 <link href="{% static 'martor/css/martor.bootstrap.min.css' %}" rel="stylesheet" />
@@ -19,11 +19,20 @@
         flex-direction: column;
         align-items: center
     }
+
+    .details p {
+        width: 100%;
+    }
+
+    .details img {
+        margin: 10px 0;
+    }
+    
 </style>
 {% endblock %}
 
 {% block main %}
-<div class="details">
+<div class="details martor-preview">
     {% if node.cover %}
         <img src="/media/{{ node.cover }}" alt="{{ node.title }}" class="cover">
     {% endif %}
@@ -34,4 +43,15 @@
         <p>{{ node.con }}</p>
     {% endif %}
 </div>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const img = document.querySelectorAll('p img')
+        img.forEach(
+            function (img) {
+                const p = img.parentNode
+                p.style.display = 'contents';
+            }
+        )
+    })
+</script>
 {% endblock %}
