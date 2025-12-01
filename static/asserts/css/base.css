@@ -233,15 +233,6 @@ main.container {
         /* 改为垂直布局 */
     }
 
-    .footer div {
-        width: 100%;
-        /* 每个列占满宽度 */
-        margin-bottom: 40px;
-        /* 增加底部间距 */
-        padding: 0;
-        /* 移除内边距 */
-    }
-
     .footer div h3 {
         margin-bottom: 15px;
     }
@@ -275,11 +266,6 @@ main.container {
         /* 确保输入框占满宽度 */
     }
 
-    .footer div:last-child {
-        margin-bottom: 0;
-        /* 最后一个元素不需要底部间距 */
-    }
-
     .footer div h3 {
         margin-bottom: 20px;
         /* 调整标题底部间距 */
@@ -304,4 +290,67 @@ main.container {
     .footer .col-3 {
         text-align: center;
     }
+}
+
+.contact-icons {
+    display: flex;
+    gap: 20px;
+    align-items: center;
+    justify-content: center;
+}
+
+.icon-item {
+    position: relative;
+    font-size: 28px;
+    cursor: pointer;
+    color: #ffffff;
+    transition: color 0.2s ease;
+}
+
+.icon-item:hover {
+    color: #adadad;
+}
+
+/* 弹出卡片（默认隐藏） */
+.popup {
+    font-size: 12px;
+    position: absolute;
+    bottom: 40px; /* 改为向上显示，距图标40px */
+    left: 50%;
+    transform: translateX(-50%) translateY(10px);
+    min-width: 180px;
+    padding: 12px 14px;
+    color: #000000;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 6px 25px rgba(0,0,0,0.15);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    z-index: 20;
+}
+
+.popup img {
+    width: 120px;
+    border-radius: 8px;
+    margin-top: 8px;
+}
+
+/* 三角形箭头（向下指） */
+.popup::before {
+    content: "";
+    position: absolute;
+    bottom: -8px; /* 箭头在底部 */
+    left: 50%;
+    transform: translateX(-50%);
+    border-width: 8px 8px 0 8px; /* 向下 */
+    border-style: solid;
+    border-color: #fff transparent transparent transparent;
+}
+
+/* 悬停显示 */
+.icon-item:hover .popup {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0); /* 平移到正常位置 */
+    pointer-events: auto;
 }
