@@ -126,12 +126,9 @@ header .nav {
         padding: 5px 0px;
         width: 100%;
     }
-
-    .open {
-        background: rgb(50, 50, 50);
-    }
-;
+    
     .menu.open {
+        background: rgb(50, 50, 50);
         display: flex;
         /* 打开状态显示 */
     }
