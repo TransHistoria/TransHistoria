@@ -76,12 +76,4 @@ document.addEventListener("DOMContentLoaded", () => {
     langBtn.addEventListener("click", () => {
         convertPage(currentLang === "cn" ? "tw" : "cn");
     });
-
-    // === 字体切换按钮 ===
-    fontBtn.addEventListener("click", () => {
-        const nextIndex = (fonts.indexOf(currentFont) + 1) % fonts.length;
-        currentFont = fonts[nextIndex];
-        applyFont(currentFont);
-        localStorage.setItem("font", currentFont);
-    });
 });
