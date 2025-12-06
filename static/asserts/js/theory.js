@@ -135,8 +135,8 @@ function get_concept_content(id) {
         sticky.remove();
     });
 }
-document.addEventListener('DOMContentLoaded', () => {
-    
+
+function load_concept(lang) {
     fetch('/api/get_theory_nodes/')
         .then(response => response.json())
         .then(data => {
@@ -150,14 +150,26 @@ document.addEventListener('DOMContentLoaded', () => {
                     }
                 }
             }
+            const blackboard = document.querySelector('.blackboard');
+            if (lang === "チョークS"){
+                const converter = OpenCC.Converter({from: 'cn', to: 'tw'});
+                for (let i = 0; i < concepts_ls.length; i++) {
+                    concepts_ls[i][0] = converter(concepts_ls[i][0]);
+                }
+                blackboard.style.setProperty("--bb-content", '"概念小黑板"')
+                blackboard.style.setProperty("--bb-font-family", '"チョークS"')
+            }
+            else {
+                blackboard.style.setProperty("--bb-content", '"概念小黑板"')
+                blackboard.style.setProperty("--bb-font-family", '"concept_font_cn"')
+            }
             
             const cloud = document.getElementById('concept_cloud')
-            const blackboard = document.querySelector('.blackboard');
             WordCloud(
                 cloud,
                 {
                     list: concepts_ls,
-                    fontFamily: "チョークS, 楷体",
+                    fontFamily: `${lang}, 楷体`,
                     color: "random-light",
                     rotationSteps: 2,
                     click: function(item) {
@@ -174,9 +186,26 @@ document.addEventListener('DOMContentLoaded', () => {
             );
             cloud.style.position = "relative";
             cloud.style.backgroundColor = "transparent"; // 设置背景颜色为透明
-            blackboard.style.height = cloud.offsetHeight + 80 + "px";
         }
         );
+}
+document.addEventListener('DOMContentLoaded', () => {
+    
+    let currentLang = localStorage.getItem("lang") || "cn";
+    const lang = currentLang === "cn" ? "concept_font_cn" : "チョークS";
+    load_concept(lang)
+    const blackboard = document.querySelector('.blackboard');
+    const cloud = document.getElementById('concept_cloud')
+    blackboard.style.height = cloud.offsetHeight + 120 + "px";
+
+    const langBtn = document.getElementById("lang-toggle");
+    langBtn.addEventListener("click", function() {
+        const to = currentLang === "cn" ? "tw" : "cn";
+        currentLang = to;
+        localStorage.setItem("lang", to);
+        const lang = to === "cn" ? "concept_font_cn" : "チョークS";
+        load_concept(lang)
+    })
 });
 
 // 拖动便利贴时的抓取动画
