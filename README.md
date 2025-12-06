@@ -25,3 +25,10 @@ https://transhistoria.org/
       corepack yarn run deploy
       ```
     - 打开 https://webapp_container.YOUR_CF_NAME.workers.dev/ 或者 https://transhistoria.org/
+
+## 其它
+1.字體
+```sh
+$ pip install fonttools brotli
+$ fonttools subset "$input_file" --text-file="$text_file" --output-file="$output_file"
+$ fonttools ttLib.woff2 compress "$input_file" -o "$output_file"

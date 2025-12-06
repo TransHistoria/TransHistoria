@@ -1,4 +1,10 @@
 @import url("https://fontsapi.zeoseven.com/117/main/result.css");
+@font-face {
+    font-family: 'concept_font_cn';
+    src: url('/static/fonts/HanyiSentyPastel_subset_compressed.woff2') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
 /* 黑板模板：https://codepen.io/ControlledChaos/pen/OPvrye */
 
@@ -67,15 +73,15 @@ body {
 			transparent
 		);
 	border: #2c2c2c solid 2px;
-	content: "概念小黑板";
-	font-family: "チョークS";
+	content: var(--bb-content, "概念小黑板");
+	font-family: var(--bb-font-family, "concept_font_cn");
 	font-size: 2.2em;
 	color: rgb(255, 255, 255);
 	text-align: center;
 }
 
 #concept_cloud {
-    height: 100%;
+    height: 90%;
     width: 100%;
     margin-top: 50px;
 }

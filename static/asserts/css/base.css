@@ -83,11 +83,12 @@ header .nav {
     padding-right: 20px;
 }
 
-.menu a {
+.menu a,span {
     min-width: 56px;
     font-weight: 500;
     font-size: 14px;
     text-align: center;
+    cursor: pointer;
 }
 
 .menu-toggle {
@@ -120,11 +121,8 @@ header .nav {
         gap: 0px;
     }
 
-    .menu a {
+    .menu a,span {
         font-size: 24px;
-    }
-
-    .menu a {
         padding: 5px 0px;
         width: 100%;
     }
@@ -132,7 +130,7 @@ header .nav {
     .open {
         background: rgb(50, 50, 50);
     }
-
+;
     .menu.open {
         display: flex;
         /* 打开状态显示 */
