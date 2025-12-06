@@ -33,11 +33,10 @@
 
 .search-bar button {
     width: 60px;
-    background: #000;
+    background: #ffffff;
     border: 2px solid #eeeeee2e;
-    color: #ffffff;
+    color: #000000;
     border-radius: 30px;
-    padding: 10px;
     margin-top: 0%;
     /* 调节页脚按钮大小 */
     font-size: 14px;
@@ -45,9 +44,71 @@
 }
 
 .search-bar button:hover {
-    border: 2px solid #eeeeee2e;
-    background: #000000ca;
+    border: 2px solid #000000;
     transition: 0.0s;
+}
+
+/* 排序按钮样式 */
+.sort-container {
+    position: relative;
+}
+
+.sort-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #eeeeee2e;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-button:hover {
+    background: #ffffffca;
+    transition: 0.0s;
+}
+
+.sort-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* 下拉菜单样式 */
+.sort-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 5px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    display: none;
+    min-width: 120px;
+}
+
+.sort-dropdown.show {
+    display: block;
+}
+
+.sort-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.sort-option:hover {
+    background: #f0f0f0;
+}
+
+.sort-option.active {
+    background: #e0e0e0;
+    font-weight: bold;
 }
 
 .tags {
