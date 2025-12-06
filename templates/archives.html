@@ -35,6 +35,17 @@
       <input type="text" id="searchInput" placeholder="输入关键词搜索…">
       <script>searchInput.value = "{{ search_keyword }}" || "";</script>
       <button id="searchButton">搜索</button>
+      <div class="sort-container">
+        <button id="sortButton" class="sort-button">
+          <img src="{% static 'asserts/images/sort.png' %}" class="sort-icon" alt="排序">
+        </button>
+        <div id="sortDropdown" class="sort-dropdown">
+          <div class="sort-option" data-sort="time" data-order="asc">时间顺序</div>
+          <div class="sort-option" data-sort="time" data-order="desc">时间倒序</div>
+          <div class="sort-option" data-sort="name" data-order="asc">名称顺序</div>
+          <div class="sort-option" data-sort="name" data-order="desc">名称倒序</div>
+        </div>
+      </div>
     </div>
   </div>
 </div>

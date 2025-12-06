@@ -2,10 +2,13 @@ const searchInput = document.getElementById('searchInput');
 const searchButton = document.getElementById('searchButton');
 const tagContainer = document.getElementById('tagContainer');
 const nodesContainer = document.getElementById('nodesContainer');
+const sortButton = document.getElementById('sortButton');
+const sortDropdown = document.getElementById('sortDropdown');
 
 // 创建列容器
 let columns = [];
 let records = [];
+let currentSort = { type: 'time', order: 'desc' }; // 默认按时间倒序
 
 // 根据屏幕宽度确定列数
 function getColumnCount() {
@@ -37,7 +40,7 @@ function appendNode(node) {
         img = `<img src=${imgsrc} alt=\"${node.title}\">`;
     }
     nodeElem.innerHTML = `
-        <a href=\"/archives/node/${node.id}\">
+        <a href=\"/archives/node/${node.id}\" target="_blank">
             ${img}
             <div class=\"node-body\">
                 <h2>${node.title}</h2>
@@ -53,6 +56,31 @@ function appendNode(node) {
     shortest.appendChild(nodeElem);
 }
 
+// 排序函数
+function sortRecords(records, sortType, sortOrder) {
+    const sortedRecords = [...records];
+
+    if (sortType === 'time') {
+        sortedRecords.sort((a, b) => {
+            const dateA = new Date(a.date || a.created_at || 0);
+            const dateB = new Date(b.date || b.created_at || 0);
+            return sortOrder === 'asc' ? dateA - dateB : dateB - dateA;
+        });
+    } else if (sortType === 'name') {
+        sortedRecords.sort((a, b) => {
+            const nameA = (a.title || '').toLowerCase();
+            const nameB = (b.title || '').toLowerCase();
+            if (sortOrder === 'asc') {
+                return nameA < nameB ? -1 : nameA > nameB ? 1 : 0;
+            } else {
+                return nameA > nameB ? -1 : nameA < nameB ? 1 : 0;
+            }
+        });
+    }
+
+    return sortedRecords;
+}
+
 // 渲染记录
 function renderRecords(records) {
     if (records.length === 0) {
@@ -60,7 +88,9 @@ function renderRecords(records) {
         return;
     }
 
-    records.forEach(node => appendNode(node));
+    // 应用当前排序
+    const sortedRecords = sortRecords(records, currentSort.type, currentSort.order);
+    sortedRecords.forEach(node => appendNode(node));
 }
 
 // 监听窗口大小变化重新布局
@@ -113,4 +143,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     })
     searchButton.addEventListener('click', fetchRecords);
+
+    // 排序按钮点击事件
+    sortButton.addEventListener('click', () => {
+        sortDropdown.classList.toggle('show');
+    });
+
+    // 点击其他地方关闭下拉菜单
+    document.addEventListener('click', (e) => {
+        if (!sortButton.contains(e.target) && !sortDropdown.contains(e.target)) {
+            sortDropdown.classList.remove('show');
+        }
+    });
+
+    // 排序选项点击事件
+    const sortOptions = sortDropdown.querySelectorAll('.sort-option');
+    sortOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            const sortType = option.getAttribute('data-sort');
+            const sortOrder = option.getAttribute('data-order');
+
+            // 更新当前排序状态
+            currentSort = { type: sortType, order: sortOrder };
+
+            // 更新选中状态
+            sortOptions.forEach(opt => opt.classList.remove('active'));
+            option.classList.add('active');
+
+            // 关闭下拉菜单
+            sortDropdown.classList.remove('show');
+
+            // 重新渲染已加载的记录
+            if (records.length > 0) {
+                createColumns(getColumnCount());
+                renderRecords(records);
+            }
+        });
+    });
 });
