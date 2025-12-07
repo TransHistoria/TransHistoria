@@ -4,7 +4,7 @@ from django.core.exceptions import ValidationError
 from django.core.validators import MinValueValidator, MaxValueValidator
 
 def validate_markdown_length(value):
-    if len(value.split()) > 3000:
+    if len(value.split()) > 10000:
         raise ValidationError("Content must be less than 3000 words")
 # Create your models here.
 class HistoryNode(models.Model):
@@ -26,7 +26,7 @@ class HistoryNode(models.Model):
         help_text="Write a new page in Markdown",
         blank=True,
         null=True,
-        max_length=3000,
+        max_length=10000,
         validators=[validate_markdown_length]
     )
     cover = models.FileField(upload_to='images/', blank=True, null=True)
