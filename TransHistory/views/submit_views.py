@@ -10,17 +10,88 @@ from django.utils.translation import gettext_lazy as _
 
 
 class TestForm(forms.Form):
+    title = forms.CharField(
+        label=_('标题'),
+        max_length=255,
+        required=True
+    )
+    content = forms.CharField(
+        label=_('内容'),
+        widget=forms.Textarea,
+        required=True
+    )
+    time = forms.IntegerField(
+        label=_('时间'),
+        required=False,
+        min_value=-9999,
+        max_value=99999999
+    )
+    time_name = forms.CharField(
+        label=_('时间名称'),
+        max_length=100,
+        required=False
+    )
+    field = forms.CharField(
+        label=_('领域'),
+        max_length=100,
+        required=False
+    )
+    theme = forms.CharField(
+        label=_('主题'),
+        max_length=100,
+        required=False
+    )
+    region = forms.CharField(
+        label=_('地区'),
+        max_length=100,
+        required=False
+    )
+    tag = forms.ChoiceField(
+        label=_('标签'),
+        choices=[
+            ('事件', '事件'),
+            ('理论', '理论'),
+            ('作品', '作品'),
+        ],
+        required=True
+    )
     details = MartorFormField(
-        label=_('Details'),
+        label=_('详细资料'),
         help_text=_('请使用Markdown语法书写，点击右上角问号可以查看帮助'),
-        required = False,
-        max_length = 3000,
+        required=False,
+        max_length=10000,
+    )
+    cover = forms.ImageField(
+        label=_('封面图片'),
+        required=False
     )
 
 @login_required
 def submit(request):
     user = request.user   # 当前登录用户对象
-    form = TestForm()
+    node_id = request.GET.get('node_id')
+
+    # 如果有node_id，先获取节点数据
+    initial_data = {}
+    if node_id:
+        try:
+            node = HistoryNode.objects.get(id=node_id)
+            initial_data = {
+                'title': node.title,
+                'content': node.con,
+                'time': node.time,
+                'time_name': node.time_name,
+                'field': node.field,
+                'theme': node.theme,
+                'region': node.region,
+                'tag': node.tag,
+                'details': node.details,
+                'cover': node.cover,
+            }
+        except HistoryNode.DoesNotExist:
+            pass  # 如果节点不存在，忽略错误
+
+    form = TestForm(initial=initial_data)
     return render(request, "submit.html", {"user": user, 'form': form})
 
 @csrf_protect

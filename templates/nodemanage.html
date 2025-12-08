@@ -1,0 +1,343 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}节点管理 - TransHistoria{% endblock %}
+
+{% block extra_head %}
+<link href="{% static 'asserts/css/nodemanage.css' %}" rel="stylesheet" />
+{% endblock %}
+
+{% block main %}
+<div class="nodemanage-container">
+  <h1>资料管理</h1>
+
+  <!-- 搜索和筛选功能 -->
+  <div class="search-container">
+    <div class="search">
+      <!-- Tag多选框 -->
+      <div class="tags" id="tagContainer">
+        <label class="tag-item">
+          <input type="checkbox" value="事件" >
+          <span>事件</span>
+        </label>
+        <label class="tag-item">
+          <input type="checkbox" value="艺术" >
+          <span>艺术</span>
+        </label>
+        <label class="tag-item">
+          <input type="checkbox" value="理论" >
+          <span>理论</span>
+        </label>
+      </div>
+      <!-- 搜索框 -->
+      <div class="search-bar">
+        <input type="text" id="searchInput" placeholder="输入关键词搜索节点…">
+        <button id="searchButton">搜索</button>
+        <div class="sort-container">
+          <button id="sortButton" class="sort-button">
+            <img src="{% static 'asserts/images/sort.png' %}" class="sort-icon" alt="排序">
+          </button>
+          <div id="sortDropdown" class="sort-dropdown">
+            <div class="sort-option" data-sort="created_time" data-order="asc">创建时间顺序</div>
+            <div class="sort-option active" data-sort="created_time" data-order="desc">创建时间倒序</div>
+            <div class="sort-option" data-sort="time" data-order="asc">时间顺序</div>
+            <div class="sort-option" data-sort="time" data-order="desc">时间倒序</div>
+            <div class="sort-option" data-sort="name" data-order="asc">名称顺序</div>
+            <div class="sort-option" data-sort="name" data-order="desc">名称倒序</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="table-container">
+    <table class="node-table">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>标题</th>
+          <th>标签</th>
+          <th>时间</th>
+          <th>创建时间</th>
+          <th>贡献者</th>
+          <th>操作</th>
+        </tr>
+      </thead>
+      <tbody id="nodeTableBody">
+        <!-- 节点数据将通过JavaScript动态加载 -->
+      </tbody>
+    </table>
+  </div>
+
+  <!-- 加载提示 -->
+  <div id="loadingIndicator" class="loading-indicator">
+    <i class="fas fa-spinner fa-spin"></i> 加载中...
+  </div>
+
+  <!-- 空数据提示 -->
+  <div id="emptyMessage" class="empty-message" style="display: none;">
+    <i class="fas fa-inbox"></i>
+    <p>暂无历史节点数据</p>
+  </div>
+</div>
+
+<!-- 删除确认模态框 -->
+<div id="deleteModal" class="modal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">确认删除</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <p>确定要删除节点 "<span id="deleteNodeTitle"></span>" 吗？</p>
+        <p>此节点由 <span id="deleteNodeContributor"></span> 贡献，删除后不可恢复。</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger" id="confirmDeleteBtn">删除</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% csrf_token %}
+<script src="{% static 'plugins/js/jquery.min.js' %}"></script>
+<script src="{% static 'plugins/js/bootstrap.min.js' %}"></script>
+<script>
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            // Does this cookie string begin with the name we want?
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+const csrftoken = getCookie('csrftoken');
+
+function csrfSafeMethod(method) {
+    // these HTTP methods do not require CSRF protection
+    return (/^(GET|HEAD|OPTIONS|TRACE)$/.test(method));
+}
+
+$.ajaxSetup({
+    beforeSend: function(xhr, settings) {
+        if (!csrfSafeMethod(settings.type) && !this.crossDomain) {
+            xhr.setRequestHeader("X-CSRFToken", csrftoken);
+        }
+    }
+});
+</script>
+<script>
+$(document).ready(function() {
+  let deleteNodeId = null;
+  // 全局排序变量
+  let sortType = 'created_time'; // 默认按时间排序
+  let sortOrder = 'desc'; // 默认降序
+  // 存储所有节点数据
+  let allNodesData = [];
+  // 标记是否已加载数据
+  let dataLoaded = false;
+
+  // 获取节点数据
+  function fetchNodesData() {
+    $('#loadingIndicator').show();
+    $('#emptyMessage').hide();
+
+    $.ajax({
+      url: '/api/get_historynodes/',
+      type: 'GET',
+      success: function(data) {
+        allNodesData = data;
+        dataLoaded = true;
+        $('#loadingIndicator').hide();
+        processAndDisplayData();
+      },
+      error: function() {
+        $('#loadingIndicator').hide();
+        alert('加载数据失败，请重试');
+      }
+    });
+  }
+
+  // 处理并显示数据
+  function processAndDisplayData() {
+    if (!dataLoaded) {
+      fetchNodesData();
+      return;
+    }
+
+    // 获取搜索关键词
+    const searchTerm = $('#searchInput').val().toLowerCase();
+
+    // 获取选中的标签
+    const selectedTags = [];
+    $('#tagContainer input:checked').each(function() {
+      selectedTags.push($(this).val());
+    });
+
+    // 清空表格
+    $('#nodeTableBody').empty();
+
+    if (allNodesData.length === 0) {
+      $('#emptyMessage').show();
+      return;
+    }
+
+    // 过滤数据
+    let filteredData = allNodesData.filter(node => {
+      // 搜索关键词过滤 - 如果搜索框为空，则匹配所有节点
+      let keywordMatch = true;
+      if (searchTerm) {
+        const titleMatch = node.title.toLowerCase().includes(searchTerm);
+        const tagMatch = node.tag && node.tag.toLowerCase().includes(searchTerm);
+        keywordMatch = titleMatch || tagMatch;
+      }
+
+      // 标签过滤
+      const tagFilter = selectedTags.length === 0 || (node.tag && selectedTags.includes(node.tag));
+
+      return keywordMatch && tagFilter;
+    });
+
+    // 排序数据
+    filteredData.sort((a, b) => {
+      let compareValue = 0;
+
+      if (sortType === 'time') {
+        // 按时间排序
+        const timeA = String(a.time || '');
+        const timeB = String(b.time || '');
+        compareValue = timeA.localeCompare(timeB);
+      } else if (sortType === 'name') {
+        // 按名称排序
+        compareValue = a.title.localeCompare(b.title);
+      } else if (sortType === 'created_time') {
+        const timeA = String(a.created_at || '');
+        const timeB = String(b.created_at || '');
+        compareValue = timeA.localeCompare(timeB);
+      }
+
+      return sortOrder === 'asc' ? compareValue : -compareValue;
+    });
+
+    // 填充数据
+    filteredData.forEach(node => {
+      const createdDate = new Date(node.created_at).toLocaleDateString();
+      const row = `
+        <tr>
+          <td>${node.id}</td>
+          <td>${node.title}</td>
+          <td>${node.tag || ''}</td>
+          <td>${node.time || ''}</td>
+          <td>${createdDate}</td>
+          <td>${node.contributor || '未知'}</td>
+          <td>
+            <a href="/archives/node/${node.id}/" class="btn btn-sm btn-primary" target="_blank">
+              <i class="fas fa-eye"></i> 查看
+            </a>
+            <a href="/submit/?node_id=${node.id}" class="btn btn-sm btn-primary">
+              <i class="fas fa-edit"></i> 编辑
+            </a>
+            <button class="btn btn-sm btn-danger delete-btn" data-id="${node.id}" data-title="${node.title}" data-contributor="${node.contributor || '未知'}">
+              <i class="fas fa-trash"></i> 删除
+            </button>
+          </td>
+        </tr>
+      `;
+      $('#nodeTableBody').append(row);
+    });
+  }
+
+  // 加载节点数据 - 初始加载时获取数据
+  function loadNodes() {
+    if (!dataLoaded) {
+      fetchNodesData();
+    } else {
+      processAndDisplayData();
+    }
+  }
+
+  // 删除按钮点击事件
+  $(document).on('click', '.delete-btn', function() {
+    deleteNodeId = $(this).data('id');
+    const nodeTitle = $(this).data('title');
+    const nodeContributor = $(this).data('contributor');
+    $('#deleteNodeTitle').text(nodeTitle);
+    $('#deleteNodeContributor').text(nodeContributor);
+    $('#deleteModal').modal('show');
+  });
+
+  // 确认删除按钮点击事件
+  $('#confirmDeleteBtn').click(function() {
+    if (!deleteNodeId) return;
+
+    $.ajax({
+      url: `/api/delete_node/${deleteNodeId}/`,
+      type: 'DELETE',
+      success: function() {
+        $('#deleteModal').modal('hide');
+        // 删除成功后，从本地数据中移除该节点并刷新显示
+        allNodesData = allNodesData.filter(node => node.id != deleteNodeId);
+        processAndDisplayData();
+      },
+      error: function() {
+        alert('删除失败，请重试');
+      }
+    });
+  });
+
+  // 搜索按钮点击事件
+  $('#searchButton').click(function() {
+    processAndDisplayData();
+  });
+
+  // 搜索框回车事件
+  $('#searchInput').keypress(function(e) {
+    if (e.which === 13) {
+      processAndDisplayData();
+    }
+  });
+
+  // 标签复选框变化事件
+  $('#tagContainer input').change(function() {
+    processAndDisplayData();
+  });
+
+  // 排序下拉菜单
+  $('#sortButton').click(function(e) {
+    e.stopPropagation();
+    $('#sortDropdown').toggleClass('show');
+  });
+
+  // 排序选项点击事件
+  $('.sort-option').click(function() {
+    // 移除所有选项的active类
+    $('.sort-option').removeClass('active');
+    // 为当前点击的选项添加active类
+    $(this).addClass('active');
+
+    sortType = $(this).data('sort');
+    sortOrder = $(this).data('order');
+    $('#sortDropdown').removeClass('show');
+    // 直接处理和显示数据，不再重新获取
+    processAndDisplayData();
+  });
+
+  // 点击页面其他地方关闭排序下拉菜单
+  $(document).click(function() {
+    $('#sortDropdown').removeClass('show');
+  });
+
+  // 初始加载
+  loadNodes();
+});
+</script>
+{% endblock %}

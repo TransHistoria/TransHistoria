@@ -53,6 +53,10 @@ def dashboard(request):
     return render(request, 'dashboard.html')
 
 @login_required
+def nodemanage(request):
+    return render(request, 'nodemanage.html')
+
+@login_required
 def collage_editor(request):
     page = request.GET.get('page', 'index')
     return render(request, 'collage_editor.html', {'page': page})

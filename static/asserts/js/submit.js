@@ -14,6 +14,62 @@ addAttr();
 updateRefNumbers();
 refreshAttrOptions();
 
+// 检查是否有node_id，如果有则加载节点数据
+document.addEventListener('DOMContentLoaded', function () {
+    const nodeId = document.getElementById('node_id').value;
+    if (nodeId) {
+        loadNodeData(nodeId);
+        document.querySelector('.bar h1').textContent = 'TransHistoria 资料编辑卡';
+    }
+})
+
+// 加载节点数据
+async function loadNodeData(id) {
+    try {
+        const response = await fetch(`/api/historynode/${id}/`);
+        if (!response.ok) throw new Error('获取节点数据失败');
+        const nodeData = await response.json();
+
+        // 填充表单
+        document.getElementById('title').value = nodeData.title || '';
+        document.getElementById('content').value = nodeData.con || '';
+        document.getElementById('time').value = nodeData.time || '';
+
+        // 填充参考文献
+        refList.innerHTML = '';
+        if (nodeData.ref && nodeData.ref.length > 0) {
+            nodeData.ref.forEach(ref => addRef(ref));
+        } else {
+            addRef();
+        }
+        updateRefNumbers();
+
+        // 填充属性
+        attrList.innerHTML = '';
+        if (nodeData.time_name) addAttr('time_name', nodeData.time_name);
+        if (nodeData.field) addAttr('field', nodeData.field);
+        if (nodeData.theme) addAttr('theme', nodeData.theme);
+        if (nodeData.region) addAttr('region', nodeData.region);
+
+        // 设置标签
+        if (nodeData.tag) {
+            const tagRadio = document.querySelector(`input[name="tag"][value="${nodeData.tag}"]`);
+            if (tagRadio) tagRadio.checked = true;
+        }
+
+        // 设置封面图片
+        if (nodeData.cover) {
+            document.getElementById('cover_image_url').value = nodeData.cover;
+            document.getElementById('cover_preview').src = `/media/${nodeData.cover}`;
+        }
+
+        refreshAttrOptions();
+    } catch (error) {
+        console.error('加载节点数据失败:', error);
+        alert('加载节点数据失败，请重试');
+    }
+}
+
 // 添加参考文献
 addRefBtn.addEventListener("click", () => {
     addRef();
@@ -99,7 +155,7 @@ cover.addEventListener('change', function () {
             if (data.status === 200) {
                 // 把返回的图片链接存到隐藏字段
                 document.getElementById("cover_image_url").value = data.link;
-                document.getElementById("cover_preview").src = data.link;
+                document.getElementById("cover_preview").src = `/media/${data.link}`;
                 alert("图片上传成功: " + data.link);
             } else {
                 alert("上传失败: " + data.error);
@@ -117,22 +173,35 @@ form.addEventListener("submit", async (e) => {
     // preview.textContent = JSON.stringify(data, null, 2);
     document.getElementById('json_data').value = JSON.stringify(data);
     const formData = new FormData(form);
+
+    const nodeId = document.getElementById('node_id').value;
+    const isEdit = nodeId !== '';
+
     try {
-        const res = await fetch('/api/', {
-            method: 'POST',
+        let url = '/api/add_node/';
+        let method = 'POST';
+
+        // 如果是编辑模式，使用不同的URL和方法
+        if (isEdit) {
+            url = `/api/update_node/${nodeId}/`;
+            method = 'POST';
+        }
+
+        const res = await fetch(url, {
+            method: method,
             headers: {
                 'X-CSRFToken': csrftoken
             },
             body: formData
         });
 
-        if (!res.ok) throw new Error('提交失败');
+        if (!res.ok) throw new Error(isEdit ? '更新失败' : '提交失败');
         const result = await res.json();
         console.log(result);
-        alert('提交成功，JSON 返回已打印到控制台');
+        alert(isEdit ? '更新成功，JSON 返回已打印到控制台' : '提交成功，JSON 返回已打印到控制台');
     } catch (err) {
         console.error(err);
-        alert('提交失败：' + err.message);
+        alert(isEdit ? '更新失败：' + err.message : '提交失败：' + err.message);
     }
 });
 
