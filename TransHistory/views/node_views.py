@@ -1,6 +1,7 @@
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from ..models import HistoryNode
+from ..models import Contributor
 
 def historynode_api(request, pk):
     node = get_object_or_404(HistoryNode, pk=pk)
@@ -38,8 +39,29 @@ def get_historynodes(request):
     
     # 按创建时间倒序排序（最新的在前）
     records = records.order_by('-created_at')
-
-    data = list(records.values())  # 转为dict列表返回
+    
+    # 构建返回数据
+    data = []
+    
+    for node in records:
+        node_data = {
+            "id": node.id,
+            "title": node.title,
+            "tag": node.tag,
+            "time": node.time,
+            "created_at": node.created_at.isoformat(),
+        }
+        
+        # 获取贡献者信息
+        contributors = Contributor.objects.filter(node=node)
+        if contributors.exists():
+            # 只获取第一个贡献者的名字
+            node_data["contributor"] = contributors.first().name
+        else:
+            node_data["contributor"] = "未知"
+            
+        data.append(node_data)
+    
     return JsonResponse(data, safe=False)
 
 

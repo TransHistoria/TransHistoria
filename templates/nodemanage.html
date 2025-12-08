@@ -57,6 +57,7 @@
           <th>标签</th>
           <th>时间</th>
           <th>创建时间</th>
+          <th>贡献者</th>
           <th>操作</th>
         </tr>
       </thead>
@@ -87,7 +88,8 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        <p>确定要删除节点 "<span id="deleteNodeTitle"></span>" 吗？此操作不可撤销。</p>
+        <p>确定要删除节点 "<span id="deleteNodeTitle"></span>" 吗？</p>
+        <p>此节点由 <span id="deleteNodeContributor"></span> 贡献，删除后不可恢复。</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
@@ -230,6 +232,7 @@ $(document).ready(function() {
           <td>${node.tag || ''}</td>
           <td>${node.time || ''}</td>
           <td>${createdDate}</td>
+          <td>${node.contributor || '未知'}</td>
           <td>
             <a href="/archives/node/${node.id}/" class="btn btn-sm btn-primary" target="_blank">
               <i class="fas fa-eye"></i> 查看
@@ -237,7 +240,7 @@ $(document).ready(function() {
             <a href="/submit/?node_id=${node.id}" class="btn btn-sm btn-primary">
               <i class="fas fa-edit"></i> 编辑
             </a>
-            <button class="btn btn-sm btn-danger delete-btn" data-id="${node.id}" data-title="${node.title}">
+            <button class="btn btn-sm btn-danger delete-btn" data-id="${node.id}" data-title="${node.title}" data-contributor="${node.contributor || '未知'}">
               <i class="fas fa-trash"></i> 删除
             </button>
           </td>
@@ -260,7 +263,9 @@ $(document).ready(function() {
   $(document).on('click', '.delete-btn', function() {
     deleteNodeId = $(this).data('id');
     const nodeTitle = $(this).data('title');
+    const nodeContributor = $(this).data('contributor');
     $('#deleteNodeTitle').text(nodeTitle);
+    $('#deleteNodeContributor').text(nodeContributor);
     $('#deleteModal').modal('show');
   });
 
