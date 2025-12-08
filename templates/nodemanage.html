@@ -38,10 +38,12 @@
             <img src="{% static 'asserts/images/sort.png' %}" class="sort-icon" alt="排序">
           </button>
           <div id="sortDropdown" class="sort-dropdown">
+            <div class="sort-option" data-sort="created_time" data-order="asc">创建时间顺序</div>
+            <div class="sort-option active" data-sort="created_time" data-order="desc">创建时间倒序</div>
             <div class="sort-option" data-sort="time" data-order="asc">时间顺序</div>
-            <div class="sort-option active" data-sort="time" data-order="desc">时间倒序</div>
-            <div class="sort-option" data-sort="name" data-order="desc">名称顺序</div>
-            <div class="sort-option" data-sort="name" data-order="asc">名称倒序</div>
+            <div class="sort-option" data-sort="time" data-order="desc">时间倒序</div>
+            <div class="sort-option" data-sort="name" data-order="asc">名称顺序</div>
+            <div class="sort-option" data-sort="name" data-order="desc">名称倒序</div>
           </div>
         </div>
       </div>
@@ -137,7 +139,7 @@ $.ajaxSetup({
 $(document).ready(function() {
   let deleteNodeId = null;
   // 全局排序变量
-  let sortType = 'time'; // 默认按时间排序
+  let sortType = 'created_time'; // 默认按时间排序
   let sortOrder = 'desc'; // 默认降序
   // 存储所有节点数据
   let allNodesData = [];
@@ -217,9 +219,13 @@ $(document).ready(function() {
       } else if (sortType === 'name') {
         // 按名称排序
         compareValue = a.title.localeCompare(b.title);
+      } else if (sortType === 'created_time') {
+        const timeA = String(a.created_at || '');
+        const timeB = String(b.created_at || '');
+        compareValue = timeA.localeCompare(timeB);
       }
 
-      return sortOrder === 'desc' ? compareValue : -compareValue;
+      return sortOrder === 'asc' ? compareValue : -compareValue;
     });
 
     // 填充数据
