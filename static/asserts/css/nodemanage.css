@@ -4,6 +4,185 @@
   padding: 20px;
 }
 
+/* 搜索和筛选功能样式 */
+.search-container {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 20px;
+}
+
+.search {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    gap: 10px;
+}
+
+.search-bar {
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+    width: 100%;
+}
+
+.search-bar input {
+    padding: 8px;
+    width: 100%;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    outline: none;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.search-bar button {
+    width: 60px;
+    background: #ffffff;
+    border: 2px solid #eeeeee2e;
+    color: #000000;
+    border-radius: 30px;
+    margin-top: 0%;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+.search-bar button:hover {
+    border: 2px solid #000000;
+    transition: 0.0s;
+}
+
+/* 排序按钮样式 */
+.sort-container {
+    position: relative;
+}
+
+.sort-button {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #ffffff;
+    border: 2px solid #eeeeee2e;
+    color: #000000;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sort-button:hover {
+    background: #ffffffca;
+    transition: 0.0s;
+}
+
+.sort-icon {
+    width: 16px;
+    height: 16px;
+}
+
+/* 下拉菜单样式 */
+.sort-dropdown {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 5px;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    z-index: 100;
+    display: none;
+    min-width: 120px;
+}
+
+.sort-dropdown.show {
+    display: block;
+}
+
+.sort-option {
+    padding: 8px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    color: #333;
+}
+
+.sort-option:hover {
+    background: #f0f0f0;
+}
+
+.sort-option.active {
+    background: #e0e0e0;
+    font-weight: bold;
+}
+
+.tags {
+    display: flex;
+    flex-direction: row;
+    gap: 8px;
+    padding: 5px 0;
+}
+
+.tag-item {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+/* 隐藏原生复选框 */
+.tag-item input[type="checkbox"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* 自定义样式 */
+.tag-item span {
+    display: inline-block;
+    padding: 6px 14px;
+    border-radius: 20px;
+    background-color: #f0f0f0;
+    color: #333;
+    font-size: 14px;
+    transition: all 0.2s ease;
+    user-select: none;
+    border: 1px solid #ccc;
+    text-wrap: nowrap;
+}
+
+/* 选中效果 */
+.tag-item input[type="checkbox"]:checked+span {
+    background-color: #000000;
+    color: #fff;
+    border-color: #000000;
+    box-shadow: 0 2px 6px rgba(79, 70, 229, 0.3);
+}
+
+/* 悬停效果 */
+.tag-item span:hover {
+    background-color: #e5e7eb;
+}
+
+@media screen and (max-width: 768px) {
+    .search-container {
+        flex-direction: row;
+        align-items: normal;
+    }
+    .search {
+        flex-direction: column;
+        width: 100%;
+    }
+    .search-bar {
+        width: 100%;
+    }
+    .search-bar input {
+        width: 100%;
+    }
+}
+
 .nodemanage-container h1 {
   margin-bottom: 30px;
   color: #333;
