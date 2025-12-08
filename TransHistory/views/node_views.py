@@ -8,9 +8,14 @@ def historynode_api(request, pk):
         "id": node.id,
         "title": node.title,
         "con": node.con,
-        "time": node.time,
-        "mkdoc": node.mkdoc,
         "ref": node.ref,
+        "time": node.time,
+        "time_name": node.time_name,
+        "field": node.field,
+        "theme": node.theme,
+        "region": node.region,
+        "tag": node.tag,
+        "cover": str(node.cover),
         "details": node.details,
     }
     return JsonResponse(data)
@@ -189,3 +194,75 @@ def upload_collage_image(request):
         'status': 'error', 
         'message': '仅支持POST请求'
     }, status=405)
+
+
+def update_node(request, pk):
+    """
+    更新历史节点
+    """
+    import json
+
+    # 获取要更新的节点
+    try:
+        node = HistoryNode.objects.get(pk=pk)
+    except HistoryNode.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': '节点不存在'}, status=404)
+
+    if request.method == 'POST':
+        # 获取JSON数据
+        json_str = request.POST.get('json_data')
+        if not json_str:
+            return JsonResponse({'status': 'error', 'message': '缺少JSON数据'}, status=400)
+
+        try:
+            data = json.loads(json_str)
+        except json.JSONDecodeError:
+            return JsonResponse({'status': 'error', 'message': '无效的JSON格式'}, status=400)
+
+        # 更新字段
+        node.title = data.get('title', node.title)
+        node.con = data.get('con', node.con)
+        node.ref = data.get('ref', node.ref)
+
+        # 处理时间字段
+        time_str = data.get('time', node.time)
+        try:
+            node.time = int(time_str)
+        except (ValueError, TypeError):
+            pass  # 保持原值
+
+        node.time_name = data.get('attr', {}).get('time_name', node.time_name)
+        node.field = data.get('attr', {}).get('field', node.field)
+        node.theme = data.get('attr', {}).get('theme', node.theme)
+        node.region = data.get('attr', {}).get('region', node.region)
+        node.tag = data.get('attr', {}).get('tag', node.tag)
+
+        # 更新详细资料
+        if 'details' in request.POST:
+            node.details = request.POST['details']
+
+        # 更新封面图片
+        if 'cover_image_url' in request.POST:
+            node.cover = request.POST['cover_image_url']
+
+        # 保存更改
+        node.save()
+
+        return JsonResponse({'status': 'success', 'message': '节点更新成功', 'id': node.id})
+
+    return JsonResponse({'status': 'error', 'message': '仅支持PUT请求'}, status=405)
+
+def delete_node(request, pk):
+    """
+    删除历史节点
+    """
+    try:
+        node = HistoryNode.objects.get(pk=pk)
+    except HistoryNode.DoesNotExist:
+        return JsonResponse({'status': 'error', 'message': '节点不存在'}, status=404)
+
+    if request.method == 'DELETE':
+        node.delete()
+        return JsonResponse({'status': 'success', 'message': '节点删除成功'})
+
+    return JsonResponse({'status': 'error', 'message': '仅支持DELETE请求'}, status=405)
