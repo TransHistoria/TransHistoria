@@ -47,9 +47,17 @@ def get_historynodes(request):
         node_data = {
             "id": node.id,
             "title": node.title,
-            "tag": node.tag,
+            "con": node.con,
+            "ref": node.ref,
             "time": node.time,
+            "time_name": node.time_name,
+            "field": node.field,
+            "theme": node.theme,
+            "region": node.region,
+            "tag": node.tag,
+            "details": node.details,
             "created_at": node.created_at.isoformat(),
+            "cover": str(node.cover),
         }
         
         # 获取贡献者信息
